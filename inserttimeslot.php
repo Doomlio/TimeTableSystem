@@ -13,6 +13,7 @@
 
             while ($row = $result->fetch_assoc()) {
                 echo "<option value='" . $row["subID"] . "'>" . $row["subname"] . "</option>";
+            }
         ?>
     </select><br>
     lecturer id:  

@@ -10,7 +10,8 @@ while ($row = $LECQUERY->fetch_assoc()) {
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>   
+    <!--  <link rel="stylesheet" href="timetable.css"> -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGT Systems</title>
@@ -36,7 +37,6 @@ while ($row = $LECQUERY->fetch_assoc()) {
         }
         .draggable {
             position: absolute;
-            /* Other styles */
         }
     </style>
 </head>
@@ -174,53 +174,9 @@ foreach ($LEC_ID as $lecturerId) {
         <form method="post" action="inserttimeslot.php">
             <button type="submit">Add Timeslot</button>
         </form>
-        <form method="post" action="insertlecturer.html">
-            <button type="submit">Add Lecturer</button>
+        <form method="post" action="insertsubject.php">
+            <button type="submit">Add aaSubject</button>
         </form>
     </footer>
 </body>
 </html>
-
-
-<!-- foreach ($daysOfWeek as $dayName => $daySlots) {
-            if (!empty($daySlots)) {
-                echo "<tr>";
-                echo "<td>$dayName</td>";
-
-                for ($hour = 8; $hour <= 17; $hour++) {
-                    $occupiedClass = '';
-                    $cellContent = '';
-                    $colspan = 1; // Default colspan value
-
-                    foreach ($daySlots as $slot) {
-                        $startTimeStamp = strtotime($slot["start_time"]);
-                        $endTimeStamp = strtotime($slot["end_time"]);
-
-                        $classHours = date('H', $endTimeStamp) - date('H', $startTimeStamp);
-                        $classStartHour = date('H', $startTimeStamp);
-
-                        if ($hour >= $classStartHour && $hour < ($classStartHour + $classHours)) {
-                            $occupiedClass = 'occupied';
-
-                            // Add the slot's content to the cell content
-                            $cellContent .= "{$slot["subject_name"]}<br>{$slot["lecname"]}<br>";
-
-                            // Calculate colspan to span multiple cells based on class hours
-                            if ($classHours > 1) {
-                                $colspan = $classHours;
-                                $cellContent .= "<span class='class-type'>{$slot["type"]}</span>";
-                            }
-                        }
-                    }
-
-                    if ($occupiedClass === 'occupied') {
-                        echo "<td class='$occupiedClass' colspan='$colspan'>$cellContent</td>";
-                        $hour += $colspan - 1; // Skip additional hours covered by colspan
-                    } else {
-                        echo "<td></td>"; // Empty cell for unoccupied slots
-                    }
-                }
-
-                echo "</tr>";
-            }
-        } -->
