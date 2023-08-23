@@ -6,7 +6,15 @@
 <h1>Insert Example</h1>
 
 <form method="post" action="insertdbtimeslot.php">
-    subject code: <input type="text" name="subcode"><br>
+    subject code:  <select name="subID">
+        <?php
+            $query = "SELECT `subID`, `subname` FROM `subject`";
+            $result = $mysqli->query($query);
+
+            while ($row = $result->fetch_assoc()) {
+                echo "<option value='" . $row["subID"] . "'>" . $row["subname"] . "</option>";
+        ?>
+    </select><br>
     lecturer id:  
     <select name="lecID">
         <?php
