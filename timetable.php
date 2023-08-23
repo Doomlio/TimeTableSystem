@@ -63,11 +63,11 @@ foreach ($LEC_ID as $lecturerId) {
 
         // Initialize daysOfWeek array for the current lecturer
         $daysOfWeek = array(
-            "Monday" => array(),
-            "Tuesday" => array(),
-            "Wednesday" => array(),
-            "Thursday" => array(),
-            "Friday" => array()
+            "monday" => array(),
+            "tuesday" => array(),
+            "wednesday" => array(),
+            "thursday" => array(),
+            "friday" => array()
         );
 
         // Loop through the fetched data and populate the daysOfWeek array
@@ -152,6 +152,14 @@ foreach ($LEC_ID as $lecturerId) {
                 }
 
                 echo "</tr>";
+            } else {
+                // Generate a row of empty slots for days without timeslots
+                echo "<tr>";
+                echo "<td>$dayName</td>";
+                for ($hour = 8; $hour <= 17; $hour++) {
+                    echo "<td></td>"; // Empty cell for unoccupied slots
+                }
+                echo "</tr>";
             }
         }
 
@@ -172,3 +180,47 @@ foreach ($LEC_ID as $lecturerId) {
     </footer>
 </body>
 </html>
+
+
+<!-- foreach ($daysOfWeek as $dayName => $daySlots) {
+            if (!empty($daySlots)) {
+                echo "<tr>";
+                echo "<td>$dayName</td>";
+
+                for ($hour = 8; $hour <= 17; $hour++) {
+                    $occupiedClass = '';
+                    $cellContent = '';
+                    $colspan = 1; // Default colspan value
+
+                    foreach ($daySlots as $slot) {
+                        $startTimeStamp = strtotime($slot["start_time"]);
+                        $endTimeStamp = strtotime($slot["end_time"]);
+
+                        $classHours = date('H', $endTimeStamp) - date('H', $startTimeStamp);
+                        $classStartHour = date('H', $startTimeStamp);
+
+                        if ($hour >= $classStartHour && $hour < ($classStartHour + $classHours)) {
+                            $occupiedClass = 'occupied';
+
+                            // Add the slot's content to the cell content
+                            $cellContent .= "{$slot["subject_name"]}<br>{$slot["lecname"]}<br>";
+
+                            // Calculate colspan to span multiple cells based on class hours
+                            if ($classHours > 1) {
+                                $colspan = $classHours;
+                                $cellContent .= "<span class='class-type'>{$slot["type"]}</span>";
+                            }
+                        }
+                    }
+
+                    if ($occupiedClass === 'occupied') {
+                        echo "<td class='$occupiedClass' colspan='$colspan'>$cellContent</td>";
+                        $hour += $colspan - 1; // Skip additional hours covered by colspan
+                    } else {
+                        echo "<td></td>"; // Empty cell for unoccupied slots
+                    }
+                }
+
+                echo "</tr>";
+            }
+        } -->
