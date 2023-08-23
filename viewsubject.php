@@ -1,20 +1,21 @@
 <?php
 
-include ('db.php');
+include ('config.php');
 
-$sql = "SELECT * FROM user2 ";
-$result = $conn->query($sql);
+$sql = "SELECT * FROM subject ";
+$result = $mysqli->query($sql);
 
 if ($result->num_rows > 0) {
-  echo "<table><tr><th>IC Number</th><th>Name</th><th>Age</th><th>Weight</th><th>Address</th></tr>";
+  echo "<table><tr><th>Subject Code</th><th>Subject Name</th><th>Qualification</th><th>Semester</th><th>Lecturer</th><th>course</th></tr>";
 
   // output data of each row
   while($row = $result->fetch_assoc()) {
-    echo "<tr><td>".$row["icnumber"]."</td>
-              <td>".$row["name"]."</td>
-              <td>".$row["age"]."</td>
-              <td>".$row["weight"]."</td>
-              <td>".$row["address"]."</td>
+    echo "<tr><td>".$row["subID"]."</td>
+              <td>".$row["subname"]."</td>
+              <td>".$row["qualification"]."</td>
+              <td>".$row["sem"]."</td>
+              <td>".$row["lecid"]."</td>
+              <td>".$row["course"]."</td>
           </tr>";
   }
   echo "</table>";
