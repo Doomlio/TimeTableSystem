@@ -1,3 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>   
+    <!--  <link rel="stylesheet" href="timetable.css"> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGT Systems</title>
+    <style>
+        .class-type {
+            font-size: 12px;
+            font-weight: normal;
+            display: block;
+        }
+        td {
+            height: 30px;
+            border: 1px solid #000;
+            padding: 10px;
+            width: 100px;
+        }
+    </style>
+</head>
+
 <?php
 
 include ('config.php');
@@ -22,8 +45,8 @@ if ($result->num_rows > 0) {
 } else {
   echo "0 results";
 }
-$conn->close();
+$mysqli->close();
 
 ?>
-
-<button onclick="window.location.href='renewal.php';">Update Page</button>
+<button onclick="window.location.href='insertsubject.php';">Insert page</button>
+<button onclick="window.location.href='editsubject.php';">edit subjects</button>

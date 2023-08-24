@@ -29,16 +29,11 @@
             <option value="Jan">January</option>
             <option value="May">May</option>
             <option value="Oct">October</option>
-        </select>
-        <br>
-
-        Lecturer ID:
-      
-        </select>
+</select>
         <br>
 
         Course: <input type="text" placeholder="DCS/DIT" name="course"><br>
-
+        
         <input type="submit" name="submit" value="Submit">
     </form>
 </body>

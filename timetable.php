@@ -174,8 +174,8 @@ foreach ($LEC_ID as $lecturerId) {
         <form method="post" action="inserttimeslot.php">
             <button type="submit">Add Timeslot</button>
         </form>
-        <form method="post" action="insertsubject.php">
-            <button type="submit">Add aaSubject</button>
+        <form method="post" action="viewsubject.php">
+            <button type="submit">Manage Subject</button>
         </form>
     </footer>
 </body>

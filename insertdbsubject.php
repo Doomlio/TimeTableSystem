@@ -6,11 +6,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $subname = $_POST["subname"];
     $qual = $_POST["qual"];
     $sem = $_POST["sem"];
-    $lecID = $_POST["lecID"];
     $course = $_POST["course"];
-    
-    $sql = "INSERT INTO `subject` (`subID`, `subname`, `qualification`,      `sem`, `lecid`, `course`) 
-            VALUES ('$subID', '$subname', '$qual', '$sem', '$lecID', '$course')";
+
+    $sql = "INSERT INTO `subject` (`subID`, `subname`, `qualification`,`sem`, `course`) 
+            VALUES ('$subID', '$subname', '$qual', '$sem', '$course')";
 
     if ($mysqli->query($sql) === TRUE) {
         echo "New record created successfully";
