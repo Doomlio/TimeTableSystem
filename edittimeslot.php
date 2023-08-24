@@ -133,7 +133,6 @@ if (isset($_POST["reassign"])) {
         <thead>
             <tr>
                 <th>#</th>
-                <th>Timetable ID</th>
                 <th>Lecturer ID</th>
                 <th>Lecturer name</th>
                 <th>Start Time</th>
@@ -146,14 +145,14 @@ if (isset($_POST["reassign"])) {
             </tr>
         </thead>
         <?php
-$sqlTimetable = "SELECT timetable.*, lecturer.lecname 
-                FROM timetable
-                INNER JOIN lecturer ON timetable.lec_id = lecturer.lec_id
-                ORDER BY timetable.lec_id;";
+ $sqlTimetable = "SELECT timetable.*, lecturer.lecname 
+ FROM timetable
+ INNER JOIN lecturer ON timetable.lec_id = lecturer.lec_id
+ ORDER BY timetable.lec_id, FIELD(LOWER(day), 'monday', 'tuesday', 'wednesday', 'thursday', 'friday');";
 $resultTimetable = $mysqli->query($sqlTimetable);
 $no = 1;
 while($row = $resultTimetable->fetch_assoc()) {
-    $timetableID = $row["timetable_id"];
+
     $lecID = $row["lec_id"];
     $lecName = $row["lecname"]; // Added lecturer name
     $startTime = $row["start_time"];
@@ -162,10 +161,10 @@ while($row = $resultTimetable->fetch_assoc()) {
     $classType = $row["classtype"];
     $subID = $row["subID"];
     $venueID = $row["venueID"];
+    $cstatus = $row["cstatus"];
 ?>
 <tr>
     <td><?php echo $no ?></td>
-    <td><input type="text" name="timetableID[]" value="<?php echo $timetableID ?>"></td>
     <td><?php echo $lecID ?></td>
     <td><?php echo $lecName ?></td> <!-- Displayed lecturer name -->
     <td><input type="text" name="startTime[]" value="<?php echo $startTime ?>"></td>
@@ -174,6 +173,7 @@ while($row = $resultTimetable->fetch_assoc()) {
     <td><input type="text" name="classType[]" value="<?php echo $classType ?>"></td>
     <td><input type="text" name="subID[]" value="<?php echo $subID ?>"></td>
     <td><input type="text" name="venueID[]" value="<?php echo $venueID ?>"></td>
+    <td><input type="text" name="cstatus[]" value="<?php echo $cstatus ?>"></td>
     <td>
         <button type="submit" name="delete" value="<?php echo $timetableID ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
     </td>

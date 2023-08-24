@@ -4,7 +4,7 @@
     <title>Insert Example</title>
 </head>
 <body>
-    <h1>Insert Example</h1>
+    <h1>Add new subjects</h1>
 
     <form method="post" action="insertdbsubject.php">
         Subject ID: <input type="text" placeholder="ECXXXX" name="subID"><br>
@@ -32,7 +32,11 @@
 </select>
         <br>
 
-        Course: <input type="text" placeholder="DCS/DIT" name="course"><br>
+        <label for="course">course:</label>
+        <select name="sem" id="sem">
+
+            <option value="May">DIT</option>
+            <option value="Oct">DCS</option>
         
         <input type="submit" name="submit" value="Submit">
     </form>

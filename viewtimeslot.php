@@ -67,7 +67,7 @@ $mysqli->close();
 
 ?>
 
-<button onclick="window.location.href='insertsubject.php';">Insert page</button>
+<button onclick="window.location.href='insertsubject.php';">Add timeslot</button>
 <button onclick="window.location.href='edittimeslot.php';">Edit timeslot</button>
 </body>
 </html>

@@ -48,5 +48,5 @@ if ($result->num_rows > 0) {
 $mysqli->close();
 
 ?>
-<button onclick="window.location.href='inserttimesslot.php';">Insert timeslot</button>
-<button onclick="window.location.href='edittimeslot.php';">edit subjects</button>
+<button onclick="window.location.href='insertsubject.php';">Insert subjects</button>
+<button onclick="window.location.href='editsubject.php';">edit subjects</button>
