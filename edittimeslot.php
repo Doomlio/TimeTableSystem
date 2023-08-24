@@ -16,9 +16,9 @@ if (isset($_POST["delete"])) {
     header("refresh:1;url=editsubject.php");
 }
 
-// Save the data
 if (isset($_POST["savedata"])) {
     foreach ($_POST['timetableID'] as $key => $timetableID) {
+        // Get all data from the form
         $newTimetableID = $_POST['newTimetableID'][$key];
         $lecID = $_POST['lecID'][$key];
         $startTime = $_POST['startTime'][$key];
@@ -27,13 +27,26 @@ if (isset($_POST["savedata"])) {
         $classType = $_POST['classType'][$key];
         $subID = $_POST['subID'][$key];
         $venueID = $_POST['venueID'][$key];
-        
-        // Prepare and execute the SQL query to update the timetable data
-        $sqlUpdateTimetable = "UPDATE timetable SET timetable_id=?, lec_id=?, start_time=?, end_time=?, day=?, classtype=?, subID=?, venueID=? WHERE timetable_id=?";
-        $stmtUpdateTimetable = $mysqli->prepare($sqlUpdateTimetable);
-        $stmtUpdateTimetable->bind_param('sssssssss', $newTimetableID, $lecID, $startTime, $endTime, $day, $classType, $subID, $venueID, $timetableID);
-        $stmtUpdateTimetable->execute();
-        $stmtUpdateTimetable->close();
+
+        // Check for clashes with existing timeslots
+        $sqlCheckClashes = "SELECT * FROM timetable WHERE lec_id = ? AND day = ? AND ((start_time >= ? AND start_time < ?) OR (end_time > ? AND end_time <= ?) OR (start_time <= ? AND end_time >= ?))";
+        $stmtCheckClashes = $mysqli->prepare($sqlCheckClashes);
+        $stmtCheckClashes->bind_param('ssssssss', $lecID, $day, $startTime, $endTime, $startTime, $endTime, $startTime, $endTime);
+        $stmtCheckClashes->execute();
+        $resultClashes = $stmtCheckClashes->get_result();
+        $clashesExist = ($resultClashes->num_rows > 0);
+        $stmtCheckClashes->close();
+
+        if ($clashesExist) {
+            // Handle the error case here (e.g., show an error message)
+        } else {
+            // Prepare and execute the SQL query to update the timetable data
+            $sqlUpdateTimetable = "UPDATE timetable SET timetable_id=?, lec_id=?, start_time=?, end_time=?, day=?, classtype=?, subID=?, venueID=? WHERE timetable_id=?";
+            $stmtUpdateTimetable = $mysqli->prepare($sqlUpdateTimetable);
+            $stmtUpdateTimetable->bind_param('sssssssss', $newTimetableID, $lecID, $startTime, $endTime, $day, $classType, $subID, $venueID, $timetableID);
+            $stmtUpdateTimetable->execute();
+            $stmtUpdateTimetable->close();
+        }
     }
 }
 
