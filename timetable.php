@@ -11,34 +11,23 @@ while ($row = $LECQUERY->fetch_assoc()) {
 <!DOCTYPE html>
 <html lang="en">
 <head>   
-    <!--  <link rel="stylesheet" href="timetable.css"> -->
+<link rel="stylesheet" href="timetable.css">
+        <div class="header">
+        <form method="post" action="inserttimeslot.php">
+        <button type="submit">Add Timeslot</button>
+        </form>
+        <form method="post" action="viewsubject.php">
+            <button   type="submit">Manage Subject</button>
+        </form>
+        <form method="post" action="viewtimeslot.php">
+            <button   type="submit">Manage Timeslots</button>
+        </form>
+        
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGT Systems</title>
-    <style>
-        .class-type {
-            font-size: 12px;
-            font-weight: normal;
-            display: block;
-        }
-        td {
-            height: 30px;
-            border: 1px solid #000;
-            padding: 10px;
-            width: 100px;
-        }
-        .occupied {
-            background-color: #03ad12;
-        }
-        .timetable-section {
-            border: 1px solid #000;
-            padding: 10px;
-            margin-bottom: 20px;
-        }
-        .draggable {
-            position: absolute;
-        }
-    </style>
+        </div>
 </head>
 <body>
 <?php
@@ -171,13 +160,8 @@ foreach ($LEC_ID as $lecturerId) {
 } // Close the loop for through $LEC_ID array
 
 ?>
-    <footer>
-        <form method="post" action="inserttimeslot.php">
-            <button type="submit">Add Timeslot</button>
-        </form>
-        <form method="post" action="viewsubject.php">
-            <button type="submit">Manage Subject</button>
-        </form>
+   <footer>
+      
     </footer>
 </body>
 </html>
