@@ -68,6 +68,8 @@ foreach ($LEC_ID as $lecturerId) {
             $subjectName = $firstRow["subname"];
             $lecname = $firstRow["lecname"];
             $type = $firstRow["classtype"]; 
+            $venueID = $firstRow["venueID"];
+            $cstatus = $firstRow["cstatus"];
 
             $daysOfWeek[$day][] = array( //inputting the data into array
                 "start_time" => $startHour,
@@ -75,8 +77,8 @@ foreach ($LEC_ID as $lecturerId) {
                 "subject_name" => $subjectName,
                 "lecname" => $lecname,
                 "type" => $type,
-                "cstatus" => $firstRow["cstatus"] // Adding cstatus to the array
-            );
+                "venueID" => $venueID,
+                "cstatus" => $cstatus );
         } while ($firstRow = $result->fetch_assoc());
 
         // Display the timetable in a separate table for each lecturer
@@ -125,7 +127,10 @@ foreach ($LEC_ID as $lecturerId) {
         
                         if ($hour >= $classStartHour && $hour < ($classStartHour + $classHours)) {
                             // Add the slot's content to the cell content
-                            $cellContent .= "{$slot["subject_name"]}<br>{$slot["lecname"]}<br>";
+                            $cellContent .= "{$slot["subject_name"]}<br>{$slot["lecname"]}<br>{$slot["start_time"]}-{$slot["end_time"]}<br>
+                            {$slot["venueID"]}<br>";
+
+        
         
                             // Calculate colspan to span multiple cells based on class hours
                             if ($classHours > 1) {
