@@ -2,34 +2,34 @@
 require_once("config.php");
 
 $LEC_ID = array();
-$LECQUERY = $mysqli->query("SELECT DISTINCT lec_id FROM timetable");
+$LECQUERY = $mysqli->query("SELECT DISTINCT lec_id FROM timetable"); //get all the lec_id
 while ($row = $LECQUERY->fetch_assoc()) {
     $LEC_ID[] = $row["lec_id"];
-}
+} 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>   
 <link rel="stylesheet" href="timetable.css">
-        <div class="header">
-        <form method="post" action="inserttimeslot.php">
-        <button type="submit">Add Timeslot</button>
-        </form>
-        <form method="post" action="viewsubject.php">
-            <button   type="submit">Manage Subject</button>
-        </form>
-        <form method="post" action="viewtimeslot.php">
-            <button   type="submit">Manage Timeslots</button>
-        </form>
-        
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AGT Systems</title>
-        </div>
 </head>
 <body>
+<div class="header">
+    <form method="post" action="inserttimeslot.php">
+        <button type="submit">Add Timeslot</button>
+    </form>
+    <form method="post" action="viewsubject.php">
+        <button type="submit">Manage Subject</button>
+    </form>
+    <form method="post" action="viewtimeslot.php">
+        <button type="submit">Manage Timeslots</button>
+    </form>
+</div>
+    
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGT Systems</title>
+
 <?php
 // Generate timetables for each lecturer
 foreach ($LEC_ID as $lecturerId) {
@@ -62,19 +62,20 @@ foreach ($LEC_ID as $lecturerId) {
 
         // Loop through the fetched data and populate the daysOfWeek array
         do {
-            $day = $firstRow["day"];
+            $day = $firstRow["day"]; //fetching all data
             $startHour = $firstRow["start_time"];
             $endHour = $firstRow["end_time"];
             $subjectName = $firstRow["subname"];
             $lecname = $firstRow["lecname"];
-            $type = $firstRow["classtype"]; // Fetch the 'type' field from the database
+            $type = $firstRow["classtype"]; 
 
-            $daysOfWeek[$day][] = array(
+            $daysOfWeek[$day][] = array( //inputting the data into array
                 "start_time" => $startHour,
                 "end_time" => $endHour,
                 "subject_name" => $subjectName,
                 "lecname" => $lecname,
-                "type" => $type // Include 'type' in the array
+                "type" => $type,
+                "cstatus" => $firstRow["cstatus"] // Adding cstatus to the array
             );
         } while ($firstRow = $result->fetch_assoc());
 
@@ -89,6 +90,7 @@ foreach ($LEC_ID as $lecturerId) {
             $nextHour = ($hour + 1) % 24;
             $amPm = ($hour < 12) ? "AM" : "PM";
             $nextAmPm = ($nextHour < 12) ? "AM" : "PM";
+
 
             // Special case for 11 AM to 12 PM
             if ($formattedHour === 11 && $amPm === "AM" && $nextHour === 0) {
@@ -106,41 +108,62 @@ foreach ($LEC_ID as $lecturerId) {
             if (!empty($daySlots)) {
                 echo "<tr>";
                 echo "<td>$dayName</td>";
-
+        
                 for ($hour = 8; $hour <= 17; $hour++) {
                     $occupiedClass = '';
                     $cellContent = '';
                     $colspan = 1; // Default colspan value
-
+                    $cellColor = ''; // Default cell color class for occupied (active) status
+                    $cstatus = '';
+        
                     foreach ($daySlots as $slot) {
                         $startTimeStamp = strtotime($slot["start_time"]);
                         $endTimeStamp = strtotime($slot["end_time"]);
-
+        
                         $classHours = date('H', $endTimeStamp) - date('H', $startTimeStamp);
                         $classStartHour = date('H', $startTimeStamp);
-
+        
                         if ($hour >= $classStartHour && $hour < ($classStartHour + $classHours)) {
-                            $occupiedClass = 'occupied';
-
                             // Add the slot's content to the cell content
                             $cellContent .= "{$slot["subject_name"]}<br>{$slot["lecname"]}<br>";
-
+        
                             // Calculate colspan to span multiple cells based on class hours
                             if ($classHours > 1) {
                                 $colspan = $classHours;
                                 $cellContent .= "<span class='class-type'>{$slot["type"]}</span>";
                             }
+        
+                            // Check if cstatus exists in the slot data
+                            if (isset($slot["cstatus"])) {
+                                $cstatus = $slot["cstatus"];
+        
+                                // Set cell color based on cstatus
+                                if ($cstatus === "active") {
+                                    $cellColor = 'occupied';
+                                } elseif ($cstatus === "replacement") {
+                                    $cellColor = 'replacement'; // CSS class for replacement color
+                                } elseif ($cstatus === "cancelled") {
+                                    $cellColor = 'cancelled'; // CSS class for cancelled color
+                                }
+                                
+                            }
+        
+                            // Check if the slot is occupied
+                            if ($occupiedClass !== 'occupied') {
+                                $occupiedClass = 'occupied'; // Set occupied class
+                            }
                         }
                     }
-
+        
                     if ($occupiedClass === 'occupied') {
-                        echo "<td class='$occupiedClass' colspan='$colspan'>$cellContent</td>";
+                        // Apply the cell color class based on cstatus
+                        echo "<td class='$occupiedClass $cellColor' colspan='$colspan'>$cellContent</td>";
                         $hour += $colspan - 1; // Skip additional hours covered by colspan
                     } else {
                         echo "<td></td>"; // Empty cell for unoccupied slots
                     }
                 }
-
+        
                 echo "</tr>";
             } else {
                 // Generate a row of empty slots for days without timeslots
@@ -152,6 +175,7 @@ foreach ($LEC_ID as $lecturerId) {
                 echo "</tr>";
             }
         }
+        
 
         // Close the table for this lecturer
         echo "</table>";
@@ -160,8 +184,7 @@ foreach ($LEC_ID as $lecturerId) {
 } // Close the loop for through $LEC_ID array
 
 ?>
-   <footer>
-      
-    </footer>
+<footer>
+</footer>
 </body>
 </html>

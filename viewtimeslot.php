@@ -26,25 +26,37 @@
 
 include('config.php');
 
-$sql = "SELECT t.*, s.subname 
-        FROM timetable t
-        LEFT JOIN subject s ON t.subID = s.subID";
-$result = $mysqli->query($sql);
+$sqlTimetable = "SELECT timetable.*, lecturer.lecname 
+                FROM timetable
+                INNER JOIN lecturer ON timetable.lec_id = lecturer.lec_id
+                ORDER BY timetable.lec_id;";
+$resultTimetable = $mysqli->query($sqlTimetable);
 
-if ($result->num_rows > 0) {
+if ($resultTimetable->num_rows > 0) {
     echo "<table><tr><th>Timetable ID</th><th>Subject Name</th><th>Lecturer ID</th><th>Start Time</th><th>End Time</th><th>Day</th><th>Class Type</th><th>Sub ID</th><th>Venue ID</th></tr>";
 
     // output data of each row
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr><td>" . $row["timetable_id"] . "</td>
-              <td>" . $row["subname"] . "</td>
-              <td>" . $row["lec_id"] . "</td>
-              <td>" . $row["start_time"] . "</td>
-              <td>" . $row["end_time"] . "</td>
-              <td>" . $row["day"] . "</td>
-              <td>" . $row["classtype"] . "</td>
-              <td>" . $row["subID"] . "</td>
-              <td>" . $row["venueID"] . "</td>
+    while($row = $resultTimetable->fetch_assoc()) {
+        $timetableID = $row["timetable_id"];
+        $lecID = $row["lec_id"];
+        $lecName = $row["lecname"]; // Added lecturer name
+        $startTime = $row["start_time"];
+        $endTime = $row["end_time"];
+        $day = $row["day"];
+        $classType = $row["classtype"];
+        $subID = $row["subID"];
+        $venueID = $row["venueID"];
+        
+        echo "<tr>
+              <td>$timetableID</td>
+              <td>$subID</td>
+              <td>$lecID</td>
+              <td>$startTime</td>
+              <td>$endTime</td>
+              <td>$day</td>
+              <td>$classType</td>
+              <td>$subID</td>
+              <td>$venueID</td>
           </tr>";
     }
     echo "</table>";
@@ -54,7 +66,8 @@ if ($result->num_rows > 0) {
 $mysqli->close();
 
 ?>
+
 <button onclick="window.location.href='insertsubject.php';">Insert page</button>
-<button onclick="window.location.href='edittimeslot.php';">Edit subjects</button>
+<button onclick="window.location.href='edittimeslot.php';">Edit timeslot</button>
 </body>
 </html>
