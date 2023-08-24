@@ -26,7 +26,9 @@
 
 include('config.php');
 
-$sql = "SELECT * FROM timetable";
+$sql = "SELECT t.*, s.subname 
+        FROM timetable t
+        LEFT JOIN subject s ON t.subID = s.subID";
 $result = $mysqli->query($sql);
 
 if ($result->num_rows > 0) {
@@ -35,7 +37,7 @@ if ($result->num_rows > 0) {
     // output data of each row
     while ($row = $result->fetch_assoc()) {
         echo "<tr><td>" . $row["timetable_id"] . "</td>
-              <td>" . $row["subject_name"] . "</td>
+              <td>" . $row["subname"] . "</td>
               <td>" . $row["lec_id"] . "</td>
               <td>" . $row["start_time"] . "</td>
               <td>" . $row["end_time"] . "</td>
