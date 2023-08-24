@@ -145,7 +145,7 @@ if (isset($_POST["reassign"])) {
             </tr>
         </thead>
         <?php
- $sqlTimetable = "SELECT timetable.*, lecturer.lecname 
+ $sqlTimetable = "SELECT timetable.*, lecturer.lecname, lecturer.maxhours 
  FROM timetable
  INNER JOIN lecturer ON timetable.lec_id = lecturer.lec_id
  ORDER BY timetable.lec_id, FIELD(LOWER(day), 'monday', 'tuesday', 'wednesday', 'thursday', 'friday');";
@@ -162,6 +162,8 @@ while($row = $resultTimetable->fetch_assoc()) {
     $subID = $row["subID"];
     $venueID = $row["venueID"];
     $cstatus = $row["cstatus"];
+    $maxHours = $row["maxhours"]; // Maximum hours allowed for this lecturer
+    $totalHoursOfClass = 0;
 ?>
 <tr>
     <td><?php echo $no ?></td>
@@ -174,9 +176,13 @@ while($row = $resultTimetable->fetch_assoc()) {
     <td><input type="text" name="subID[]" value="<?php echo $subID ?>"></td>
     <td><input type="text" name="venueID[]" value="<?php echo $venueID ?>"></td>
     <td><input type="text" name="cstatus[]" value="<?php echo $cstatus ?>"></td>
-    <td>
-        <button type="submit" name="delete" value="<?php echo $timetableID ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
-    </td>
+    <?php if ($totalHoursOfClass > $maxHours): ?>
+        <td colspan="10"><span style="color: red;">Total hours exceed maximum!</span></td>
+    <?php else: ?>
+        <td>
+            <button type="submit" name="delete" value="<?php echo $timetableID ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
+        </td>
+    <?php endif; ?>
 </tr>
 <?php
     $no++;

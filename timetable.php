@@ -25,6 +25,7 @@ while ($row = $LECQUERY->fetch_assoc()) {
         <button type="submit">Manage Timeslots</button>
     </form>
 </div>
+
     
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
