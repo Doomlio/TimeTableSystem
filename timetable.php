@@ -46,12 +46,13 @@ while ($row = $LECQUERY->fetch_assoc()) {
 foreach ($LEC_ID as $lecturerId) {
     // Query to fetch data from the timetable table for the current lecturer
     $result = $mysqli->query("
-        SELECT t.*, l.lecname AS lecname
-        FROM timetable t
-        JOIN lecturer l ON t.lec_id = l.lec_id
-        WHERE t.lec_id = '$lecturerId'
-        ORDER BY FIELD(t.day, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
-    ");
+    SELECT t.*, s.subname, l.lecname
+    FROM timetable t
+    JOIN lecturer l ON t.lec_id = l.lec_id
+    JOIN subject s ON t.subID = s.subID
+    WHERE t.lec_id = '$lecturerId'
+    ORDER BY FIELD(t.day, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
+");
 
     // Check if the query was successful
     if ($result->num_rows > 0) {
@@ -75,7 +76,7 @@ foreach ($LEC_ID as $lecturerId) {
             $day = $firstRow["day"];
             $startHour = $firstRow["start_time"];
             $endHour = $firstRow["end_time"];
-            $subjectName = $firstRow["subject_name"];
+            $subjectName = $firstRow["subname"];
             $lecname = $firstRow["lecname"];
             $type = $firstRow["classtype"]; // Fetch the 'type' field from the database
 
