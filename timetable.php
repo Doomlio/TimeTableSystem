@@ -15,15 +15,16 @@ while ($row = $LECQUERY->fetch_assoc()) {
 </head>
 <body>
 <div class="header">
-    <form method="post" action="inserttimeslot.php">
-        <button type="submit">Add Timeslot</button>
-    </form>
     <form method="post" action="viewsubject.php">
         <button type="submit">Manage Subject</button>
     </form>
     <form method="post" action="viewtimeslot.php">
         <button type="submit">Manage Timeslots</button>
     </form>
+    <form method="post" action ="viewlecturer.php">
+    <button type ="submit">Manage lecturers</form>
+    <form method="post" action ="viewvenue.php">
+    <button type ="submit">Manage venue</form>
 </div>
 
     
