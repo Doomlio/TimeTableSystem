@@ -48,5 +48,8 @@ if ($result->num_rows > 0) {
 $mysqli->close();
 
 ?>
+<form method="post" action="timetable.php">
+        <button type="submit">Back to timetable</button>
+    </form>
 <button onclick="window.location.href='insertsubject.php';">Insert subjects</button>
 <button onclick="window.location.href='editsubject.php';">edit subjects</button>

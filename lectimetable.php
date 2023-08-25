@@ -1,51 +1,42 @@
 <?php
+session_start();
 require_once("config.php");
 
-$LEC_ID = array();
-$LECQUERY = $mysqli->query("SELECT DISTINCT lec_id FROM timetable"); //get all the lec_id
-while ($row = $LECQUERY->fetch_assoc()) {
-    $LEC_ID[] = $row["lec_id"];
-} 
-?>
+if (!isset($_SESSION["lec_id"]) || !isset($_SESSION["name"])) {
+    // Redirect the user to the login page if not logged in
+    header("Location: login.php");
+    exit;
+}
 
+$lec_id = $_SESSION["lec_id"];
+$lecname = $_SESSION["name"];
 
-<!DOCTYPE html>
-<html lang="en">
-<head>   
-<link rel="stylesheet" href="timetable.css">
-</head>
-<body>
-<div class="header">
-    <form method="post" action="viewsubject.php">
-        <button type="submit">Manage Subject</button>
-    </form>
-    <form method="post" action="viewtimeslot.php">
-        <button type="submit">Manage Timeslots</button>
-    </form>
-    <form method="post" action ="viewlecturer.php">
-    <button type ="submit">Manage lecturers</form>
-    <form method="post" action ="viewvenue.php">
-    <button type ="submit">Manage venue</form>
-</div>
-
-    
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AGT Systems</title>
-
-<?php
-// Generate timetables for each lecturer
-foreach ($LEC_ID as $lecturerId) {
-    // Query to fetch data from the timetable table for the current lecturer
-    $result = $mysqli->query("
+$result = $mysqli->query("
     SELECT t.*, s.subname, l.lecname
     FROM timetable t
     JOIN lecturer l ON t.lec_id = l.lec_id
     JOIN subject s ON t.subID = s.subID
-    WHERE t.lec_id = '$lecturerId'
+    WHERE t.lec_id = '$lec_id'
     ORDER BY FIELD(t.day, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
 ");
 
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>   
+<link rel="stylesheet" href="timetable.css">
+<form method="post" action="viewreplacementclass.php">
+        <button type="submit">Manage Replacement Class</button>
+    </form>
+</head>
+<body>
+<div class="header">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGT Systems</title>
+
+
+    <?php
     // Check if the query was successful
     if ($result->num_rows > 0) {
         echo "<div class='timetable-section'>";
@@ -189,7 +180,7 @@ foreach ($LEC_ID as $lecturerId) {
         echo "</table>";
         echo "</div>";
     } // Close the if statement for checking if the query was successful
-} // Close the loop for through $LEC_ID array
+// Close the loop for through $LEC_ID array
 
 ?>
 <footer>

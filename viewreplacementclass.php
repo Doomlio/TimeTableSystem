@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- <link rel="stylesheet" href="timetable.css"> -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGT Systems</title>
@@ -21,25 +20,24 @@
 </head>
 
 <body>
-
 <?php
+session_start();
+include ('config.php');
 
-include('config.php');
+$lecID = $_SESSION["lec_id"]; // Get lecturer ID from the session
+$classType = "replacement"; // Class type condition
 
-$sqlTimetable = "SELECT timetable.*, lecturer.lecname 
-                FROM timetable
-                INNER JOIN lecturer ON timetable.lec_id = lecturer.lec_id
-                ORDER BY timetable.lec_id;";
-$resultTimetable = $mysqli->query($sqlTimetable);
+$sqlTimetable = "SELECT * FROM timetable WHERE lec_id = ? AND classtype = ? AND cstatus = ?";
+$stmt = $mysqli->prepare($sqlTimetable);
+$stmt->bind_param("iss", $lecID, $classType, $classType);
+$stmt->execute();
+$resultTimetable = $stmt->get_result();
 
 if ($resultTimetable->num_rows > 0) {
-    echo "<table><tr><th>Timetable ID</th><th>Subject Name</th><th>Lecturer ID</th><th>Start Time</th><th>End Time</th><th>Day</th><th>Class Type</th><th>Sub ID</th><th>Venue ID</th></tr>";
+    echo "<table><tr><th>Timetable ID</th><th>Subject Name</th><th>Start Time</th><th>End Time</th><th>Day</th><th>Class Type</th><th>Sub ID</th><th>Venue ID</th></tr>";
 
-    // output data of each row
     while($row = $resultTimetable->fetch_assoc()) {
         $timetableID = $row["timetable_id"];
-        $lecID = $row["lec_id"];
-        $lecName = $row["lecname"]; // Added lecturer name
         $startTime = $row["start_time"];
         $endTime = $row["end_time"];
         $day = $row["day"];
@@ -50,7 +48,6 @@ if ($resultTimetable->num_rows > 0) {
         echo "<tr>
               <td>$timetableID</td>
               <td>$subID</td>
-              <td>$lecID</td>
               <td>$startTime</td>
               <td>$endTime</td>
               <td>$day</td>
@@ -63,8 +60,9 @@ if ($resultTimetable->num_rows > 0) {
 } else {
     echo "0 results";
 }
-$mysqli->close();
 
+$stmt->close();
+$mysqli->close();
 ?>
 <form method="post" action="timetable.php">
         <button type="submit">Back to timetable</button>

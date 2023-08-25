@@ -22,6 +22,8 @@ if ($result->num_rows > 0) {
 }
 $mysqli->close();
 ?>
-
+<form method="post" action="timetable.php">
+        <button type="submit">Back to timetable</button>
+    </form>
 <button onclick="window.location.href='insertlecturer.php';">Insert Lecturer</button>
 <button onclick="window.location.href='editlecturer.php';">Edit Lecturer</button>
