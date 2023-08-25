@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Login</h1>
-    <form method="post" action="process_login.php">
+    <form method="post" action="loginprocessing.php">
         Email: <input type="email" name="email"><br>
         Password: <input type="password" name="password"><br>
         <input type="submit" value="Login">

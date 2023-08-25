@@ -1,27 +1,42 @@
 <?php
 session_start();
-require_once('config.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+// Database connection
+include('config.php');
 
-    $sql = "SELECT * FROM lecturer WHERE email = '$email'";
-    $result = $mysqli->query($sql);
+if (isset($_POST["mylogsession"])) {
+    $email = $_POST['email']; 
+    $userpassword = $_POST['password'];
+    $userpassword = md5($userpassword);
 
-    if ($result->num_rows === 1) {
-        $row = $result->fetch_assoc();
-        if (password_verify($password, $row['password'])) {
-            $_SESSION['user_id'] = $row['lec_id'];
-            header("Location: timetable.php"); // Redirect to the dashboard after successful login
-            exit();
-        } else {
-            echo "Invalid password.";
+    $sql = "SELECT * FROM lecturer WHERE email=? AND password=?"; 
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("ss", $email, $userpassword);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $total = $result->num_rows;
+
+    if ($total == 0) {
+        header("refresh:1;url=loginwithsession.html");
+?>
+        <script language=javascript>alert('ACCESS DENIED!');</script>
+<?php
+    }
+
+    if ($total != 0) {
+        while ($row = $result->fetch_assoc()) {
+            $lec_id = $row["lec_id"]; 
+            $password = $row["password"];
+            $lecname = $row["lecname"]; 
+            $email = $row["email"];
         }
-    } else {
-        echo "Email not found.";
+
+        header("refresh:1;url=landingsession.php");
+
+        $_SESSION["lec_id"] = $lec_id;
+        $_SESSION["password"] = $password;
+        $_SESSION["lecname"] = $lecname;
+        $_SESSION["email"] = $email;
     }
 }
-
-$mysqli->close();
 ?>
