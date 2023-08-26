@@ -61,6 +61,6 @@ $mysqli->close();
         <button type="submit">Back to timetable</button>
     </form>
 <button onclick="window.location.href='insertrepclass.php';">Add timeslot</button>
-<button onclick="window.location.href='edittimeslot.php';">Edit timeslot</button>
+<button onclick="window.location.href='editrepclass.php';">Edit timeslot</button>
 </body>
 </html>

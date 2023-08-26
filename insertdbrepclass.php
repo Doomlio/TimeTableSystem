@@ -11,8 +11,6 @@ if (!isset($_SESSION["lec_id"]) || !isset($_SESSION["name"])) {
 $lec_id = $_SESSION["lec_id"];
 $lecname = $_SESSION["name"];
 
-require_once('config.php');
-
 $subcode = $_POST["subID"];
 $starttime = $_POST["starttime"];
 $endtime = $_POST["endtime"];
