@@ -21,12 +21,11 @@ if (isset($_POST["savedata"])) {
     foreach ($_POST['venueid'] as $key => $venueid) {
         $newVenueID = $_POST['newVenueID'][$key];
         $venuetype = $_POST['venuetype'][$key];
-        $subID = $_POST['subID'][$key];
 
         // Prepare and execute the SQL query to update the venue data
-        $sqlUpdateVenue = "UPDATE venue SET venueid=?, venuetype=?, subID=? WHERE venueid=?";
+        $sqlUpdateVenue = "UPDATE venue SET venueid=?, venuetype=? WHERE venueid=?";
         $stmtUpdateVenue = $mysqli->prepare($sqlUpdateVenue);
-        $stmtUpdateVenue->bind_param('ssss', $newVenueID, $venuetype, $subID, $venueid);
+        $stmtUpdateVenue->bind_param('sss', $newVenueID, $venuetype,  $venueid);
         $stmtUpdateVenue->execute();
         $stmtUpdateVenue->close();
     }

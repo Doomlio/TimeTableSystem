@@ -73,28 +73,28 @@ $mysqli->close();
 <head>
     <title>Confirmation</title>
 </head>
-<body>
-    <h1>Confirm Timetable Entry</h1>
-    <p>Subject: <?php echo $subcode; ?></p>
-    <p>Start Time: <?php echo $starttime; ?></p>
-    <p>End Time: <?php echo $endtime; ?></p>
-    <p>Day: <?php echo $day; ?></p>
-    <p>Venue: <?php echo $venueID; ?></p>
-    <p>Class Type : <?php echo $classtype; ?></p>
+    <body>
+        <h1>Confirm Timetable Entry</h1>
+        <p>Subject: <?php echo $subcode; ?></p>
+        <p>Start Time: <?php echo $starttime; ?></p>
+        <p>End Time: <?php echo $endtime; ?></p>
+        <p>Day: <?php echo $day; ?></p>
+        <p>Venue: <?php echo $venueID; ?></p>
+        <p>Class Type : <?php echo $classtype; ?></p>
 
-    <form method="post">
-        <input type="hidden" name="subID" value="<?php echo $subcode; ?>">
-        <input type="hidden" name="starttime" value="<?php echo $starttime; ?>">
-        <input type="hidden" name="endtime" value="<?php echo $endtime; ?>">
-        <input type="hidden" name="day" value="<?php echo $day; ?>">
-        <input type="hidden" name="venueID" value="<?php echo $venueID; ?>">
-        <input type="hidden" name="type" value="<?php echo $classtype; ?>">
-        <input type="hidden" name="confirm" value="1">
-        <input type="submit" value="Confirm">
-    </form>
+        <form method="post">
+            <input type="hidden" name="subID" value="<?php echo $subcode; ?>">
+            <input type="hidden" name="starttime" value="<?php echo $starttime; ?>">
+            <input type="hidden" name="endtime" value="<?php echo $endtime; ?>">
+            <input type="hidden" name="day" value="<?php echo $day; ?>">
+            <input type="hidden" name="venueID" value="<?php echo $venueID; ?>">
+            <input type="hidden" name="type" value="<?php echo $classtype; ?>">
+            <input type="hidden" name="confirm" value="1">
+            <input type="submit" value="Confirm">
+        </form>
 
-    <form action="lectimetable.php">
-        <button>Cancel</button>
-    </form>
-</body>
-</html>
+        <form action="lectimetable.php">
+            <button>Cancel</button>
+        </form>
+    </body>
+    </html>

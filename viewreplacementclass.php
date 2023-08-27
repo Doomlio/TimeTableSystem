@@ -13,18 +13,18 @@
         }
     </style>
 </head>
-
+<h2>VIEW REPLACEMENT CLASS</h2>
 <body>
 <?php
 session_start();
 include ('config.php');
 
 $lecID = $_SESSION["lec_id"]; // Get lecturer ID from the session
-$classType = "replacement"; // Class type condition
+$classtype = "replacement"; // Class type condition
 
 $sqlTimetable = "SELECT * FROM timetable WHERE lec_id = ? AND cstatus = ?";
 $stmt = $mysqli->prepare($sqlTimetable);
-$stmt->bind_param("is", $lecID, $classType);
+$stmt->bind_param("is", $lecID, $classtype);
 $stmt->execute();
 $resultTimetable = $stmt->get_result();
 

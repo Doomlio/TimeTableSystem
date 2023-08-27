@@ -39,11 +39,11 @@ if ($resultTimetable->num_rows > 0) {
     while($row = $resultTimetable->fetch_assoc()) {
         $timetableID = $row["timetable_id"];
         $lecID = $row["lec_id"];
-        $lecName = $row["lecname"]; // Added lecturer name
+        $lecName = $row["lecname"]; 
         $startTime = $row["start_time"];
         $endTime = $row["end_time"];
         $day = $row["day"];
-        $classType = $row["classtype"];
+        $classtype = $row["classtype"];
         $subID = $row["subID"];
         $venueID = $row["venueID"];
         
@@ -54,7 +54,7 @@ if ($resultTimetable->num_rows > 0) {
               <td>$startTime</td>
               <td>$endTime</td>
               <td>$day</td>
-              <td>$classType</td>
+              <td>$classtype</td>
               <td>$subID</td>
               <td>$venueID</td>
           </tr>";
