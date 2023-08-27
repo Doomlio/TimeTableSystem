@@ -28,6 +28,19 @@
     <form method="post" action="viewreplacementclass.php">
             <button type="submit">Manage Replacement Class</button>
         </form>
+        <form method="post" action="viewlectimeslot.php">
+            <button type="submit">Manage timeslots</button>
+        </form>
+        <form method="post" action="viewlecsubject.php">
+            <button type="submit">View subjects</button>
+        </form>
+       
+        <form method="post" action="viewlecvenue.php">
+            <button type="submit">View venues</button>
+        </form>
+        <form method="post" action="requestform.php">
+            <button type="submit">Request Forms</button>
+        </form>
     </head>
     <body>
     <div class="header">
