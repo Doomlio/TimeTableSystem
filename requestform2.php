@@ -20,15 +20,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $newVenueID = $_POST["venueID"];
     $TimetableID = $_GET["timetableID"]; // Use $_GET here
     
-    // Insert the request into the database
-    $status = "pending";
-    $insertSql = "INSERT INTO request (lecid, timetable_id, new_start_time, new_end_time, new_day, new_class_type, new_venue_id, status)
-                  VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    $stmt = $mysqli->prepare($insertSql);
-    $stmt->bind_param("iissssis", $lec_id, $TimetableID, $newStartTime, $newEndTime, $newDay, $newClassType, $newVenueID, $status);
-    $stmt->execute();
-    $stmt->close();
+    // Check for clashes in timetable
+    $clashesExist = false;
+    $sqlCheckTimetableClashes = "SELECT * FROM timetable WHERE lec_id = ? AND day = ? AND ((start_time >= ? AND start_time < ?) OR (end_time > ? AND end_time <= ?) OR (start_time <= ? AND end_time >= ?))";
+    $stmtCheckTimetableClashes = $mysqli->prepare($sqlCheckTimetableClashes);
+    $stmtCheckTimetableClashes->bind_param('ssssssss', $lec_id, $newDay, $newStartTime, $newEndTime, $newStartTime, $newEndTime, $newStartTime, $newEndTime);
+    $stmtCheckTimetableClashes->execute();
+    $resultTimetableClashes = $stmtCheckTimetableClashes->get_result();
+    $clashesExist = ($resultTimetableClashes->num_rows > 0);
+    $stmtCheckTimetableClashes->close();
+
+    // Check for clashes in pending requests
+    if (!$clashesExist) {
+        $sqlCheckRequestClashes = "SELECT * FROM request WHERE lecid = ? AND new_day = ? AND ((new_start_time >= ? AND new_start_time < ?) OR (new_end_time > ? AND new_end_time <= ?) OR (new_start_time <= ? AND new_end_time >= ?)) AND status = 'pending'";
+        $stmtCheckRequestClashes = $mysqli->prepare($sqlCheckRequestClashes);
+        $stmtCheckRequestClashes->bind_param('ssssssss', $lec_id, $newDay, $newStartTime, $newEndTime, $newStartTime, $newEndTime, $newStartTime, $newEndTime);
+        $stmtCheckRequestClashes->execute();
+        $resultRequestClashes = $stmtCheckRequestClashes->get_result();
+        $clashesExist = ($resultRequestClashes->num_rows > 0);
+        $stmtCheckRequestClashes->close();
+    }
+
+    if (!$clashesExist) {
+        // No clashes found, proceed to insert request
+        $status = "pending";
+        $insertSql = "INSERT INTO request (lecid, timetable_id, new_start_time, new_end_time, new_day, new_class_type, new_venue_id, status)
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $mysqli->prepare($insertSql);
+        $stmt->bind_param("iissssis", $lec_id, $TimetableID, $newStartTime, $newEndTime, $newDay, $newClassType, $newVenueID, $status);
+        $stmt->execute();
+        $stmt->close();
+        // Redirect back to requestform.php after successful submission
+        header("Location: requestform.php");
+        echo '<script>
+        alert("Successful request.");
+        window.location.href = "requestform.php"; // Redirect to the form
+    </script>';
+        exit;
+    } else {
+        // Clashes found, show an alert using JavaScript
+        echo '<script>
+            alert("There is a clash of time and venue with another timeslot. Please change your  request.");
+            window.location.href = "requestform.php"; // Redirect to the form
+        </script>';
+        exit; // Ensure the script execution stops after the alert
+    }
 }
+
 
 // Use $_GET to access the data passed in the URL
 $timetableID = $_GET["timetableID"];
