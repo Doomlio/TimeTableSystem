@@ -33,25 +33,23 @@ $lec_id = $_SESSION["lec_id"];
         }
     </style>
 
-<script>
-function redirectToRequestForm(timetableID, subID, subName, startTime, endTime, day, classtype, venueID) {
-    var url = "requestform2.php" +
-              "?timetableID=" + timetableID +
-              "&subID=" + subID +
-              "&subName=" + encodeURIComponent(subName) +
-              "&startTime=" + startTime +
-              "&endTime=" + endTime +
-              "&day=" + day +
-              "&classtype=" + classtype +
-              "&venueID=" + venueID;
-    window.location.href = url;
-}
-</script>
-
+    <script>
+        function redirectToRequestForm(timetableID, subID, subName, startTime, endTime, day, classtype, venueID) {
+            var url = "requestform2.php" +
+                    "?timetableID=" + timetableID +
+                    "&subID=" + subID +
+                    "&subName=" + encodeURIComponent(subName) +
+                    "&startTime=" + startTime +
+                    "&endTime=" + endTime +
+                    "&day=" + day +
+                    "&classtype=" + classtype +
+                    "&venueID=" + venueID;
+            window.location.href = url;
+        }
+    </script>
 </head>
 <body>
     <?php
-  
     $result = $mysqli->query("
         SELECT t.*, s.subname, l.lecname
         FROM timetable t
@@ -62,20 +60,20 @@ function redirectToRequestForm(timetableID, subID, subName, startTime, endTime, 
     ");
 
     if ($result->num_rows > 0) {
-        echo "<form method='post' action='viewlectimeslot.php'>
-        <table>
-        <tr><th>Timetable ID</th>
-        <th>Subject ID</th>
-        <th>Subject Name</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>Day</th>
-        <th>Class Type</th>
-        <th>Venue ID</th>
-        <th>Actions</th>
+        echo "<table>
+        <tr>
+            <th>Timetable ID</th>
+            <th>Subject ID</th>
+            <th>Subject Name</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Day</th>
+            <th>Class Type</th>
+            <th>Venue ID</th>
+            <th>Actions</th>
         </tr>";
 
-        while($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
             $timetableID = $row["timetable_id"];
             $subName = $row["subname"];
             $startTime = $row["start_time"];
@@ -86,30 +84,66 @@ function redirectToRequestForm(timetableID, subID, subName, startTime, endTime, 
             $venueID = $row["venueID"];
 
             echo "<tr>
-                  <td>$timetableID</td>
-                  <td>$subID</td>
-                  <td>$subName</td>
-                  <td>$startTime</td>
-                  <td>$endTime</td>
-                  <td>$day</td>
-                  <td>$classtype</td>
-                  <td>$venueID</td>
-                  <td>
-                  <button type='button' onclick='redirectToRequestForm(\"$timetableID\", \"$subID\", \"$subName\", \"$startTime\", \"$endTime\", 
-                  \"$day\", \"$classtype\", \"$venueID\")'>Request changes</button>
+                <td>$timetableID</td>
+                <td>$subID</td>
+                <td>$subName</td>
+                <td>$startTime</td>
+                <td>$endTime</td>
+                <td>$day</td>
+                <td>$classtype</td>
+                <td>$venueID</td>
+                <td>
+                    <button type='button' onclick='redirectToRequestForm(\"$timetableID\", \"$subID\", \"$subName\", \"$startTime\", \"$endTime\", 
+                    \"$day\", \"$classtype\", \"$venueID\")'>Request changes</button>
                 </td>
             </tr>";
         }
-        echo "</table>
-        </form>";
+        echo "</table>";
     } else {
-        echo "0 results";
+        echo "No results found.";
     }
-    $mysqli->close();
+   
     ?>
-    <div id="editFormContainer"></div>
+
+    <h2>Your Requests</h2>
+    <table border="1">
+        <tr>
+            <th>Timetable ID</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Day</th>
+            <th>Class Type</th>
+            <th>Venue</th>
+            <th>Status</th>
+        </tr>
+        <?php
+        // Fetch and display the user's requests
+        $sqlGetUserRequests = "SELECT * FROM request WHERE lecid = ?";
+        $stmtGetUserRequests = $mysqli->prepare($sqlGetUserRequests);
+        $stmtGetUserRequests->bind_param('i', $lec_id);
+        $stmtGetUserRequests->execute();
+        $resultUserRequests = $stmtGetUserRequests->get_result();
+
+        while ($rowUserRequest = $resultUserRequests->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>{$rowUserRequest['timetable_id']}</td>";
+           
+            echo "<td>{$rowUserRequest['new_start_time']}</td>";
+            echo "<td>{$rowUserRequest['new_end_time']}</td>";
+            echo "<td>{$rowUserRequest['new_day']}</td>";
+            echo "<td>{$rowUserRequest['new_class_type']}</td>";
+            echo "<td>{$rowUserRequest['new_venue_id']}</td>";
+            echo "<td>{$rowUserRequest['status']}</td>";
+            echo "</tr>";
+        }
+
+        $stmtGetUserRequests->close();
+        $mysqli->close();
+        ?>
+    </table>
+
     <form method="post" action="lectimetable.php">
-          <button type="submit">Back to timetable</button>
+        <button type="submit">Back to timetable</button>
     </form>
 </body>
 </html>

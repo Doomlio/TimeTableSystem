@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 
@@ -21,52 +22,77 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $TimetableID = $_GET["timetableID"]; // Use $_GET here
     
     // Check for clashes in timetable
-    $clashesExist = false;
-    $sqlCheckTimetableClashes = "SELECT * FROM timetable WHERE lec_id = ? AND day = ? AND ((start_time >= ? AND start_time < ?) OR (end_time > ? AND end_time <= ?) OR (start_time <= ? AND end_time >= ?))";
+    $timetableClashesExist = false;
+    $sqlCheckTimetableClashes = "SELECT * FROM timetable WHERE lec_id = ? AND day = ? AND venueID = ? AND ((start_time >= ? AND start_time < ?) OR (end_time > ? AND end_time <= ?) OR (start_time <= ? AND end_time >= ?))";
     $stmtCheckTimetableClashes = $mysqli->prepare($sqlCheckTimetableClashes);
-    $stmtCheckTimetableClashes->bind_param('ssssssss', $lec_id, $newDay, $newStartTime, $newEndTime, $newStartTime, $newEndTime, $newStartTime, $newEndTime);
+    $stmtCheckTimetableClashes->bind_param('sssssssss', $lec_id, $newDay, $newVenueID, $newStartTime, $newEndTime, $newStartTime, $newEndTime, $newStartTime, $newEndTime);
     $stmtCheckTimetableClashes->execute();
     $resultTimetableClashes = $stmtCheckTimetableClashes->get_result();
-    $clashesExist = ($resultTimetableClashes->num_rows > 0);
+    $timetableClashesExist = ($resultTimetableClashes->num_rows > 0);
     $stmtCheckTimetableClashes->close();
 
-    // Check for clashes in pending requests
-    if (!$clashesExist) {
-        $sqlCheckRequestClashes = "SELECT * FROM request WHERE lecid = ? AND new_day = ? AND ((new_start_time >= ? AND new_start_time < ?) OR (new_end_time > ? AND new_end_time <= ?) OR (new_start_time <= ? AND new_end_time >= ?)) AND status = 'pending'";
-        $stmtCheckRequestClashes = $mysqli->prepare($sqlCheckRequestClashes);
-        $stmtCheckRequestClashes->bind_param('ssssssss', $lec_id, $newDay, $newStartTime, $newEndTime, $newStartTime, $newEndTime, $newStartTime, $newEndTime);
-        $stmtCheckRequestClashes->execute();
-        $resultRequestClashes = $stmtCheckRequestClashes->get_result();
-        $clashesExist = ($resultRequestClashes->num_rows > 0);
-        $stmtCheckRequestClashes->close();
-    }
+    // Check for clashes in pending requests (time and venue)
+    $requestClashesExist = false;
+    $sqlCheckRequestClashes = "SELECT * FROM request WHERE lecid = ? AND new_day = ? AND new_venue_id = ? AND ((new_start_time >= ? AND new_start_time < ?) OR (new_end_time > ? AND new_end_time <= ?) OR (new_start_time <= ? AND new_end_time >= ?)) AND status = 'pending'";
+    $stmtCheckRequestClashes = $mysqli->prepare($sqlCheckRequestClashes);
+    $stmtCheckRequestClashes->bind_param('sssssssss', $lec_id, $newDay, $newVenueID, $newStartTime, $newEndTime, $newStartTime, $newEndTime, $newStartTime, $newEndTime);
+    $stmtCheckRequestClashes->execute();
+    $resultRequestClashes = $stmtCheckRequestClashes->get_result();
+    $requestClashesExist = ($resultRequestClashes->num_rows > 0);
+    $stmtCheckRequestClashes->close();
 
-    if (!$clashesExist) {
+    // Check if there's already a pending or approved request for the same timetable entry
+    $existingRequestExist = false;
+    $sqlCheckExistingRequest = "SELECT * FROM request WHERE lecid = ? AND timetable_id = ? AND status IN ('pending', 'approved')";
+    $stmtCheckExistingRequest = $mysqli->prepare($sqlCheckExistingRequest);
+    $stmtCheckExistingRequest->bind_param('ii', $lec_id, $TimetableID);
+    $stmtCheckExistingRequest->execute();
+    $resultExistingRequest = $stmtCheckExistingRequest->get_result();
+    $existingRequestExist = ($resultExistingRequest->num_rows > 0);
+    $stmtCheckExistingRequest->close();
+
+    // Check if clashes exist and handle accordingly
+    if ($existingRequestExist) {
+        // Request already exists for the same timetable entry
+        echo '<script>
+            alert("A request for this timetable entry already exists.");
+            window.location.href = "requestform.php"; // Redirect to the form
+        </script>';
+        exit;
+    } elseif (!$timetableClashesExist && !$requestClashesExist) {
         // No clashes found, proceed to insert request
         $status = "pending";
         $insertSql = "INSERT INTO request (lecid, timetable_id, new_start_time, new_end_time, new_day, new_class_type, new_venue_id, status)
                       VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $mysqli->prepare($insertSql);
-        $stmt->bind_param("iissssis", $lec_id, $TimetableID, $newStartTime, $newEndTime, $newDay, $newClassType, $newVenueID, $status);
-        $stmt->execute();
+        $stmt->bind_param("iissssss", $lec_id, $TimetableID, $newStartTime, $newEndTime, $newDay, $newClassType, $newVenueID, $status);
+        $result = $stmt->execute(); // Execute the statement and store the result
+        
+        if ($result) {
+            // Successful insertion
+            echo '<script>
+                alert("Successful request.");
+                window.location.href = "requestform.php"; // Redirect to the form
+            </script>';
+        } else {
+            // Error in insertion
+            echo '<script>
+                alert("Error occurred while submitting the request.");
+                window.location.href = "requestform.php"; // Redirect to the form
+            </script>';
+        }
+        
         $stmt->close();
-        // Redirect back to requestform.php after successful submission
-        header("Location: requestform.php");
-        echo '<script>
-        alert("Successful request.");
-        window.location.href = "requestform.php"; // Redirect to the form
-    </script>';
         exit;
     } else {
         // Clashes found, show an alert using JavaScript
         echo '<script>
-            alert("There is a clash of time and venue with another timeslot. Please change your  request.");
+            alert("There is a clash of time and venue with another timeslot. Please change your request.");
             window.location.href = "requestform.php"; // Redirect to the form
         </script>';
         exit; // Ensure the script execution stops after the alert
     }
 }
-
 
 // Use $_GET to access the data passed in the URL
 $timetableID = $_GET["timetableID"];
@@ -156,29 +182,30 @@ $venueID = $_GET["venueID"];
                 <td>Old Venue:</td>
                 <td><?php echo $venueID; ?></td>
                 <td>New Venue:</td>
-                <td>
-                    <select name="venueID">
-                        <?php
-                        // Fetch venues that match the current class type
-                        $sqlMatchingVenues = "SELECT * FROM venue WHERE venuetype = ?";
-                        $stmtMatchingVenues = $mysqli->prepare($sqlMatchingVenues);
-                        $stmtMatchingVenues->bind_param('s', $classtype);
-                        $stmtMatchingVenues->execute();
-                        $resultMatchingVenues = $stmtMatchingVenues->get_result();
+<td>
+    <select name="venueID">
+        <?php
+        // Fetch venues that match the current class type
+        $sqlMatchingVenues = "SELECT * FROM venue WHERE venuetype = ?";
+        $stmtMatchingVenues = $mysqli->prepare($sqlMatchingVenues);
+        $stmtMatchingVenues->bind_param('s', $classtype);
+        $stmtMatchingVenues->execute();
+        $resultMatchingVenues = $stmtMatchingVenues->get_result();
 
-                        while ($rowVenue = $resultMatchingVenues->fetch_assoc()) {
-                            $venueIDOption = $rowVenue['venueid'];
-                            $selected = ($venueIDOption === $venueID) ? 'selected' : '';
+        while ($rowVenue = $resultMatchingVenues->fetch_assoc()) {
+            $venueIDOption = $rowVenue['venueid'];
+            $selected = ($venueIDOption === $venueID) ? 'selected' : '';
 
-                            echo "<option value=\"$venueIDOption\" $selected>$venueIDOption</option>";
-                        }
+            echo "<option value=\"$venueIDOption\" $selected>$venueIDOption</option>";
+        }
 
-                        $stmtMatchingVenues->close();
-                        ?>
-                    </select>
-                </td>
+        $stmtMatchingVenues->close();
+        ?>
+    </select>
+</td>
             </tr>
         </table>
+        
         
         <button type="submit">Submit Request</button>
     </form>
