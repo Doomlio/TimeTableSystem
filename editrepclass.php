@@ -344,7 +344,7 @@ if (isset($_POST["reassign"])) {
     <br>
     <button name="submitSave" class="link-button">Save</button>
     </form>
-    <button class="link-button" onclick="window.location.href='timetable.php';">Back To Timetable</button>
+    <button class="link-button" onclick="window.location.href='lectimetable.php';">Back To Timetable</button>
     
 </body>
 </html>

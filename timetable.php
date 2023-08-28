@@ -29,8 +29,9 @@ while ($row = $LECQUERY->fetch_assoc()) {
     <a href="viewlecturer.php">Manage Lecturers</a>
     <a href="viewvenue.php">Manage Venue</a>
     <a href="viewrequest.php">Manage Requests</a>
+    <a href="adminlogout.php">Logout</a>
 </div>
-<a href="logout.php">Logout</a>
+
 
     
 <meta charset="UTF-8">

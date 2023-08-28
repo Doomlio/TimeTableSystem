@@ -10,6 +10,10 @@ $stmt->bind_param("i", $lecid);
 $stmt->execute();
 $result = $stmt->get_result();
 
+
+
+
+
 if (!$result) {
     echo "Query Error: " . $mysqli->error;
 } else {
