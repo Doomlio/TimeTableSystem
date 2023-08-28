@@ -18,9 +18,12 @@
     text-align: center;
     max-width: 150vh;
     border-radius: 10px;
-    background-color: rgba(201, 201, 201, 0.274);
+    background: rgba(255,255,255,.2);
+    border: 2px solid rgba(255,255,255,.2);
+    backdrop-filter: blur(200px);
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
     max-height: 100vh;
-    padding: 5vh;
+    padding: 30px 40px;
 }
 
 .username{
@@ -30,29 +33,41 @@
 }
 
 .AGT{
-    /* WELCOME TO AGT */
-  /* identical to box height */
-  white-space: nowrap;
-
-  display: flex;
-  width: 100%;
-  
+    white-space: nowrap;
+    text-align: center;
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+    font-size: 26px;
+    margin: 0;
+    font-weight: 600;
 }
 
-.write-box{
-    height: 8vh;
-    background: #FFFFFF;
-    border-radius: 10px;
-    width: 50vh;
-}
+
 .label-container{
     align-items: center; /* Center vertically */
     justify-content: flex-start; /* Align elements to the left */
-    margin: 0; /* Remove default margin */
     flex: 1; /* Grow to fill available space */
     text-align: left; /* Align text to the right */
-    padding-right: 10px; /* Add some space between label and input */
-    padding: 5vh 0;
+    margin: 6vh 0;
+    height: 3rem;
+    width: 25rem;
+    background: transparent;
+    position: relative;
+}
+.label-container input{
+    width: 95%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255,255,255,.2);
+    border-radius: 30px;
+    color: #fff;
+    padding: 0 0 0 20px;
+}
+.label-container input::placeholder{
+color: #fff;
 }
 /* Password: */
 .password{
