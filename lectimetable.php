@@ -41,6 +41,9 @@
         <form method="post" action="requestform.php">
             <button type="submit">Request Forms</button>
         </form>
+        <form method="post" action="logout.php">
+            <button type="submit">logout</button>
+        </form>
     </head>
     <body>
     <div class="header">
