@@ -94,7 +94,7 @@ $lec_id = $_SESSION["lec_id"];
                 <td>$classtype</td>
                 <td>$venueID</td>
                 <td>
-                    <button type='button' onclick='redirectToRequestForm(\"$timetableID\", \"$subID\", \"$subName\", \"$startTime\", \"$endTime\", 
+                    <button type='button' class='link-button'onclick='redirectToRequestForm(\"$timetableID\", \"$subID\", \"$subName\", \"$startTime\", \"$endTime\", 
                     \"$day\", \"$classtype\", \"$venueID\")'>Request changes</button>
                 </td>
             </tr>";
@@ -143,8 +143,8 @@ $lec_id = $_SESSION["lec_id"];
         ?>
     </table>
 
-    <form method="post" action="lectimetable.php">
-        <button type="submit">Back to timetable</button>
-    </form>
+  
+ <button class="link-button" onclick="window.location.href='lectimetable.php';">Back To Timetable</button>
+
 </body>
 </html>

@@ -24,12 +24,30 @@ while ($row = $LECQUERY->fetch_assoc()) {
 </head>
 <body>
 <div class="header">
-    <a href="viewsubject.php">Manage Subject</a>
-    <a href="viewtimeslot.php">Manage Timeslots</a>
-    <a href="viewlecturer.php">Manage Lecturers</a>
-    <a href="viewvenue.php">Manage Venue</a>
-    <a href="viewrequest.php">Manage Requests</a>
-    <a href="adminlogout.php">Logout</a>
+    
+<a class="link-button"
+
+ href="viewsubject.php">Manage Subject</a>
+    
+<a class="link-button"
+
+ href="viewtimeslot.php">Manage Timeslots</a>
+    
+<a class="link-button"
+
+ href="viewlecturer.php">Manage Lecturers</a>
+    
+<a class="link-button"
+
+ href="viewvenue.php">Manage Venue</a>
+    
+<a class="link-button"
+
+ href="viewrequest.php">Manage Requests</a>
+    
+<a class="link-button"
+
+ href="adminlogout.php">Logout</a>
 </div>
 
 

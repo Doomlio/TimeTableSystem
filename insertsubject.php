@@ -43,7 +43,10 @@
             <option value="Oct">DCS</option>
         </select>
         <input type="submit"class ="submit"name="submit" value="Submit">
-        <a href="viewsubject.php" class="back2">Back</a>
+        
+<a class="link-button"
+
+ href="viewsubject.php" class="back2">Back</a>
     </form>
     </div>
 </body>

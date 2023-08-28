@@ -107,8 +107,9 @@ if ($result->num_rows > 0) {
               <td>$subID</td>
               <td>$venueID</td>
               <td>
-              <button type='submit' name='activate' value='$timetableID'>Activate Class</button>
-              <button type='submit' name='cancel' value='$timetableID'>Cancel Class</button>
+              <button type='submit' class='link-button' name='activate' value='$timetableID'>Activate Class</button>
+              <br>
+              <button type='submit' class='back' name='cancel' value='$timetableID'>Cancel Class</button>
             </td>
         </tr>";
     }
@@ -121,7 +122,7 @@ $mysqli->close();
 
 ?>
 <form method="post" action="lectimetable.php">
-      <button type="submit">Back to timetable</button>
+      <button class="link-button "type="submit">Back to timetable</button>
   </form>
 </body>
 </html>

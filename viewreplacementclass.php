@@ -5,14 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGT Systems</title>
-    <style>
-        td {
-            height: 30px;
-            border: 1px solid #000;
-            padding: 10px;
-            width: 100px;
-        }
-    </style>
+   
 </head>
 <h2>VIEW REPLACEMENT CLASS</h2>
 <body>
@@ -58,10 +51,8 @@ if ($resultTimetable->num_rows > 0) {
 $stmt->close();
 $mysqli->close();
 ?>
-<form method="post" action="timetable.php">
-        <button type="submit">Back to timetable</button>
-    </form>
-<button onclick="window.location.href='insertrepclass.php';">Add timeslot</button>
-<button onclick="window.location.href='editrepclass.php';">Edit timeslot</button>
+<button class="link-button" onclick="window.location.href='lectimetable.php';">Back to timetable</button>
+<button class="link-button" onclick="window.location.href='insertrepclass.php';">Add timeslot</button>
+<button class="link-button" onclick="window.location.href='editrepclass.php';">Edit timeslot</button>
 </body>
 </html>
