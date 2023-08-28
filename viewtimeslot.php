@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- <link rel="stylesheet" href="timetable.css"> -->
+<link rel="stylesheet" href="/asset/timetable.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGT Systems</title>
@@ -29,11 +29,13 @@ include('config.php');
 $sqlTimetable = "SELECT timetable.*, lecturer.lecname 
                 FROM timetable
                 INNER JOIN lecturer ON timetable.lec_id = lecturer.lec_id
-                ORDER BY timetable.lec_id;";
+                ORDER BY timetable.lec_id,
+                 FIELD(day, 'monday', 'tuesday', 'wednesday', 'thursday', 'friday');";
 $resultTimetable = $mysqli->query($sqlTimetable);
 
 if ($resultTimetable->num_rows > 0) {
-    echo "<table><tr><th>Timetable ID</th><th>Subject Name</th><th>Lecturer ID</th><th>Start Time</th><th>End Time</th><th>Day</th><th>Class Type</th><th>Sub ID</th><th>Venue ID</th></tr>";
+    echo '<table class="custom-table">';
+    echo '<tr><th>Timetable ID</th><th>Subject Name</th><th>Lecturer ID</th><th>Start Time</th><th>End Time</th><th>Day</th><th>Class Type</th><th>Sub ID</th><th>Venue ID</th></tr>';
 
     // output data of each row
     while($row = $resultTimetable->fetch_assoc()) {
@@ -65,11 +67,14 @@ if ($resultTimetable->num_rows > 0) {
 }
 $mysqli->close();
 
+
 ?>
-<form method="post" action="timetable.php">
-        <button type="submit">Back to timetable</button>
+<div class="btn-container">
+    <form method="post" action="timetable.php">
+        <button type="submit">Back to Timetable</button>
     </form>
-<button onclick="window.location.href='insertsubject.php';">Add timeslot</button>
-<button onclick="window.location.href='edittimeslot.php';">Edit timeslot</button>
+    <button onclick="window.location.href='insertsubject.php';">Add Timeslot</button>
+    <button onclick="window.location.href='edittimeslot.php';">Edit Timeslot</button>
+</div>
 </body>
 </html>

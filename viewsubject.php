@@ -1,8 +1,9 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>   
-    <!--  <link rel="stylesheet" href="timetable.css"> -->
+<head>
+<link rel="stylesheet" href="/asset/timetable.css">   
+    <!--  <link rel="stylesheet" href="/asset/timetable.css"> -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGT Systems</title>
@@ -29,7 +30,7 @@ $sql = "SELECT * FROM subject ";
 $result = $mysqli->query($sql);
 
 if ($result->num_rows > 0) {
-  echo "<table><tr><th>Subject Code</th><th>Subject Name</th><th>Qualification</th><th>Semester</th><th>Lecturer</th><th>course</th></tr>";
+  echo "<table class="custom-table"><tr><th>Subject Code</th><th>Subject Name</th><th>Qualification</th><th>Semester</th><th>Lecturer</th><th>course</th></tr>";
 
   // output data of each row
   while($row = $result->fetch_assoc()) {

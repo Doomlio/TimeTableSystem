@@ -11,21 +11,15 @@ while ($row = $LECQUERY->fetch_assoc()) {
 
 <!DOCTYPE html>
 <html lang="en">
-<head>   
-<link rel="stylesheet" href="timetable.css">
+<head>
+<link rel="stylesheet" href="/asset/timetable.css">   
 </head>
 <body>
 <div class="header">
-    <form method="post" action="viewsubject.php">
-        <button type="submit">Manage Subject</button>
-    </form>
-    <form method="post" action="viewtimeslot.php">
-        <button type="submit">Manage Timeslots</button>
-    </form>
-    <form method="post" action ="viewlecturer.php">
-    <button type ="submit">Manage lecturers</form>
-    <form method="post" action ="viewvenue.php">
-    <button type ="submit">Manage venue</form>
+    <a href="viewsubject.php">Manage Subject</a>
+    <a href="viewtimeslot.php">Manage Timeslots</a>
+    <a href="viewlecturer.php">Manage Lecturers</a>
+    <a href="viewvenue.php">Manage Venue</a>
 </div>
 
     

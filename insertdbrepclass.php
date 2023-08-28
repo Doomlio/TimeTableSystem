@@ -71,6 +71,7 @@ $mysqli->close();
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/asset/timetable.css">
     <title>Confirmation</title>
 </head>
     <body>

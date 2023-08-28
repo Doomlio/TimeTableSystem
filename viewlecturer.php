@@ -5,7 +5,7 @@ $sql = "SELECT * FROM lecturer";
 $result = $mysqli->query($sql);
 
 if ($result->num_rows > 0) {
-  echo "<table><tr><th>Lecturer ID</th><th>Lecturer Name</th><th>Email</th><th>Password</th><th>Max Hours</th></tr>";
+  echo "<table class="custom-table"><tr><th>Lecturer ID</th><th>Lecturer Name</th><th>Email</th><th>Password</th><th>Max Hours</th></tr>";
 
   // output data of each row
   while($row = $result->fetch_assoc()) {

@@ -124,6 +124,7 @@
  <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/asset/timetable.css">
     <title>Manage Timeslots</title>
     <script>
         function updateHoursAndEndTime(index) {

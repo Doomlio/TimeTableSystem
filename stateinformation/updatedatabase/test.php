@@ -6,7 +6,8 @@ include ('db.php');
 <!DOCTYPE html>
 
 <html>
-<head><title>Update One by One</title>
+<head>
+<link rel="stylesheet" href="/asset/timetable.css"><title>Update One by One</title>
 
 </head>
 <body>

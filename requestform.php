@@ -16,6 +16,7 @@ $lec_id = $_SESSION["lec_id"];
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet" href="/asset/timetable.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGT Systems</title>
@@ -60,7 +61,7 @@ $lec_id = $_SESSION["lec_id"];
     ");
 
     if ($result->num_rows > 0) {
-        echo "<table>
+        echo "<table class="custom-table">
         <tr>
             <th>Timetable ID</th>
             <th>Subject ID</th>

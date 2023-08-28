@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/asset/timetable.css">
     <title>Insert Example</title>
 </head>
 <body>

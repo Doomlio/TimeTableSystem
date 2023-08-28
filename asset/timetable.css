@@ -1,0 +1,281 @@
+/* footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: bold;
+    background-color: #f05340; Assuming bg-laravel corresponds to this color 
+    color: white;
+    height: 24px; 
+    margin-top: 24px;
+    opacity: 0.9;
+    height:10%
+  } */
+  .button {
+    position: absolute;
+    top: 33.33%; /* Equivalent to top: 1/3; */
+    right: 10px;
+    background-color: black;
+    color: white;
+    padding: 2px 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #333; /* Darker color for hover effect */
+  }
+
+  th, td {
+    padding: 15px;
+    text-align: left;
+  }
+
+
+
+
+
+
+          .class-type {
+              font-size: 12px;
+              font-weight: normal;
+              display: block;
+          }
+          td {
+              height: 30px;
+              border: 1px solid #000;
+              padding: 10px;
+              width: 100px;
+          }
+          .occupied {
+              background-color: #03ad12;
+              
+          }
+          
+          .cancelled {
+          background-color: #ed0404; 
+            }
+
+            .replacement {
+              background-color: yellow; 
+          }
+          
+          .timetable-section {
+              border: 1px solid #000;
+              padding: 10px;
+              margin-bottom: 20px;
+          }
+          .draggable {
+              position: absolute;
+          }
+
+          .header {
+            overflow: hidden;
+            background-color: #ff0000;
+            padding: 20px 10px;
+          }
+          
+          /* Style the header links */
+          .header a {
+            float: left;
+            color: black;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            line-height: 25px;
+            border-radius: 4px;
+          }
+          /* login box */
+/* Desktop - 3 */
+.AGT{
+  /* WELCOME TO AGT */
+
+position: absolute;
+width: 423px;
+height: 73px;
+left: 153.36px;
+top: 0px;
+
+font-family: 'Laila';
+font-style: normal;
+font-weight: 400;
+font-size: 47px;
+line-height: 73px;
+/* identical to box height */
+
+color: #000000;
+
+transform: rotate(0.28deg);
+
+}
+.bg{
+position: relative;
+width: 1440px;
+height: 1024px;
+
+background: #fffeed;
+}
+.loginbox{
+/* login box */
+
+position: absolute;
+width: 641px;
+height: 546px;
+left: 300.67px;
+top: 87px;
+
+background: #7BFF98;
+border-radius: 45px;
+transform: rotate(0.28deg);
+}
+/* Username: */
+.username{
+position: absolute;
+width: 326px;
+height: 105px;
+left: 10px;
+top: 100px;
+
+font-family: 'Laila';
+font-style: normal;
+font-weight: 400;
+font-size: 40px;
+line-height: 62px;
+
+color: #000000;
+}
+/* username box */
+.txtbox1{
+position: absolute;
+width: 350px;
+height: 80px;
+left: 190.18px;
+top: 137.24px;
+
+background: #FFFFFF;
+border-radius: 50px;
+transform: rotate(0.28deg);
+}
+/* Password: */
+.password{
+/* Password: */
+
+position: absolute;
+width: 326px;
+height: 105px;
+left: 10px;
+top: 201.24px;
+
+font-family: 'Laila';
+font-style: normal;
+font-weight: 400;
+font-size: 40px;
+line-height: 62px;
+
+color: #000000;
+
+transform: rotate(0.28deg);
+
+
+}
+.passwordbox{
+/* password box */
+
+position: absolute;
+width: 350px;
+height: 80px;
+left: 190.18px;
+top: 231.24px;
+
+background: #FFFFFF;
+border-radius: 50px;
+transform: rotate(0.28deg);
+
+}
+
+.login{
+/* login button box */
+
+position: absolute;
+width: 180px;
+height: 100px;
+left: 418.63px;
+top: 405.05px;
+
+background: #C0FFD9;
+border-radius: 45px;
+transform: rotate(0.28deg);
+
+}
+
+.logintxt{
+  /* Login */
+
+position: absolute;
+width: 121px;
+height: 73px;
+left: 20px;
+top: -30px;
+
+font-family: 'Laila';
+font-style: normal;
+font-weight: 400;
+font-size: 47px;
+line-height: 73px;
+/* identical to box height */
+
+color: #000000;
+
+transform: rotate(0.28deg);
+
+}
+input[type=email] {
+  font-family: 'Laila';
+font-style: normal;
+font-weight: 400;
+font-size: 32px;
+line-height: 73px;
+}
+input[type=email] {
+
+font-size: 32px;
+line-height: 73px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Table Styles */
+.table-container {
+  margin: 20px;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table th, .custom-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.custom-table th {
+  background-color: #f2f2f2;
+}
+
+.btn-container {
+  margin-top: 20px;
+}
+
+.btn-container button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 14px;
+}

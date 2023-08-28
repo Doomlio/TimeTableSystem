@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet" href="/asset/timetable.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGT Systems</title>
@@ -29,7 +30,7 @@ $stmt->execute();
 $resultTimetable = $stmt->get_result();
 
 if ($resultTimetable->num_rows > 0) {
-    echo "<table><tr><th>Timetable ID</th><th>Subject Name</th><th>Start Time</th><th>End Time</th><th>Day</th><th>Sub ID</th><th>Venue ID</th></tr>";
+    echo "<table class="custom-table"><tr><th>Timetable ID</th><th>Subject Name</th><th>Start Time</th><th>End Time</th><th>Day</th><th>Sub ID</th><th>Venue ID</th></tr>";
 
     while($row = $resultTimetable->fetch_assoc()) {
         $timetableID = $row["timetable_id"];

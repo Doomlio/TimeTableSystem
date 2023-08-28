@@ -38,7 +38,8 @@ if ($sqlUpdateRecord ){
 <!DOCTYPE html>
 
 <html>
-<head><title>Retrieve All Student Record</title>
+<head>
+<link rel="stylesheet" href="/asset/timetable.css"><title>Retrieve All Student Record</title>
 
 
 </head>

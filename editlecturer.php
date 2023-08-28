@@ -40,6 +40,7 @@ if (isset($_POST["savedata"])) {
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/asset/timetable.css">
     <title>Manage Lecturer Data</title>
 </head>
 <body>

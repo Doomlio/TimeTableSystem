@@ -46,7 +46,8 @@ if ($showpage==1) {
 <!DOCTYPE html>
 
 <html>
-<head><title>One Name</title>
+<head>
+<link rel="stylesheet" href="/asset/timetable.css"><title>One Name</title>
 
 
 </head>

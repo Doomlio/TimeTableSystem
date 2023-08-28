@@ -23,8 +23,9 @@
     ?>
     <!DOCTYPE html>
     <html lang="en">
-    <head>   
-    <link rel="stylesheet" href="timetable.css">
+    <head>
+<link rel="stylesheet" href="/asset/timetable.css">   
+    <link rel="stylesheet" href="/asset/timetable.css">
     <form method="post" action="viewreplacementclass.php">
             <button type="submit">Manage Replacement Class</button>
         </form>

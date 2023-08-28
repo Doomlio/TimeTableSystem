@@ -158,6 +158,7 @@ if (isset($_POST["reassign"])) {
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/asset/timetable.css">
 	<title>Edit Timetable</title>
 
     <script>
