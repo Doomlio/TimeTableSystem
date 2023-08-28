@@ -1,0 +1,145 @@
+.stime {
+    position: relative;
+
+    left: 10px;
+    top: 100px;
+    
+    font-family: 'Laila';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 66px;
+    white-space: nowrap;
+    color: #000000;
+} 
+
+/* Responsive styles for screens with a maximum width of 768px */
+@media (max-width: 768px) {
+    .stime {
+        width: 100%; /* Take full width of the container */
+        left: 0;
+        top: auto; /* Allow vertical positioning to adjust based on content */
+        text-align: center; /* Center-align the text */
+        font-size: 24px; /* Adjust font size for smaller screens */
+        line-height: 1.5; /* Adjust line height */
+    }
+}
+.starttime{
+    position: relative; 
+    font-family: 'Laila';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 35px;
+    margin-top: 100px;
+    left:28px;
+    padding: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    width: 50%;
+    box-sizing: border-box; 
+}
+.endtimetext{
+    position: relative;
+
+    left: 10px;
+    top: 0px;
+    
+    font-family: 'Laila';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 66px;
+    white-space: nowrap;
+    color: #000000;
+    
+}
+.day2{
+   /* Password: */
+
+position: absolute;
+width: 325.77px;
+height: 66.78px;
+left: 10px;
+top: 476.99px;
+
+font-family: 'Laila';
+font-style: normal;
+font-weight: 400;
+font-size: 40px;
+line-height: 62px;
+
+color: #000000;
+
+transform: matrix(1, 0, -0.01, 1, 0, 0);
+
+}
+.daysel{
+    font-family: 'Laila';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 35px;
+    margin-top: 100px;
+    margin-left: 10px;;
+    padding: 5px; 
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    background-color: #fff; 
+    color: #333;
+    width: 50%;
+    box-sizing: border-box; 
+}
+
+
+.endtime{
+    font-family: 'Laila';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 35px;
+    margin-top: 0px;
+    margin-left: 20px;
+    padding: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    width: 50%;
+    box-sizing: border-box; 
+}
+.typesel{
+    font-family: 'Laila';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 35px;
+    margin-top: 60px;
+    margin-left: 20px;
+    padding: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    width: 50%;
+    box-sizing: border-box; 
+
+}
+.venueID{
+    font-family: 'Laila';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 35px;
+    margin-top: 100px;
+    margin-left: 10px;;
+    padding: 5px; 
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    background-color: #fff; 
+    color: #333;
+    width: 50%;
+    box-sizing: border-box; 
+}

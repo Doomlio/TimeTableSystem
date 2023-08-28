@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Add new subjects</h1>
-    <div class="formboxsub2">
+    <div class="formboxsub">
     <form method="post" action="insertdbsubject.php">
     <label class="subID">Subject ID:</label>
        <input type="text"  class="subIDtext" placeholder="ECXXXX" name="subID"><br>

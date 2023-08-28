@@ -382,7 +382,26 @@ body {
     align-items: center;
     height: 100vh;
 }
+.formboxsub2{
+  /* login box */
+  
+  position: absolute;
+  width: 541px;
+  height: 750px;
+  left: 300.67px;
+  top: 87px;
+  
+  background: #7BFF98;
+  border-radius: 45px;
+  transform: rotate(0.28deg);
+  }
 
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 .formbox3{
   /* login box */
   
@@ -451,7 +470,12 @@ input[type="submit"] {
   display: block;
   margin-bottom: 10px; /* Add spacing between each field */
 }
-
+.formboxsub2 label,
+.formboxsub2 input,
+.formboxsub2 select {
+  display: block;
+  margin-bottom: 10px; /* Add spacing between each field */
+}
 .subID{
   /* Username: */
 
