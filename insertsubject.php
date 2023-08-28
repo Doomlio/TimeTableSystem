@@ -21,11 +21,7 @@
         </select>
         <br>
 
-        <!-- <label for="subtype" class="type">Type of class (theory/practical):</label>
-        <select name="subtype" class="samesel" id="subtype">
-            <option value="theory">Theory</option>
-            <option value="practical">Practical</option>
-        </select> -->
+     
         
 
         <label for="sem" class="sem">Sem:</label>
@@ -43,10 +39,7 @@
             <option value="Oct">DCS</option>
         </select>
         <input type="submit"class ="submit"name="submit" value="Submit">
-        
-<a class="link-button"
-
- href="viewsubject.php" class="back2">Back</a>
+        <a href="viewsubject.php" class="back2">Back</a>
     </form>
     </div>
 </body>

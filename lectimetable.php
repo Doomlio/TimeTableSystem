@@ -53,7 +53,7 @@ if (!isset($_SESSION["lec_id"])) {
 
  href="requestform.php">Manage Requests</a>
     
-<a class="link-button"
+<a class="link-button-logout"
 
  href="logout.php">Logout</a>
     </div>
