@@ -20,6 +20,7 @@ while ($row = $LECQUERY->fetch_assoc()) {
     <a href="viewtimeslot.php">Manage Timeslots</a>
     <a href="viewlecturer.php">Manage Lecturers</a>
     <a href="viewvenue.php">Manage Venue</a>
+    <a href="viewrequest.php">Manage Requests</a>
 </div>
 
     
@@ -79,7 +80,7 @@ foreach ($LEC_ID as $lecturerId) {
         } while ($firstRow = $result->fetch_assoc());
 
         // Display the timetable in a separate table for each lecturer
-        echo "<table border='5' cellspacing='0'>";
+        echo "<table class ='custom-table' border='5' cellspacing='0'>";
         // Generate header row for the hours
         echo "<tr>";
         echo "<th></th>";

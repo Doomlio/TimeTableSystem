@@ -52,7 +52,7 @@ foreach ($LEC_ID as $lecturerId) {
         $firstRow = $result->fetch_assoc();
         $lecname = $firstRow['lecname'];
         echo "<h2>Lecturer name: $lecname</h2>";
-        echo "<table border='1'>";
+        echo "<table class ="custom-table" border='1'>";
         echo "<tr><th></th>";
 
         foreach ($timeSlots as $timeSlot) {
@@ -213,7 +213,7 @@ foreach ($LEC_ID as $lecturerId) {
       
     }
 
-            echo "<table border='5' cellspacing='0'>";
+            echo "<table class ="custom-table" border='5' cellspacing='0'>";
             $daysOfWeek = array(
                 "Monday" => array(),
                 "Tuesday" => array(),
@@ -467,7 +467,7 @@ while ($row = $LECQUERY->fetch_assoc()) {
                 );
             }
     
-            echo "<table border='5' cellspacing='0'>";
+            echo "<table class ="custom-table" border='5' cellspacing='0'>";
             $daysOfWeek = array(
                 "Monday" => array(),
                 "Tuesday" => array(),

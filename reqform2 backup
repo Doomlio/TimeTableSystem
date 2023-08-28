@@ -53,7 +53,7 @@ $venueID = $_GET["venueID"];
     <h2>Request Changes for Timetable Entry</h2>
     
     <form method="post" action="requestform2.php">
-        <table border="1">
+        <table class ="custom-table" border="1">
         <tr>
     <td>Old Timetable ID:</td>
     <td> <input type="hidden" name="timetableID" value="<?php echo $timetableID; ?>"><?php echo $timetableID; ?></td>

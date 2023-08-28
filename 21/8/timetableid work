@@ -144,7 +144,7 @@ if (isset($_POST["reassign"])) {
     <h2>Edit Timeslots</h2>
     <p></p>
 
-    <table id="myTable">
+    <table class ="custom-table" id="myTable">
     <thead>
             <tr>
                 <th>#</th>
@@ -200,13 +200,13 @@ if (isset($_POST["reassign"])) {
         </form>
         </table>
         <br>
-        <button name="savedata" class="button">Save</button>
+        <button name="savedata" class="link-button">Save</button>
     </form>
     <form method="post" action="timetable.php">
         <button type="submit">Back to timetable</button>
     </form>
     <form method="post" name="updaterenewal" action="editsubject.php">
-    <button type="submit" name="reassign" class="button">Reassign Lecturers </button>
+    <button type="submit" name="reassign" class="link-button">Reassign Lecturers </button>
 </form>
 </body>
 </html>
@@ -337,7 +337,7 @@ if (isset($_POST["reassign"])) {
 <body>
     <h2>Edit Timeslots</h2>
     <form method="post" action="edittimeslot.php">
-        <table id="myTable">
+        <table class ="custom-table" id="myTable">
             <thead>
                 <tr>
                     <th>#</th>
@@ -404,5 +404,5 @@ if (isset($_POST["reassign"])) {
         }
         ?>
     </table>
-    <button type="submit" name="savedata" class="button">Save</button>
+    <button type="submit" name="savedata" class="link-button">Save</button>
 </form>

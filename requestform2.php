@@ -121,7 +121,7 @@ $venueID = $_GET["venueID"];
     <h2>Request Changes for Timetable Entry</h2>
     
     <form method="post" action="requestform2.php?timetableID=<?php echo $timetableID; ?>&subID=<?php echo $subID; ?>&subName=<?php echo $subName; ?>&startTime=<?php echo $startTime; ?>&endTime=<?php echo $endTime; ?>&day=<?php echo $day; ?>&classtype=<?php echo $classtype; ?>&venueID=<?php echo $venueID; ?>">
-        <table border="1">
+        <table class ="custom-table" border="1">
         <tr>
     <td>Old Timetable ID:</td>
     <td> <input type="hidden" name="timetableID" value="<?php echo $timetableID; ?>"><?php echo $timetableID; ?></td>

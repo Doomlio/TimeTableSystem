@@ -1,14 +1,14 @@
 <?php
 require_once('config.php');
 
-$subcode = $_POST["subcode"];
+$subcode = $_POST["subID"];
 $starttime = $_POST["starttime"];
 $endtime = $_POST["endtime"];
 $day = $_POST["day"];
 $lecID=$_POST["lecID"];
 
 
-$sql = "INSERT INTO `timetable` (`subject_name`, `lec_id`, `start_time`, `end_time`, `day`) 
+$sql = "INSERT INTO `timetable` (`subID`, `lec_id`, `start_time`, `end_time`, `day`) 
         VALUES ('$subcode', '$lecID', '$starttime', '$endtime', '$day')";
     
       

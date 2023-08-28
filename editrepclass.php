@@ -196,7 +196,7 @@ if (isset($_POST["reassign"])) {
 <body>
     <h2>Edit Timetable</h2>
 
-    <table id="myTable">
+    <table class ="custom-table" id="myTable">
         <thead>
             <tr>
                 <th>#</th>
@@ -342,11 +342,9 @@ if (isset($_POST["reassign"])) {
         </thead>
     </table>
     <br>
-    <button name="submitSave" class="button">Save</button>
+    <button name="submitSave" class="link-button">Save</button>
     </form>
-    <form method="post" action="lectimetable.php">
-        <button type="submit">Back to timetable</button>
-    </form>
+    <button class="link-button" onclick="window.location.href='timetable.php';">Back To Timetable</button>
     
 </body>
 </html>

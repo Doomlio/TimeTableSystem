@@ -86,7 +86,7 @@
 
     // Check if data was fetched successfully
     if ($result && $result->num_rows > 0) {
-        echo '<table border="1">
+        echo '<table class ="custom-table" border="1">
                 <tr>
                     <th></th>
                     <th>Timetable Data</th>

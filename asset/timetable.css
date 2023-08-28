@@ -67,6 +67,7 @@
               border: 1px solid #000;
               padding: 10px;
               margin-bottom: 20px;
+              width: auto;
           }
           .draggable {
               position: absolute;
@@ -74,7 +75,7 @@
 
           .header {
             overflow: hidden;
-            background-color: #ff0000;
+            background-color: #b4ffcd;
             padding: 20px 10px;
           }
           
@@ -117,7 +118,7 @@ position: relative;
 width: 1440px;
 height: 1024px;
 
-background: #fffeed;
+background: #f5fef6;
 }
 .loginbox{
 /* login box */
@@ -205,7 +206,7 @@ width: 180px;
 height: 100px;
 left: 418.63px;
 top: 405.05px;
-
+cursor: pointer;
 background: #C0FFD9;
 border-radius: 45px;
 transform: rotate(0.28deg);
@@ -239,15 +240,20 @@ font-style: normal;
 font-weight: 400;
 font-size: 32px;
 line-height: 73px;
-}
-input[type=email] {
+
 
 font-size: 32px;
 line-height: 73px;
 }
-
+input[type=text]{
+  font-family: 'Laila';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+}
 body {
   font-family: Arial, sans-serif;
+  background: #f5fef6;
 }
 
 /* Table Styles */
@@ -258,17 +264,22 @@ body {
 .custom-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed; /* This makes the table cells share width equally */
 }
 
 .custom-table th, .custom-table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
 }
 
 .custom-table th {
   background-color: #f2f2f2;
 }
+
 
 .btn-container {
   margin-top: 20px;
@@ -279,3 +290,510 @@ body {
   margin: 5px;
   font-size: 14px;
 }
+
+.link-button {
+  background-color: #b4ffcd;
+  border: 1px solid #000000;
+  color: rgb(0, 0, 0);
+  text-decoration: none; /* Remove underline from the link */
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: inherit;
+  display: inline-block;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.link-button:hover {
+  color: #0056b3;
+}
+
+.link-button2 {
+  background-color: #b4ffcd;
+  border: 0px;
+  color: rgb(0, 0, 0);
+  text-decoration: none; /* Remove underline from the link */
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: inherit;
+  display: inline-block;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.link-button:hover {
+  color: #0056b3;
+}
+
+
+
+.formbox{
+  /* login box */
+  
+  position: absolute;
+  width: 541px;
+  height: 750px;
+  left: 300.67px;
+  top: 87px;
+  
+  background: #7BFF98;
+  border-radius: 45px;
+  transform: rotate(0.28deg);
+  }
+
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.formboxsub{
+  /* login box */
+  
+  position: absolute;
+  width: 541px;
+  height: 650px;
+  left: 300.67px;
+  top: 87px;
+  
+  background: #7BFF98;
+  border-radius: 45px;
+  transform: rotate(0.28deg);
+  }
+
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.formbox3{
+  /* login box */
+  
+  position: absolute;
+  width: 541px;
+  height: 450px;
+  left: 300.67px;
+  top: 87px;
+  
+  background: #7BFF98;
+  border-radius: 45px;
+  transform: rotate(0.28deg);
+  }
+
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.subIDtext{
+  /* username box */
+
+position: absolute;
+width: 300.62px;
+height: 50.88px;
+left: 30.39px;
+top: 71.7px;
+font-size: 32px;
+background: #FFFFFF;
+border-radius: 50px;
+transform: matrix(1, 0, -0.01, 1, 0, 0);
+
+}
+
+
+  
+  
+  select, option {
+    font-family: 'Laila';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 35px;
+    padding: 5px; /* Adding some padding for better appearance */
+}
+
+/* Style for the submit button */
+input[type="submit"] {
+    background-color: #C0FFD9;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-family: 'Laila';
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.formbox {
+  margin: 20px; /* Add margin around the form */
+}
+
+.formboxsub label,
+.formboxsub input,
+.formboxsub select {
+  display: block;
+  margin-bottom: 10px; /* Add spacing between each field */
+}
+
+.subID{
+  /* Username: */
+
+position: absolute;
+width: 326px;
+height: 66px;
+left: 10px;
+top: 10px;
+
+font-family: 'Laila';
+font-style: normal;
+font-weight: 400;
+font-size: 40px;
+line-height: 62px;
+
+color: #000000;
+
+
+}
+.subname{
+  /* Username: */
+
+position: absolute;
+width: 326px;
+height: 66px;
+left: 10px;
+top: 150px;
+
+font-family: 'Laila';
+font-style: normal;
+font-weight: 400;
+font-size: 40px;
+line-height: 62px;
+
+color: #000000;
+
+
+}
+
+.subnametext{
+  /* password box */
+
+position: absolute;
+width: 300.62px;
+height: 50.88px;
+left: 30.39px;
+top: 213.82px;
+
+background: #FFFFFF;
+border-radius: 50px;
+transform: matrix(1, 0, -0.01, 1, 0, 0);
+
+}
+
+.qual{
+  position: absolute;
+width: 326px;
+height: 66px;
+left: 10px;
+top: 270px;
+
+font-family: 'Laila';
+font-style: normal;
+font-weight: 400;
+font-size: 40px;
+line-height: 62px;
+
+color: #000000;
+}
+.qualsel {
+  font-family: 'Laila';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 35px;
+  margin-top: 300px;
+  margin-left: 20px;;
+  padding: 5px; 
+  border: 1px solid #ccc; 
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  width: 50%;
+  box-sizing: border-box; 
+}
+.samesel {
+  font-family: 'Laila';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 35px;
+  margin-top: 30px;
+  margin-left: 20px;;
+  padding: 5px; 
+  border: 1px solid #ccc;
+  border-radius: 5px; 
+  background-color: #fff; 
+  color: #333;
+  width: 50%;
+  box-sizing: border-box; 
+}
+
+/* Style for the option elements within the select */
+.qualsel option {
+  font-family: 'Laila';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 35px;
+}
+.type{
+  position: absolute;
+  width: 326px;
+  height: 66px;
+  left: 10px;
+  top: 360px;
+  
+  font-family: 'Laila';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 66px;
+  white-space: nowrap;
+  color: #000000;
+}
+.sem{
+  position: absolute;
+  width: 326px;
+  height: 66px;
+  left: 10px;
+  top: 370px;
+  
+  font-family: 'Laila';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 66px;
+  white-space: nowrap;
+  color: #000000;
+}
+
+.sembox{
+  font-family: 'Laila';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 35px;
+  margin-top: 30px;
+  margin-left: 20px;;
+  padding: 5px; /* Adding some padding for better appearance */
+  border: 1px solid #ccc; /* Adding a border */
+  border-radius: 5px; /* Adding border-radius for rounded corners */
+  background-color: #fff; /* Setting background color */
+  color: #333; /* Setting text color */
+  width: 50%; /* Set the width to fill its container */
+  box-sizing: border-box; /* Include padding and border in the width */
+}
+
+.course{
+  position: absolute;
+  width: 326px;
+  height: 66px;
+  left: 10px;
+  top: 450px;
+  
+  font-family: 'Laila';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 66px;
+  white-space: nowrap;
+  color: #000000;
+}
+.coursebox{
+  font-family: 'Laila';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 35px;
+  margin-top: 30px;
+  margin-left: 20px;;
+  padding: 5px; /* Adding some padding for better appearance */
+  border: 1px solid #ccc; /* Adding a border */
+  border-radius: 5px; /* Adding border-radius for rounded corners */
+  background-color: #fff; /* Setting background color */
+  color: #333; /* Setting text color */
+  width: 50%; /* Set the width to fill its container */
+  box-sizing: border-box; /* Include padding and border in the width */
+}
+.submit {
+  position: absolute;
+  width: 126px;
+  height: 66px;
+  right: 20px; /* Adjust the right distance as needed */
+  bottom: 20px; /* Adjust the bottom distance as needed */
+}
+.back {
+  background-color: #ff9b9b;
+  border: 1px solid #000000;
+  color: rgb(0, 0, 0);
+  text-decoration: none; /* Remove underline from the link */
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: inherit;
+  display: inline-block;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.back:hover {
+  color: #ff0000; /* Darker red on hover */
+}
+
+.back2 {
+  background-color: #ff9b9b;
+  border: 1px solid #000000;
+  color: rgb(0, 0, 0);
+  text-decoration: none; /* Remove underline from the link */
+  cursor: pointer;
+  padding: 10px;
+  font-size: 16px;
+  font-family: inherit;
+  display: inline-block;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  bottom:10px;
+}
+
+.back2:hover {
+  color: #ff0000; /* Darker red on hover */
+}
+
+.subidsel{
+ font-family: 'Laila';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 35px;
+  margin-top: 80px;
+  margin-left: 20px;;
+  padding: 5px; 
+  border: 1px solid #ccc;
+  border-radius: 5px; 
+  background-color: #fff; 
+  color: #333;
+  width: 50%;
+  box-sizing: border-box; 
+}
+
+.lecID{
+ position: absolute;
+  width: 326px;
+  height: 66px;
+  left: 10px;
+  top: 110px;
+  
+  font-family: 'Laila';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 66px;
+  white-space: nowrap;
+  color: #000000;
+}
+.lecIDsel{
+ font-family: 'Laila';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 35px;
+  margin-top: 40px;
+  margin-left: 20px;;
+  padding: 5px; 
+  border: 1px solid #ccc;
+  border-radius: 5px; 
+  background-color: #fff; 
+  color: #333;
+  width: 50%;
+  box-sizing: border-box; 
+  }
+  .sttime{
+   position: absolute;
+  width: 326px;
+  height: 66px;
+  left: 10px;
+  top: 200px;
+  
+  font-family: 'Laila';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 66px;
+  white-space: nowrap;
+  color: #000000;
+  }
+  .sttimesel{
+  position: absolute;
+  left: 13px;
+  top: 260px;
+  }
+  .etime{
+     position: absolute;
+  width: 326px;
+  height: 66px;
+  left: 10px;
+  top: 280px;
+  
+  font-family: 'Laila';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 66px;
+  color: #000000;
+  }
+  .etimesel{
+     position: absolute;
+  left: 10px;
+  top: 350px;
+  }
+  .day{
+       position: absolute;
+  width: 326px;
+  height: 66px;
+  left: 10px;
+  top: 370px;
+  
+  font-family: 'Laila';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 66px;
+  color: #000000;
+  }
+  .daysel{
+   position: absolute;
+  left: 10px;
+  top: 440px;
+  }
+  .ctype{
+        position: absolute;
+  width: 326px;
+  height: 66px;
+  left: 10px;
+  top: 480px;
+  
+  font-family: 'Laila';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 66px;
+  color: #000000;
+  }
+  .csell{
+   position: absolute;
+  left: 10px;
+  top: 540px;
+  }

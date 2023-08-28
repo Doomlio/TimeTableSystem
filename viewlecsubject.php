@@ -45,7 +45,7 @@
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        echo "<table class="custom-table"><tr><th>Subject Code</th><th>Subject Name</th><th>Qualification</th><th>Semester</th><th>Course</th></tr>";
+        echo "<table class ='custom-table'><tr><th>Subject Code</th><th>Subject Name</th><th>Qualification</th><th>Semester</th><th>Course</th></tr>";
 
         // Output data of each row
         while ($row = $result->fetch_assoc()) {

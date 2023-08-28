@@ -61,7 +61,7 @@ $lec_id = $_SESSION["lec_id"];
     ");
 
     if ($result->num_rows > 0) {
-        echo "<table class="custom-table">
+        echo "<table class ='custom-table'>
         <tr>
             <th>Timetable ID</th>
             <th>Subject ID</th>
@@ -107,7 +107,7 @@ $lec_id = $_SESSION["lec_id"];
     ?>
 
     <h2>Your Requests</h2>
-    <table border="1">
+    <table class ="custom-table" border="1">
         <tr>
             <th>Timetable ID</th>
             <th>Start Time</th>

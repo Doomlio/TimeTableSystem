@@ -30,7 +30,7 @@ $stmt->execute();
 $resultTimetable = $stmt->get_result();
 
 if ($resultTimetable->num_rows > 0) {
-    echo "<table class="custom-table"><tr><th>Timetable ID</th><th>Subject Name</th><th>Start Time</th><th>End Time</th><th>Day</th><th>Sub ID</th><th>Venue ID</th></tr>";
+    echo "<table class ='custom-table'><tr><th>Timetable ID</th><th>Subject Name</th><th>Start Time</th><th>End Time</th><th>Day</th><th>Sub ID</th><th>Venue ID</th></tr>";
 
     while($row = $resultTimetable->fetch_assoc()) {
         $timetableID = $row["timetable_id"];

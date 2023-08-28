@@ -93,7 +93,7 @@
             } while ($firstRow = $result->fetch_assoc());
 
             // Display the timetable in a separate table for each lecturer
-            echo "<table border='5' cellspacing='0'>";
+            echo "<table class ='custom-table' border='5' cellspacing='0'>";
             // Generate header row for the hours
             echo "<tr>";
             echo "<th></th>";

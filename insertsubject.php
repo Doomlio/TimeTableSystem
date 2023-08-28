@@ -6,40 +6,45 @@
 </head>
 <body>
     <h1>Add new subjects</h1>
-
+    <div class="formboxsub2">
     <form method="post" action="insertdbsubject.php">
-        Subject ID: <input type="text" placeholder="ECXXXX" name="subID"><br>
-        subjectname: <input type="text" placeholder="Intro to abc" name="subname"><br>
+    <label class="subID">Subject ID:</label>
+       <input type="text"  class="subIDtext" placeholder="ECXXXX" name="subID"><br>
 
-        <label for="qual">Qualification:</label>
-        <select name="qual" id="qual">
+       <label class="subname">Subject name:</label>
+       <input type="text" class="subnametext" placeholder="Intro to abc" name="subname"><br>
+
+        <label for="qual" class="qual">Qualification:</label>
+        <select name="qual" class="qualsel" id="qual">
             <option value="diploma">Diploma</option>
             <option value="degree">Degree</option>
         </select>
         <br>
 
-        <label for="subtype">Type of class (theory/practical):</label>
-        <select name="subtype" id="subtype">
+        <!-- <label for="subtype" class="type">Type of class (theory/practical):</label>
+        <select name="subtype" class="samesel" id="subtype">
             <option value="theory">Theory</option>
             <option value="practical">Practical</option>
-        </select>
-        <br>
+        </select> -->
+        
 
-        <label for="sem">Sem:</label>
-        <select name="sem" id="sem">
+        <label for="sem" class="sem">Sem:</label>
+        <select name="sem" id="sem" class="sembox">
             <option value="Jan">January</option>
             <option value="May">May</option>
             <option value="Oct">October</option>
 </select>
         <br>
 
-        <label for="course">course:</label>
-        <select name="sem" id="sem">
+        <label for="course" class="course">Course:</label>
+        <select name="sem" id="sem" class="coursebox">
 
             <option value="May">DIT</option>
             <option value="Oct">DCS</option>
-        
-        <input type="submit" name="submit" value="Submit">
+        </select>
+        <input type="submit"class ="submit"name="submit" value="Submit">
+        <a href="viewsubject.php" class="back2">Back</a>
     </form>
+    </div>
 </body>
 </html>

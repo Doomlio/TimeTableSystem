@@ -34,7 +34,7 @@ $sqlTimetable = "SELECT timetable.*, lecturer.lecname
 $resultTimetable = $mysqli->query($sqlTimetable);
 
 if ($resultTimetable->num_rows > 0) {
-    echo '<table class="custom-table">';
+    echo '<table class ="custom-table" class="custom-table">';
     echo '<tr><th>Timetable ID</th><th>Subject Name</th><th>Lecturer ID</th><th>Start Time</th><th>End Time</th><th>Day</th><th>Class Type</th><th>Sub ID</th><th>Venue ID</th></tr>';
 
     // output data of each row
@@ -70,11 +70,9 @@ $mysqli->close();
 
 ?>
 <div class="btn-container">
-    <form method="post" action="timetable.php">
-        <button type="submit">Back to Timetable</button>
-    </form>
-    <button onclick="window.location.href='insertsubject.php';">Add Timeslot</button>
-    <button onclick="window.location.href='edittimeslot.php';">Edit Timeslot</button>
+<button class="link-button" onclick="window.location.href='timetable.php'">Back to Timetable</button>
+    <button class="link-button" onclick="window.location.href='inserttimeslot.php';">Add Timeslot</button>
+    <button  class="link-button"onclick="window.location.href='edittimeslot.php';">Edit Timeslot</button>
 </div>
 </body>
-</html>
+</html> 

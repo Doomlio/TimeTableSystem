@@ -89,7 +89,7 @@ if ($sqlUpdateRecord ){
  ?>
 </table>
 <br>
-<button name="submitSave" class="button">Save</button>
+<button name="submitSave" class="link-button">Save</button>
 </form>
 <button onclick="window.location.href='updateonebyone.php';">Update One by One</button>
 

@@ -43,7 +43,7 @@ if (isset($_POST["savedata"])) {
     <h2>Edit Venue Record</h2>
     <p></p>
 
-    <table id="myTable">
+    <table class ="custom-table" id="myTable">
         <thead>
             <tr class="header">
                 <th class="">#</th>
@@ -67,7 +67,7 @@ if (isset($_POST["savedata"])) {
             <td class=""><input type="text" name="newVenueID[]" value="<?php echo $venueid ?>"></td>
             <td class=""><input type="text" name="venuetype[]" value="<?php echo $venuetype ?>"></td>
             <td class="">
-                <button type="submit" name="delete" value="<?php echo $venueid ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
+                <button type="submit" class="back" name="delete" value="<?php echo $venueid ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
             </td>
         </tr>
         <?php
@@ -76,10 +76,8 @@ if (isset($_POST["savedata"])) {
         ?>
         </table>
         <br>
-        <button name="savedata" class="button">Save</button>
+        <button name="savedata" class="link-button">Save</button>
     </form>
-    <form method="post" action="timetable.php">
-        <button type="submit">Back to timetable</button>
-    </form>
+    <button class="link-button" onclick="window.location.href='timetable.php';">Back to Timetable</button>
 </body>
 </html>

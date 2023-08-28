@@ -158,7 +158,7 @@
 </head>
 <h2>Edit Timeslots</h2>
     <form method="post" action="edittimeslot.php">
-        <table id="myTable">
+        <table class ="custom-table" id="myTable">
             <thead>
                 <tr>
                     <th>#</th>
@@ -245,13 +245,13 @@
             </tbody>
         </table>
         <br>
-        <button name="savedata" class="button">Save</button>
+        <button name="savedata" class="link-button">Save</button>
     </form>
     <form method="post" action="timetable.php">
         <button type="submit">Back to timetable</button>
     </form>
     <form method="post" name="reassign" action="edittimeslot.php">
-        <button type="submit" name="reassign" class="button">Reassign Timeslots</button>
+        <button type="submit" name="reassign" class="link-button">Reassign Timeslots</button>
     </form>
 </body>
 </html>

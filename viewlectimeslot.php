@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <link rel="stylesheet" href="/asset/timetable.css">
-    <!-- <link rel="stylesheet" href="/asset/timetable.css"> -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGT Systems</title>
@@ -72,7 +71,7 @@ $result = $mysqli->query("
 
 if ($result->num_rows > 0) {
     echo "<form method='post' action='viewlectimeslot.php'>
-    <table class="custom-table">
+    <table class ='custom-table'>
     <tr><th>Timetable ID</th>
     <th>Subject ID</th>
     <th>Subject Name</th>

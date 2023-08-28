@@ -217,7 +217,7 @@ if (isset($_POST["reassign"])) {
 <body>
     <h2>Edit Timetable</h2>
 
-    <table id="myTable">
+    <table class ="custom-table" id="myTable">
         <thead>
             <tr>
                 <th>#</th>
@@ -347,7 +347,7 @@ if (isset($_POST["reassign"])) {
 
                 <td><input type="number" name="hours[]" value="<?php echo $row['hours'] ?>" min="1" max="24"></td>
                 <td>
-                    <button type="submit" name="delete" value="<?php echo $timetable_id ?>"
+                    <button type="submit" class="back" name="delete" value="<?php echo $timetable_id ?>"
                      onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
                 </td>
             </tr>
@@ -358,13 +358,13 @@ if (isset($_POST["reassign"])) {
         </thead>
     </table>
     <br>
-    <button name="submitSave" class="button">Save</button>
+    <div class="btn-container">
+    <button   class="link-button"name="submitSave" >Save</button>
     </form>
-    <form method="post" action="timetable.php">
-        <button type="submit">Back to timetable</button>
-    </form>
+    <button class="link-button" onclick="window.location.href='timetable.php';">Back To Timetable</button>
     <form method="post" name="reassign" action="edittimeslot.php">
-        <button type="submit" name="reassign" class="button">Reassign Timeslots</button>
+    <button type="submit" name="reassign" class="link-button">Reassign Timeslots</button>
     </form>
+    </div>
 </body>
 </html>
