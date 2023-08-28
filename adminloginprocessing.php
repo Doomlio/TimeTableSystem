@@ -16,7 +16,7 @@ if (isset($_POST["login"])) {
     $total = $result->num_rows;
 
     if ($total == 0) {
-        header("refresh:1;url=login.php");
+        header("refresh:1;url=adminlogin.php");
         ?>
         <script language=javascript>alert('ACCESS DENIED!');</script>
         <?php

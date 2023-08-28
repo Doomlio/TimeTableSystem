@@ -104,10 +104,10 @@ top: 0px;
 font-family: 'Laila';
 font-style: normal;
 font-weight: 400;
-font-size: 47px;
+font-size: 40px;
 line-height: 73px;
 /* identical to box height */
-
+white-space: nowrap;
 color: #000000;
 
 transform: rotate(0.28deg);
