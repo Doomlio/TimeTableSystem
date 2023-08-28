@@ -1,12 +1,16 @@
     <?php
     session_start();
     require_once("config.php");
+if (!isset($_SESSION["lec_id"])) {
+    header("Location: login.php");
+    exit;
+}
 
-    if (!isset($_SESSION["lec_id"]) || !isset($_SESSION["name"])) {
-        // Redirect the user to the login page if not logged in
-        header("Location: login.php");
-        exit;
-    }
+
+
+
+
+
 
     $lec_id = $_SESSION["lec_id"];
     $lecname = $_SESSION["name"];
@@ -26,25 +30,34 @@
     <head>
 <link rel="stylesheet" href="/asset/timetable.css">   
     <link rel="stylesheet" href="/asset/timetable.css">
-    <form method="post" action="viewreplacementclass.php">
-            <button type="submit">Manage Replacement Class</button>
-        </form>
-        <form method="post" action="viewlectimeslot.php">
-            <button type="submit">Manage timeslots</button>
-        </form>
-        <form method="post" action="viewlecsubject.php">
-            <button type="submit">View subjects</button>
-        </form>
-       
-        <form method="post" action="viewlecvenue.php">
-            <button type="submit">View venues</button>
-        </form>
-        <form method="post" action="requestform.php">
-            <button type="submit">Request Forms</button>
-        </form>
-        <form method="post" action="logout.php">
-            <button type="submit">logout</button>
-        </form>
+
+    <div class="header">
+    
+<a class="link-button"
+
+ href="viewreplacementclass.php">Manage Replacement Class</a>
+    
+<a class="link-button"
+
+ href="viewlectimeslot.php">Manage Timeslots</a>
+    
+<a class="link-button"
+
+ href="viewlecsubject.php">View Subject</a>
+    
+<a class="link-button"
+
+ href="viewlecvenue.php">View  Venue</a>
+    
+<a class="link-button"
+
+ href="requestform.php">Manage Requests</a>
+    
+<a class="link-button"
+
+ href="logout.php">Logout</a>
+    </div>
+    
     </head>
     <body>
     <div class="header">

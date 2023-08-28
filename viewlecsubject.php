@@ -27,12 +27,16 @@
     
     // Include the configuration file
     require_once("config.php");
+if (!isset($_SESSION["lec_id"])) {
+    header("Location: login.php");
+    exit;
+}
 
-    if (!isset($_SESSION["lec_id"]) || !isset($_SESSION["name"])) {
-        // Redirect the user to the login page if not logged in
-        header("Location: login.php");
-        exit;
-    }
+
+
+
+
+
 
     // Get the lecturer ID from the session
     $lec_id = $_SESSION["lec_id"];
@@ -63,8 +67,8 @@
     $stmt->close();
     $mysqli->close();
 ?>
-    <form method="post" action="lectimetable.php">
-        <button type="submit">Back to timetable</button>
-    </form>
+  
+ <button class="link-button" onclick="window.location.href='lectimetable.php';">Back To Timetable</button>
+
 </body>
 </html>

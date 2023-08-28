@@ -1,12 +1,16 @@
 <?php 
     // Database connection
     include ('config.php');
-    session_start();
-    if (!isset($_SESSION["lec_id"]) || !isset($_SESSION["name"])) {
-        // Redirect the user to the login page if not logged in
-        header("Location: login.php");
-        exit;
-    }
+    session_start();if (!isset($_SESSION["lec_id"])) {
+    header("Location: login.php");
+    exit;
+}
+
+
+
+
+
+
     
     $lec_id = $_SESSION["lec_id"];
     
@@ -332,7 +336,7 @@ if (isset($_POST["reassign"])) {
                 <td><input type="number" name="hours[]" value="<?php echo $row['hours'] ?>" min="1" max="24"></td>
                 <td>
                     <button type="submit" name="delete" value="<?php echo $timetable_id ?>"
-                     onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
+                    class="back" onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
                 </td>
             </tr>
             <?php
