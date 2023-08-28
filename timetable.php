@@ -1,11 +1,19 @@
 <?php
+session_start();
+
+// Check if the admin session is not set
+if (!isset($_SESSION["admin_id"])) {
+    header("location: login.php"); // Redirect to login page
+    exit; // Exit to prevent further execution
+}
+
 require_once("config.php");
 
 $LEC_ID = array();
 $LECQUERY = $mysqli->query("SELECT DISTINCT lec_id FROM timetable"); //get all the lec_id
 while ($row = $LECQUERY->fetch_assoc()) {
     $LEC_ID[] = $row["lec_id"];
-} 
+}
 ?>
 
 
@@ -22,6 +30,7 @@ while ($row = $LECQUERY->fetch_assoc()) {
     <a href="viewvenue.php">Manage Venue</a>
     <a href="viewrequest.php">Manage Requests</a>
 </div>
+<a href="logout.php">Logout</a>
 
     
 <meta charset="UTF-8">

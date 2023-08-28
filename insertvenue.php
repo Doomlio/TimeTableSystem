@@ -8,12 +8,12 @@
     <h1>Add New Venue</h1>
     <div class="formbox3">
     <form method="post" action="insertdbvenue.php">
-        <label class="subID">Lecturer Name:</label>
-        <input type="text" class="subIDtext" placeholder="John Doe" name="lecname"><br>
+        <label class="subID">Venue ID:</label>
+        <input type="text" class="subIDtext" placeholder="ABCD" name="venueID"><br>
 
-        <label class="subname">Email:</label>
-        <input type="email" class="subnametext" 
-        placeholder="abcd@example.com" name="email"><br>
+        <label class="subname">type of class:</label>
+        <input type="text" class="subnametext" 
+        placeholder="lab/lecture" name="type"><br>
         <input type="submit" class="submit">
     </form>
     </div>
