@@ -1,3 +1,48 @@
+.repclasstitle{
+    position:relative;
+left: 300.67px;
+}
+
+
+.formboxsub2{
+    /* login box */
+    
+    position: absolute;
+    width: 541px;
+    height: 750px;
+    left: 300.67px;
+    top: 87px;
+    
+    background: #7BFF98;
+    border-radius: 45px;
+    transform: rotate(0.28deg);
+    }
+  
+    .form-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+  }
+  .formboxsub2 label,
+  .formboxsub2 input,
+  .formboxsub2 select {
+    display: block;
+    margin-bottom: 10px; /* Add spacing between each field */
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 .stime {
     position: relative;
 
@@ -72,9 +117,6 @@ font-size: 40px;
 line-height: 62px;
 
 color: #000000;
-
-transform: matrix(1, 0, -0.01, 1, 0, 0);
-
 }
 .daysel{
     font-family: 'Laila';
@@ -128,17 +170,32 @@ transform: matrix(1, 0, -0.01, 1, 0, 0);
 
 }
 .venueID{
+    position: relative;
+    width: 325.77px;
+    height: 66.78px;
+    left: 10px;
+    top: 100.99px;
+    
+    font-family: 'Laila';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 62px;
+    
+    color: #000000;
+}
+.venuesel{
     font-family: 'Laila';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 35px;
     margin-top: 100px;
-    margin-left: 10px;;
+    margin-left: 20px;
     padding: 5px; 
-    border: 1px solid #ccc;
-    border-radius: 5px; 
-    background-color: #fff; 
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    background-color: #fff;
     color: #333;
     width: 50%;
     box-sizing: border-box; 

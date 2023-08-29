@@ -1,19 +1,7 @@
 <?php 
     // Database connection
     include ('../../config.php');
-    session_start();if (!isset($_SESSION["lec_id"])) {
-    header("Location: login.php");
-    exit;
-}
 
-
-
-
-
-
-    
-    $lec_id = $_SESSION["lec_id"];
-    
     $showAlert = false; // Initialize showAlert to false
 
     // Delete code
@@ -25,7 +13,7 @@
         $sqlDeleteRecord->close();
         
         echo "<script>alert('Record deleted successfully.')</script>";
-        header("refresh:1;url=edittimeslot.php");
+        header("refresh:1;url=/admin/edit/edittimeslot.php");
     }
 
 
@@ -152,7 +140,7 @@ if (isset($_POST["reassign"])) {
     }
 
     // Refresh the page after reassignment
-    header("refresh:1;url=edittimeslot.php");
+    header("refresh:4;url=edittimeslot.php");
     echo "<script>alert('Timeslots reassigned successfully.')</script>";
 }
 
@@ -165,35 +153,64 @@ if (isset($_POST["reassign"])) {
 <link rel="stylesheet" href="/asset/timetable.css">
 	<title>Edit Timetable</title>
 
+   
     <script>
-    function updateHoursAndEndTime(index) {
-        var startTime = document.getElementsByName('startTime[]')[index].value;
-        var endTime = document.getElementsByName('endTime[]')[index].value;
-        var hoursInput = document.getElementsByName('hours[]')[index];
+        function updateHoursAndEndTime(index) {
+            var startTime = document.getElementsByName('start_time[]')[index].value;
+            var endTime = document.getElementsByName('end_time[]')[index].value;
+            var hoursInput = document.getElementsByName('hours[]')[index];
 
-        var startTimestamp = new Date('1970-01-01 ' + startTime).getTime();
-        var endTimestamp = new Date('1970-01-01 ' + endTime).getTime();
+            if (startTime && endTime) {
+                var startTimestamp = new Date('1970-01-01 ' + startTime).getTime();
+                var endTimestamp = new Date('1970-01-01 ' + endTime).getTime();
 
-        var diffInMillisecs = Math.abs(endTimestamp - startTimestamp);
-        var hours = Math.floor(diffInMillisecs / (1000 * 60 * 60));
+                var diffInMillisecs = Math.abs(endTimestamp - startTimestamp);
+                var hours = Math.floor(diffInMillisecs / (1000 * 60 * 60));
 
-        hoursInput.value = hours;
-    }
+                hoursInput.value = hours;
+            }
+        }
 
-    // Attach event listeners to start time and end time inputs
-    var startTimeInputs = document.getElementsByName('startTime[]');
-    var endTimeInputs = document.getElementsByName('endTime[]');
+        function updateEndTime(index) {
+            var startTime = document.getElementsByName('start_time[]')[index].value;
+            var hours = document.getElementsByName('hours[]')[index].value;
+            var endTimeInput = document.getElementsByName('end_time[]')[index];
 
-    for (var i = 0; i < startTimeInputs.length; i++) {
-        startTimeInputs[i].addEventListener('input', function () {
-            updateHoursAndEndTime(i);
+            if (startTime && hours) {
+                var startTimestamp = new Date('1970-01-01 ' + startTime).getTime();
+                var endTimestamp = startTimestamp + (hours * 60 * 60 * 1000);
+                var endDate = new Date(endTimestamp);
+
+                var endHours = String(endDate.getHours()).padStart(2, '0');
+                var endMinutes = String(endDate.getMinutes()).padStart(2, '0');
+
+                var endTime = endHours + ':' + endMinutes;
+                endTimeInput.value = endTime;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var startTimeInputs = document.getElementsByName('start_time[]');
+            var endTimeInputs = document.getElementsByName('end_time[]');
+            var hoursInputs = document.getElementsByName('hours[]');
+
+            for (var i = 0; i < startTimeInputs.length; i++) {
+                (function(index) {
+                    startTimeInputs[index].addEventListener('input', function () {
+                        updateHoursAndEndTime(index);
+                    });
+
+                    endTimeInputs[index].addEventListener('input', function () {
+                        updateHoursAndEndTime(index);
+                    });
+
+                    hoursInputs[index].addEventListener('input', function () {
+                        updateEndTime(index);
+                    });
+                })(i); // Pass the current value of 'i' to the IIFE
+            }
         });
-
-        endTimeInputs[i].addEventListener('input', function () {
-            updateHoursAndEndTime(i);
-        });
-    }
-</script>
+    </script>
 
 
 </head>
@@ -217,18 +234,13 @@ if (isset($_POST["reassign"])) {
                 <th>Hours</th>
                 <th>Actions</th>
             </tr>
-            <form method="post" name="updateTimetable" action="editrepclass.php">
+            <form method="post" name="updateTimetable" action="edittimeslot.php">
             <?php
-               $sqlTimetable = "SELECT timetable.*, lecturer.lecname, lecturer.maxhours 
-               FROM timetable
-               INNER JOIN lecturer ON timetable.lec_id = lecturer.lec_id
-               WHERE timetable.lec_id = ? AND timetable.cstatus = 'replacement'
-               ORDER BY timetable.lec_id, FIELD(LOWER(day), 'monday', 'tuesday', 'wednesday', 'thursday', 'friday')";
-                $stmtTimetable = $mysqli->prepare($sqlTimetable);
-                $stmtTimetable->bind_param('s', $lec_id); // Bind lec_id to the placeholder
-                $stmtTimetable->execute();
-                $resultTimetable = $stmtTimetable->get_result();
-
+                $sqlTimetable = "SELECT timetable.*, lecturer.lecname, lecturer.maxhours 
+                                FROM timetable
+                                INNER JOIN lecturer ON timetable.lec_id = lecturer.lec_id
+                                ORDER BY timetable.lec_id, FIELD(LOWER(day), 'monday', 'tuesday', 'wednesday', 'thursday', 'friday');";
+                $resultTimetable = $mysqli->query($sqlTimetable);
                 $no = 1;
                 while ($row = $resultTimetable->fetch_assoc()) {
                     $timetable_id = $row["timetable_id"];
@@ -335,8 +347,8 @@ if (isset($_POST["reassign"])) {
 
                 <td><input type="number" name="hours[]" value="<?php echo $row['hours'] ?>" min="1" max="24"></td>
                 <td>
-                    <button type="submit" name="delete" value="<?php echo $timetable_id ?>"
-                    class="back" onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
+                    <button type="submit" class="back" name="delete" value="<?php echo $timetable_id ?>"
+                     onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
                 </td>
             </tr>
             <?php
@@ -346,9 +358,16 @@ if (isset($_POST["reassign"])) {
         </thead>
     </table>
     <br>
-    <button name="submitSave" class="link-button">Save</button>
+    <div class="btn-container">
+    <button   class="link-button"name="submitSave" >Save</button>
     </form>
-    <button class="link-button" onclick="window.location.href='/lecturer/view/lectimetable.php';">Back To Timetable</button>
-    
+    <button class="link-button" onclick="window.location.href='/admin/view/timetable.php';">Back To Timetable</button>
+    <form method="post" action="edittimeslot.php">
+    <button type="submit" name="reassign" class="link-button">Reassign Timeslots</button>
+</form>
+
+<a class="link-button" onclick="window.location.href='genslot.php';">Generate Missing Timeslots</a>
+    </div>  
+
 </body>
 </html>

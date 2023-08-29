@@ -75,7 +75,7 @@
 
           .header {
             overflow: hidden;
-            background-color: #b4ffcd;
+            background-color: #e9fff0;
             padding: 20px 10px;
           }
           
@@ -273,9 +273,7 @@ body {
 .custom-table th {
   background-color:  #2ac96f;
 }
-.custom-table td {
-  background-color: #dedede;
-}
+
 
 
 .btn-container {
@@ -298,7 +296,7 @@ body {
   font-size: 16px;
   font-family: inherit;
   display: inline-block;
-  border-radius: 5px;
+  border-radius: 20px;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
   margin-left: 10px;
 }
@@ -382,26 +380,6 @@ body {
     align-items: center;
     height: 100vh;
 }
-.formboxsub2{
-  /* login box */
-  
-  position: absolute;
-  width: 541px;
-  height: 750px;
-  left: 300.67px;
-  top: 87px;
-  
-  background: #7BFF98;
-  border-radius: 45px;
-  transform: rotate(0.28deg);
-  }
-
-  .form-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
 .formbox3{
   /* login box */
   
@@ -470,12 +448,7 @@ input[type="submit"] {
   display: block;
   margin-bottom: 10px; /* Add spacing between each field */
 }
-.formboxsub2 label,
-.formboxsub2 input,
-.formboxsub2 select {
-  display: block;
-  margin-bottom: 10px; /* Add spacing between each field */
-}
+
 .subID{
   /* Username: */
 
@@ -703,6 +676,11 @@ color: #000000;
   border-radius: 5px;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
   bottom:10px;
+  position: absolute;
+  width: 66px;
+  height: 26px;
+  left: 20px; /* Adjust the right distance as needed */
+  bottom: 20px; /* Adjust the bottom distance as needed */
 }
 
 .back2:hover {

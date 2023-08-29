@@ -8,7 +8,7 @@ if (isset($_POST["login"])) {
     $email = $_POST['email']; 
     $userpassword = $_POST['password'];
 
-    $sql = "SELECT * FROM lecturer WHERE email=? AND password=?"; 
+    $sql = "SELECT * FROM admin WHERE email=? AND password=?"; // Change to 'admin' table
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("ss", $email, $userpassword);
     $stmt->execute();
@@ -16,19 +16,19 @@ if (isset($_POST["login"])) {
     $total = $result->num_rows;
 
     if ($total == 0) {
-        header("refresh:1;url=login.php");
+        header("refresh:1;url=/admin/login/adminlogin.php");
         ?>
         <script language=javascript>alert('ACCESS DENIED!');</script>
         <?php
     } else {
         $row = $result->fetch_assoc();
-        $lec_id = $row["lec_id"];
-        $lecname = $row["lecname"];
+        $admin_id = $row["admin_id"];
+        $admin_name = $row["admin_name"];
         
-        $_SESSION["lec_id"] = $lec_id;
-        $_SESSION["name"] = $lecname;
+        $_SESSION["admin_id"] = $admin_id;
+        $_SESSION["name"] = $admin_name;
 
-        header("location: /lecturer/view/lectimetable.php"); 
+        header("location: /admin/view/timetable.php"); 
         exit; // Make sure to exit after header redirection
     }
 }
