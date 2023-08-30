@@ -27,7 +27,7 @@ if (!$result) {
     <h1 class="repclasstitle">Insert Replacement class</h1>
     <div class="formboxsub2">
     <form method="post" action="insertdbrepclass.php">
-       <label class="subID"> subject code:</label> 
+       <label class="subID"> Subject code:</label> 
         <select class="subIDtext"name="subID">
 <?php
         while ($row = $result->fetch_assoc()) {
@@ -35,10 +35,10 @@ if (!$result) {
         }
 ?>
         </select><br>
-        <label class="stime">start time:</label>
+        <label class="stime">Start time:</label>
         <input type="time" class="starttime"name="starttime" value="00:00" required>
 
-        <label class="endtimetext">end time:</label>
+        <label class="endtimetext">End time:</label>
         <input type="time" class="endtime"name="endtime" value="00:00" required>
         <label class="day2">Day:</label>
         <select  class="daysel" name="day">
@@ -48,7 +48,7 @@ if (!$result) {
             <option value="thursday">Thursday</option>
             <option value="friday">Friday</option>
         </select>
-        <label class="type">type</label>
+        <label class="type">Type</label>
         <select class="typesel" name="type">
             <option value="lecture">Lecture</option>
             <option value="lab">Lab</option>
@@ -70,7 +70,7 @@ if (!$result) {
 ?>
         <input class="submit" type="submit">
     </form>
-    <a href="viewrepclass.php" class="back2">Back</a>
+    <a href="/lecturer/view/viewreplacementclass.php" class="back2">Back</a>
     </div>
 </body>
 </html>

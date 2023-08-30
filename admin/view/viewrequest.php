@@ -75,9 +75,11 @@
 
     // Retrieve existing data from the timetable table based on the request timetable ID
     $sql = "SELECT t.*, r.timetable_id AS request_timetable_id,
-    r.new_start_time, r.new_end_time, r.new_day, r.new_class_type, r.new_venue_id
+    r.new_start_time, r.new_end_time, r.new_day, r.new_class_type, r.new_venue_id,
+    l.lecname
     FROM timetable t
     JOIN request r ON t.timetable_id = r.timetable_id
+    JOIN lecturer l ON t.lec_id = l.lec_id
     WHERE r.status != 'deny' AND r.status != 'approved'";
 
     $stmt = $mysqli->prepare($sql);
@@ -96,6 +98,7 @@
         // Loop through the rows and output the data
         while ($row = $result->fetch_assoc()) {
             // Assign new data from the request table to variables
+            $lecname= $row['lecname'];
             $newStartTime = $row["new_start_time"];
             $newEndTime = $row["new_end_time"];
             $newDay = $row["new_day"];
@@ -112,17 +115,17 @@
 
             // Output the data for each row
             echo '<tr>
-                    <td>Timetable ID (Request)</td>
+                    <td>Timetable ID (Requested)</td>
                     <td>' . $requestTimetableID . '</td>
                     <td>-</td>
                 </tr>';
-
                 echo '<tr>
-                    <td>Timetable ID (timetable)</td>
-                    <td>' . $requestTimetableID . '</td>
-                    <td>-</td>
-                    </td>
-                </tr>';
+                <td>Lecturer name</td>
+                <td>' . $lecname . '</td>
+                <td>-</td>
+            </tr>';
+
+              
 
             // Check if there are differences and display them
             if ($timetableStartTime !== $newStartTime) {

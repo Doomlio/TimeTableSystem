@@ -22,8 +22,8 @@ if (isset($_POST["savedata"])) {
     foreach ($_POST['lec_id'] as $key => $lec_id) {
         $newLecID = $_POST['newLecID'][$key];
         $lecname = $_POST['lecname'][$key];
-        $email = $_POST['email'][$key];
-        $password = $_POST['password'][$key];
+        $email = $_POST['lecemail'][$key];
+        $password = $_POST['lecpassword'][$key];
         $maxhours = $_POST['maxhours'][$key];
 
         // Prepare and execute the SQL query to update the lecturer data
@@ -67,8 +67,8 @@ if (isset($_POST["savedata"])) {
             while($row = $resultRenewal->fetch_assoc()) {
                 $lec_id = $row["lec_id"];
                 $lecname = $row["lecname"];
-                $email = $row["email"];
-                $password = $row["password"];
+                $email = $row["lecemail"];
+                $password = $row["lecpassword"];
                 $maxhours = $row["maxhours"];
         ?>
         <tr>

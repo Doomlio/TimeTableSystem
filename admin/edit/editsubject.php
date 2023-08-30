@@ -188,10 +188,10 @@ if (isset($_POST["reassign"])) {
         ?>
         </table>
         <br>
-        
+        <button class="link-button" onclick="window.location.href='/admin/view/timetable.php';">Back To Timetable</button>
         <button name="savedata" class="link-button">Save</button>
     </form>
-    <button class="link-button" onclick="window.location.href='/admin/view/timetable.php';">Back To Timetable</button>
+   
     <form method="post" name="updaterenewal" action="/admin/edit/editsubject.php">
     <button name="reassign" class="link-button" onclick="window.location.href='/admin/edit/editsubject.php';">Reassign Lecturers </button>
 </form>

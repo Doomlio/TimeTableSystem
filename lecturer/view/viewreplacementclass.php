@@ -52,7 +52,7 @@ $stmt->close();
 $mysqli->close();
 ?>
 <button class="link-button" onclick="window.location.href='/lecturer/view/lectimetable.php';">Back to timetable</button>
-<button class="link-button" onclick="window.location.href='lecturer/insert/insertrepclass.php';">Add replacement</button>
+<button class="link-button" onclick="window.location.href='/lecturer/insert/insertrepclass.php';">Add replacement</button>
 <button class="link-button" onclick="window.location.href='/lecturer/edit/editrepclass.php';">Edit replacement</button>
 </body>
 </html>

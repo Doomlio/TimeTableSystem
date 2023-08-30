@@ -207,9 +207,10 @@ $venueID = $_GET["venueID"];
             </tr>
         </table>
         
-        
+        <button class="link-button" onclick="window.location.href='requestform.php';">Back To request</button>
         <button class="link-button "type="submit">Submit Request</button>
+        
     </form>
-    <button class="link-button" onclick="window.location.href='requestform.php';">Back To request</button>
+    
 </body>
 </html>

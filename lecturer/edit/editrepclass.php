@@ -315,20 +315,12 @@ if (isset($_POST["reassign"])) {
                     </select>
                 </td>
                 <td>
-                    <select name="cstatus[]">
+                    
                     <?php
-                        $classStatusOptions = ['active', 'replacement', 'cancelled'];
-                        $selectedClassStatus = $cstatus; // Value from the database
+                    $selectedClassStatus = $cstatus; // Value from the database
 
-                        // Display the current class status first
-                        echo "<option value=\"$selectedClassStatus\">$selectedClassStatus</option>";
-
-                        // Display the other class status options
-                        foreach ($classStatusOptions as $classStatusOption) {
-                            if ($classStatusOption !== $selectedClassStatus) {
-                                echo "<option value=\"$classStatusOption\">$classStatusOption</option>";
-                            }
-                        }
+                    // Display the current class status
+                        echo $selectedClassStatus;
                     ?>
                     </select>
                 </td>
@@ -348,7 +340,7 @@ if (isset($_POST["reassign"])) {
     <br>
     <button name="submitSave" class="link-button">Save</button>
     </form>
-    <button class="link-button" onclick="window.location.href='/lecturer/view/lectimetable.php';">Back To Timetable</button>
+    <button class="link-button" onclick="window.location.href='/lecturer/view/viewreplacementclass.php';">Back To table</button>
     
 </body>
 </html>
