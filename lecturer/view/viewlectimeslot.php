@@ -33,7 +33,7 @@ require_once("../../config.php");
 
 if (!isset($_SESSION["lec_id"]) || !isset($_SESSION["name"])) {
     // Redirect the user to the login page if not logged in
-    header("Location: login.php");
+    header("Location: /lecturer/login/login.php");
     exit;
 }
 

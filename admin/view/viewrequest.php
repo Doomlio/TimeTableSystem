@@ -51,7 +51,7 @@
             $stmtUpdate->execute();
             $stmtUpdate->close();
               // Change the request status to 'approved'
-            $updateStatusQuery = "UPDATE request SET request_status = 'approved' WHERE timetable_id = ?";
+            $updateStatusQuery = "UPDATE request SET status = 'approved' WHERE timetable_id = ?";
             $stmtUpdateStatus = $mysqli->prepare($updateStatusQuery);
             $stmtUpdateStatus->bind_param("s", $approvedRequestID);
             $stmtUpdateStatus->execute();
@@ -160,14 +160,16 @@
                         <td>' . $newVenueID . '</td>
                     </tr>';
             }
-
+            echo'<td>';
+            echo' <td class="action-buttons">
+            <form method="post" action="">
+                <button type="submit" class="link-button"name="approve" value="' . $requestTimetableID . '">Approve</button>
+                <button type="submit" class="back"name="deny" value="' . $requestTimetableID . '">Deny</button>
+            </form>';
         }
+        
         echo'<td>';
-       echo' <td class="action-buttons">
-        <form method="post" action="">
-            <button type="submit" class="link-button"name="approve" value="' . $requestTimetableID . '">Approve</button>
-            <button type="submit" class="back"name="deny" value="' . $requestTimetableID . '">Deny</button>
-        </form>';
+     
         echo '</table>';
     } else {
         echo "No data found.";

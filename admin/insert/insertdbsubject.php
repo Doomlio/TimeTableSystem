@@ -17,13 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . $sql . "<br>" . $mysqli->error;
     }
 
-    echo "
-    <form action='/admin/view/timetable.php'>
-    <button>Go back to timetable</button>
-    </form>";
+    header("refresh:1;url=insertsubject.php");
+    echo "<script>alert('subject added successfully.')</script>";
 }
-
-echo " <input type='submit' value='Submit'>";
 
 $mysqli->close();
 ?>

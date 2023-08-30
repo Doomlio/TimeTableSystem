@@ -62,7 +62,7 @@
 
 
 </form>
-<a class="back2" href="viewsubject.php" >Back</a>
+<a class="back2" href="/admin/view/viewtimeslot.php" >Back</a>
 
 </div>
 </body>

@@ -8,7 +8,7 @@ if (isset($_POST["login"])) {
     $email = $_POST['email']; 
     $userpassword = $_POST['password'];
 
-    $sql = "SELECT * FROM lecturer WHERE email=? AND password=?"; 
+    $sql = "SELECT * FROM lecturer WHERE lecemail=? AND lecpassword=?"; 
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("ss", $email, $userpassword);
     $stmt->execute();
@@ -16,7 +16,7 @@ if (isset($_POST["login"])) {
     $total = $result->num_rows;
 
     if ($total == 0) {
-        header("refresh:1;url=login.php");
+        header("refresh:1;url=/lecturer/login/login.php");
         ?>
         <script language=javascript>alert('ACCESS DENIED!');</script>
         <?php

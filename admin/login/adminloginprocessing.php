@@ -8,7 +8,7 @@ if (isset($_POST["login"])) {
     $email = $_POST['email']; 
     $userpassword = $_POST['password'];
 
-    $sql = "SELECT * FROM admin WHERE email=? AND password=?"; // Change to 'admin' table
+    $sql = "SELECT * FROM admin WHERE email=? AND password=?"; 
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("ss", $email, $userpassword);
     $stmt->execute();

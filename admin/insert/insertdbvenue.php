@@ -37,7 +37,7 @@ $mysqli->close();
             <?php } else { ?>
                 alert("Error: Record creation failed");
             <?php } ?>
-            window.location.href = "viewvenue.php"; // Redirect to viewvenue.php
+            window.location.href = "/admin/view/viewvenue.php"; // Redirect to viewvenue.php
         </script>
     </div>
 </body>

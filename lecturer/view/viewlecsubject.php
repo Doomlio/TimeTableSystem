@@ -28,7 +28,7 @@
     // Include the configuration file
     require_once("../../config.php");
 if (!isset($_SESSION["lec_id"])) {
-    header("Location: login.php");
+    header("Location: /lecturer/login/login.php");
     exit;
 }
 

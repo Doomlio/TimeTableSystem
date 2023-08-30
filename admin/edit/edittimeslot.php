@@ -12,7 +12,7 @@
         $sqlDeleteRecord->execute();
         $sqlDeleteRecord->close();
         
-        echo "<script>alert('Record deleted successfully.')</script>";
+    
         header("refresh:1;url=/admin/edit/edittimeslot.php");
     }
 
@@ -365,8 +365,6 @@ if (isset($_POST["reassign"])) {
     <form method="post" action="edittimeslot.php">
     <button type="submit" name="reassign" class="link-button">Reassign Timeslots</button>
 </form>
-
-<a class="link-button" onclick="window.location.href='genslot.php';">Generate Missing Timeslots</a>
     </div>  
 
 </body>

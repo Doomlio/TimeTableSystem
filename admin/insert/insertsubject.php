@@ -32,14 +32,14 @@
 </select>
         <br>
 
-        <label for="course" class="course">Course:</label>
-        <select name="sem" id="sem" class="coursebox">
+        <label for="course" name="course" class="course">Course:</label>
+        <select name="course" id="course" class="coursebox">
 
             <option value="May">DIT</option>
             <option value="Oct">DCS</option>
         </select>
         <input type="submit"class ="submit"name="submit" value="Submit">
-        <a href="viewsubject.php" class="back2">Back</a>
+        <a href="/admin/view/viewsubject.php" class="back2">Back</a>
     </form>
     </div>
 </body>

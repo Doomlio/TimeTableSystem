@@ -3,7 +3,7 @@ session_start();
 
 // Check if the admin session is not set
 if (!isset($_SESSION["admin_id"])) {
-    header("location: login.php"); // Redirect to login page
+    header("location: /lecturer/login/login.php"); // Redirect to login page
     exit; // Exit to prevent further execution
 }
 

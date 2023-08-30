@@ -6,7 +6,7 @@ require_once("../../config.php");
 
 if (!isset($_SESSION["lec_id"]) || !isset($_SESSION["name"])) {
     // Redirect the user to the login page if not logged in
-    header("Location: login.php");
+    header("Location: /lecturer/login/login.php");
     exit;
 }
 
@@ -16,6 +16,7 @@ $lec_id = $_SESSION["lec_id"];
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <link rel="stylesheet" href="/asset/timetable.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,6 +33,14 @@ $lec_id = $_SESSION["lec_id"];
             padding: 10px;
             width: 100px;
         }
+        .status-approved {
+        color: green;
+    }
+
+    
+    .status-denied {
+        color: red; 
+    }
     </style>
 
     <script>
@@ -134,7 +143,10 @@ $lec_id = $_SESSION["lec_id"];
             echo "<td>{$rowUserRequest['new_day']}</td>";
             echo "<td>{$rowUserRequest['new_class_type']}</td>";
             echo "<td>{$rowUserRequest['new_venue_id']}</td>";
-            echo "<td>{$rowUserRequest['status']}</td>";
+            $status = $rowUserRequest['status'];
+            $statusClass = ($status === 'approved') ? 'status-approved' : ($status === 'deny' ? 'status-denied' : '');
+            echo "<td class='$statusClass'>$status</td>";
+
             echo "</tr>";
         }
 

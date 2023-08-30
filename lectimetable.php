@@ -51,11 +51,11 @@ if (!isset($_SESSION["lec_id"])) {
     
 <a class="link-button"
 
- href="/lecturer/request/requestform.php">Manage Requests</a>
+ href="requestform.php">Manage Requests</a>
     
 <a class="link-button-logout"
 
- href="/lecturer/login/logout.php">Logout</a>
+ href="logout.php">Logout</a>
     </div>
     
     </head>

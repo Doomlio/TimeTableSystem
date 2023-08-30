@@ -16,10 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Error: " . $sql . "<br>" . $mysqli->error;
         }
 
-        echo "
-        <form action='/admin/view/timetable.php'>
-            <button>Go back to timetable</button>
-        </form>";
+        header("refresh:1;url=/admin/edit/edittimeslot.php");
+        echo "<script>alert('Lecturer added  successfully.')</script>";
     } else {
         echo "Lecturer name and email are required.";
     }

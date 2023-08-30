@@ -34,6 +34,6 @@ $mysqli->close();
 
 <button class="link-button" onclick="window.location.href='/admin/view/timetable.php';">Back to Timetable</button>
 <button class="link-button"onclick="window.location.href='/admin/insert/insertvenue.php';">Insert Venue</button>
-<button class="link-button" onclick="window.location.href='/admin/edit/ editvenue.php';">Edit Venue</button>
+<button class="link-button" onclick="window.location.href='/admin/edit/editvenue.php';">Edit Venue</button>
 </body>
 </html>

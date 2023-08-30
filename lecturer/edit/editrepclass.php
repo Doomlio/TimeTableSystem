@@ -2,7 +2,7 @@
     // Database connection
     include ('../../config.php');
     session_start();if (!isset($_SESSION["lec_id"])) {
-    header("Location: login.php");
+    header("Location: /lecturer/login/login.php");
     exit;
 }
 
