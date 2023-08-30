@@ -53,9 +53,9 @@ if (!isset($_SESSION["lec_id"])) {
 
  href="/lecturer/request/requestform.php">Manage Requests</a>
     
-<a class="link-button-logout"
+ <a class="link-button"
 
- href="/lecturer/login/logout.php">Logout</a>
+href="/lecturer/login/logout.php">Logout</a>
     </div>
     
     </head>
