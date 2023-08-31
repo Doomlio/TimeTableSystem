@@ -30,7 +30,11 @@
             $venueID = $_POST['venueID'][$key];
             $cstatus = $_POST['cstatus'][$key];
             $hours = $_POST['hours'][$key];
-    
+            
+
+
+
+
             // Calculate total hours of the class if cstatus is "active"
             $totalHoursOfClass = 0;
             if ($cstatus === "active") {
@@ -95,6 +99,10 @@ if (isset($_POST["reassign"])) {
         $resultExistingTimeslots = $stmtExistingTimeslots->get_result();
 
         $newTimeslots = [];
+
+
+          // Assuming subject_id and lec_id exist in the subject table
+       
 
         while ($row = $resultExistingTimeslots->fetch_assoc()) {
             // Get the class duration (hours) from the database

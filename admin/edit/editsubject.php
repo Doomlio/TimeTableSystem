@@ -115,6 +115,16 @@ if (isset($_POST["reassign"])) {
         $stmtReassignToLecturer->bind_param('ss', $randomLecturerID, $subjectID);
         $stmtReassignToLecturer->execute();
 
+         // Update the timetable table based on the assigned lecturer
+         $sqlUpdateTimetable = "UPDATE timetable SET lec_id = ? WHERE subID = ?";
+         $stmtUpdateTimetable = $mysqli->prepare($sqlUpdateTimetable);
+         $stmtUpdateTimetable->bind_param('ss', $randomLecturerID, $subjectID);
+         $stmtUpdateTimetable->execute();
+         
+         // Close the statement
+         $stmtUpdateTimetable->close();
+
+         
         // Add debugging output
         echo "Subject ID: $subjectID - Rows affected: " . $stmtReassignToLecturer->affected_rows . "<br>";
 
