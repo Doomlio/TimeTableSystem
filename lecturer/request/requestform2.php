@@ -16,8 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Form has been submitted, process the data
     $newStartTime = $_POST["start_time"];
     $newEndTime = $_POST["end_time"];
-    $newDay = $_POST["day"];
     $newClassType = $_POST["classtype"];
+    $newDay = $_POST["day"];
     $newVenueID = $_POST["venueID"];
     $TimetableID = $_GET["timetableID"]; // Use $_GET here
     
@@ -175,9 +175,17 @@ $venueID = $_GET["venueID"];
                 <td><?php echo $classtype; ?></td>
                 <td> Class Type:</td>
                 <td>
-                        <?php
-                         echo $classtype;
-                        ?>
+                
+        <select name="classtype"> <!-- User input for new class type -->
+            <?php
+            $classTypes = ['Lab', 'Lecture'];
+            foreach ($classTypes as $classTypeOption) {
+                $selected = ($classTypeOption === $classtype) ? 'selected' : '';
+                echo "<option value=\"$classTypeOption\" $selected>$classTypeOption</option>";
+            }
+            ?>
+        </select>
+    </td>
                 </td>
             </tr>
             <tr>
