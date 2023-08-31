@@ -44,8 +44,8 @@ $lec_id = $_SESSION["lec_id"];
     </style>
 
     <script>
-        function redirectToRequestForm(timetableID, subID, subName, startTime, endTime, day, classtype, venueID) {
-            var url = "requestform2.php" +
+        function redirectToRequestForm(timetableID, subID, subName, startTime, endTime, day, classtype, venueID) { 
+            var url = "requestform2.php" +  //javascript to send the variables to the request form when click request change
                     "?timetableID=" + timetableID +
                     "&subID=" + subID +
                     "&subName=" + encodeURIComponent(subName) +
@@ -59,9 +59,9 @@ $lec_id = $_SESSION["lec_id"];
     </script>
 </head>
 <body>
-    <?php
+    <?php //selecting all timeslot related to lecturer
     $result = $mysqli->query("
-        SELECT t.*, s.subname, l.lecname
+        SELECT t.*, s.subname, l.lecname 
         FROM timetable t
         JOIN lecturer l ON t.lec_id = l.lec_id
         JOIN subject s ON t.subID = s.subID
@@ -69,7 +69,7 @@ $lec_id = $_SESSION["lec_id"];
         ORDER BY FIELD(t.day, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
     ");
 
-    if ($result->num_rows > 0) {
+    if ($result->num_rows > 0) { //output data
         echo "<table class ='custom-table'>
         <tr>
             <th>Timetable ID</th>
@@ -83,7 +83,7 @@ $lec_id = $_SESSION["lec_id"];
             <th>Actions</th>
         </tr>";
 
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) { //output data
             $timetableID = $row["timetable_id"];
             $subName = $row["subname"];
             $startTime = $row["start_time"];
@@ -103,7 +103,8 @@ $lec_id = $_SESSION["lec_id"];
                 <td>$classtype</td>
                 <td>$venueID</td>
                 <td>
-                    <button type='button' class='link-button'onclick='redirectToRequestForm(\"$timetableID\", \"$subID\", \"$subName\", \"$startTime\", \"$endTime\", 
+                    <button type='button' class='link-button'onclick='redirectToRequestForm(\"$timetableID\", \"$subID\",
+                     \"$subName\", \"$startTime\", \"$endTime\", 
                     \"$day\", \"$classtype\", \"$venueID\")'>Request changes</button>
                 </td>
             </tr>";

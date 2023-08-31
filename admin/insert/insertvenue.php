@@ -16,6 +16,7 @@
         placeholder="lab/lecture" name="type"><br>
         <input type="submit" class="submit">
     </form>
+    <a class="back2" href="/admin/view/viewvenue.php" >Back</a>
     </div>
 </body>
 </html>

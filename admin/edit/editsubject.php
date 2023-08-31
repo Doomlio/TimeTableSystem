@@ -128,7 +128,7 @@ if (isset($_POST["reassign"])) {
     }
 
     // Refresh the page after reassignment
-    header("refresh:5;url=/admin/edit/editsubject.php");
+    header("refresh:5;url=/admin/view/timetable.php");
     echo "<script>alert('Lecturer reassigned successfully.')</script>";
 }
 ?>
@@ -145,7 +145,7 @@ if (isset($_POST["reassign"])) {
 
     <table class ="custom-table" id="myTable">
         <thead>
-            <tr class="header">
+            <tr class="header2">
                 <th class="">#</th>
                 <th class="">Subject ID</th>
                 <th class="">Subject Name</th>
@@ -179,7 +179,8 @@ if (isset($_POST["reassign"])) {
             <td class=""><input type="text" name="lecid[]" value="<?php echo $lecid ?>"></td>
             <td class=""><input type="text" name="course[]" value="<?php echo $course ?>"></td>
             <td class="">
-                <button type="submit" class="back" name="delete" value="<?php echo $subID ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
+                <button type="submit" class="back" name="delete" value="<?php echo $subID ?>"
+                 onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
             </td>
         </tr>
         <?php
@@ -188,10 +189,10 @@ if (isset($_POST["reassign"])) {
         ?>
         </table>
         <br>
-        <button class="link-button" onclick="window.location.href='/admin/view/timetable.php';">Back To Timetable</button>
+      
         <button name="savedata" class="link-button">Save</button>
     </form>
-   
+    <button class="link-button" onclick="window.location.href='/admin/view/timetable.php';">Back To Timetable</button>
     <form method="post" name="updaterenewal" action="/admin/edit/editsubject.php">
     <button name="reassign" class="link-button" onclick="window.location.href='/admin/edit/editsubject.php';">Reassign Lecturers </button>
 </form>

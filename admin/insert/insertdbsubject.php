@@ -8,17 +8,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sem = $_POST["sem"];
     $course = $_POST["course"];
 
-    $sql = "INSERT INTO `subject` (`subID`, `subname`, `qualification`,`sem`, `course`) 
-            VALUES ('$subID', '$subname', '$qual', '$sem', '$course')";
+    // Check for empty fields
+    if (empty($subID) || empty($subname) || empty($qual) || empty($sem) || empty($course)) {
+        echo "<script>alert('All fields are required.');</script>";
+        header("refresh:1;url=insertsubject.php");
+        exit; // Stop further execution
+    }
 
-    if ($mysqli->query($sql) === TRUE) {
-        echo "New record created successfully";
+    // Check if the subID already exists
+    $checkQuery = "SELECT COUNT(*) as count FROM `subject` WHERE `subID` = '$subID'";
+    $result = $mysqli->query($checkQuery);
+    $row = $result->fetch_assoc();
+    $subjectCount = $row['count'];
+
+    if ($subjectCount > 0) {
+        echo "<script>alert('A subject with this code already exists.');</script>";
     } else {
-        echo "Error: " . $sql . "<br>" . $mysqli->error;
+        $sql = "INSERT INTO `subject` (`subID`, `subname`, `qualification`,`sem`, `course`) 
+                VALUES ('$subID', '$subname', '$qual', '$sem', '$course')";
+
+        if ($mysqli->query($sql) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $mysqli->error;
+        }
     }
 
     header("refresh:1;url=insertsubject.php");
-    echo "<script>alert('subject added successfully.')</script>";
 }
 
 $mysqli->close();

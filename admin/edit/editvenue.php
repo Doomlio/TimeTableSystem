@@ -45,7 +45,7 @@ if (isset($_POST["savedata"])) {
 
     <table class ="custom-table" id="myTable">
         <thead>
-            <tr class="header">
+            <tr class="header2">
                 <th class="">#</th>
                 <th class="">Venue ID</th>
                 <th class="">Venue Type</th>

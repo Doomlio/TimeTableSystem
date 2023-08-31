@@ -49,7 +49,7 @@ if (isset($_POST["savedata"])) {
 
     <table class ="custom-table" id="myTable">
         <thead>
-            <tr class="header">
+            <tr class="header2">
                 <th class="">#</th>
                 <th class="">Lecturer ID</th>
                 <th class="">Lecturer Name</th>

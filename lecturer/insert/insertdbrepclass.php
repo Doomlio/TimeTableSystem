@@ -44,7 +44,7 @@ $venueConflictResult = $mysqli->query($venueConflictQuery);
 
 if ($venueConflictResult && $venueConflictResult->num_rows > 0) {
     // Conflict with existing timetable in the same venue
-    echo "<script>alert('There is a venue and time conflict with another class. Please choose a different venue or time.');</script>";
+    echo "<script>alert('There is a venue conflict with another class at this time. Please choose a different venue .');</script>";
     echo "<script>window.location.href = 'insertrepclass.php';</script>";
     exit;
 }

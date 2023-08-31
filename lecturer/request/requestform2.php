@@ -23,9 +23,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Check for clashes in timetable
     $timetableClashesExist = false;
-    $sqlCheckTimetableClashes = "SELECT * FROM timetable WHERE lec_id = ? AND day = ? AND venueID = ? AND ((start_time >= ? AND start_time < ?) OR (end_time > ? AND end_time <= ?) OR (start_time <= ? AND end_time >= ?))";
+    $sqlCheckTimetableClashes = "SELECT * FROM timetable WHERE lec_id = ? AND day = ? AND venueID = ? AND ((start_time >= ? AND start_time < ?) OR 
+    (end_time > ? AND end_time <= ?) OR (start_time <= ? AND end_time >= ?))";
     $stmtCheckTimetableClashes = $mysqli->prepare($sqlCheckTimetableClashes);
-    $stmtCheckTimetableClashes->bind_param('sssssssss', $lec_id, $newDay, $newVenueID, $newStartTime, $newEndTime, $newStartTime, $newEndTime, $newStartTime, $newEndTime);
+    $stmtCheckTimetableClashes->bind_param('sssssssss', $lec_id, $newDay, $newVenueID, $newStartTime, $newEndTime,
+     $newStartTime, $newEndTime, $newStartTime, $newEndTime);
     $stmtCheckTimetableClashes->execute();
     $resultTimetableClashes = $stmtCheckTimetableClashes->get_result();
     $timetableClashesExist = ($resultTimetableClashes->num_rows > 0);
@@ -33,9 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check for clashes in pending requests (time and venue)
     $requestClashesExist = false;
-    $sqlCheckRequestClashes = "SELECT * FROM request WHERE lecid = ? AND new_day = ? AND new_venue_id = ? AND ((new_start_time >= ? AND new_start_time < ?) OR (new_end_time > ? AND new_end_time <= ?) OR (new_start_time <= ? AND new_end_time >= ?)) AND status = 'pending'";
+    $sqlCheckRequestClashes = "SELECT * FROM request WHERE lecid = ? AND new_day = ? AND new_venue_id = ? AND 
+    ((new_start_time >= ? AND new_start_time < ?) OR (new_end_time > ? AND new_end_time <= ?) OR (new_start_time <= ? AND new_end_time >= ?)) A
+    ND status = 'pending'";
     $stmtCheckRequestClashes = $mysqli->prepare($sqlCheckRequestClashes);
-    $stmtCheckRequestClashes->bind_param('sssssssss', $lec_id, $newDay, $newVenueID, $newStartTime, $newEndTime, $newStartTime, $newEndTime, $newStartTime, $newEndTime);
+    $stmtCheckRequestClashes->bind_param('sssssssss', $lec_id, $newDay, $newVenueID, $newStartTime, 
+    $newEndTime, $newStartTime, $newEndTime, $newStartTime, $newEndTime);
     $stmtCheckRequestClashes->execute();
     $resultRequestClashes = $stmtCheckRequestClashes->get_result();
     $requestClashesExist = ($resultRequestClashes->num_rows > 0);
@@ -120,39 +125,42 @@ $venueID = $_GET["venueID"];
 <body>
     <h2>Request Changes for Timetable Entry</h2>
     
-    <form method="post" action="requestform2.php?timetableID=<?php echo $timetableID; ?>&subID=<?php echo $subID; ?>&subName=<?php echo $subName; ?>&startTime=<?php echo $startTime; ?>&endTime=<?php echo $endTime; ?>&day=<?php echo $day; ?>&classtype=<?php echo $classtype; ?>&venueID=<?php echo $venueID; ?>">
+    <form method="post" action="requestform2.php?timetableID=<?php echo $timetableID; ?>&subID=<?php echo $subID; ?>
+    &subName=<?php echo $subName; ?>&startTime=<?php echo $startTime; ?>&endTime=<?php echo $endTime; ?>
+    &day=<?php echo $day; ?>&classtype=<?php echo $classtype; ?>&venueID=<?php echo $venueID; ?>"> <!-- get data from view request page -->
+
         <table class ="custom-table" border="1">
         <tr>
-    <td> Timetable ID:</td>
+    <td> Timetable ID:</td> <!-- show data -->
     <td> <input type="hidden" name="timetableID" value="<?php echo $timetableID; ?>"><?php echo $timetableID; ?></td>
 </tr>
             <tr>
-                <td> Subject ID:</td>
+                <td> Subject ID:</td> <!-- show data -->
                 <td><?php echo $subID; ?></td>
             </tr>
             <tr>
-                <td> Subject Name:</td>
+                <td> Subject Name:</td> <!-- show data -->
                 <td><?php echo $subName; ?></td>
             </tr>
             <tr>
-            <td>Old Start Time:</td>
+            <td>Old Start Time:</td> <!-- show data -->
 <td><?php echo $startTime; ?></td>
 <td>New Start Time:</td>
 <td><input type="time" name="start_time" value="<?php echo substr($startTime, 0, 5); ?>"></td>
-<?php echo "Received start time: $startTime"; ?>
+<?php echo "Received start time: $startTime"; ?> <!-- user input  data -->
             </tr>
             <tr>
                 <td>Old End Time:</td>
                 <td><?php echo $endTime; ?></td>
                 <td>New End Time:</td>
-                <td><input type="time" name="end_time" value="<?php echo $endTime; ?>"></td>
+                <td><input type="time" name="end_time" value="<?php echo $endTime; ?>"></td> <!-- user input  data -->
             </tr>
             <tr>
                 <td>Old Day:</td>
                 <td><?php echo $day; ?></td>
                 <td>New Day:</td>
                 <td>
-                    <select name="day">
+                    <select name="day"> <!-- user input  data -->
                         <?php
                         $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                         foreach ($days as $dayOption) {
@@ -166,23 +174,17 @@ $venueID = $_GET["venueID"];
             <tr>
                 <td>Old Class Type:</td>
                 <td><?php echo $classtype; ?></td>
-                <td>New Class Type:</td>
+                <td> Class Type:</td>
                 <td>
-                    <select name="classtype">
                         <?php
-                        $classTypes = ['lecture', 'lab'];
-                        foreach ($classTypes as $classTypeOption) {
-                            $selected = ($classTypeOption === $classtype) ? 'selected' : '';
-                            echo "<option value=\"$classTypeOption\" $selected>$classTypeOption</option>";
-                        }
+                         echo $classtype;
                         ?>
-                    </select>
                 </td>
             </tr>
             <tr>
                 <td>Old Venue:</td>
                 <td><?php echo $venueID; ?></td>
-                <td>New Venue:</td>
+                <td>New Venue:</td> <!-- user input  data -->
 <td>
     <select name="venueID">
         <?php
@@ -211,6 +213,30 @@ $venueID = $_GET["venueID"];
         <button class="link-button "type="submit">Submit Request</button>
         
     </form>
+    <script>
+    function validateChanges() {
+        // Get new data
+        var newStartTime = document.getElementsByName("start_time")[0].value;
+        var newEndTime = document.getElementsByName("end_time")[0].value;
+        var newDay = document.getElementsByName("day")[0].value;
+        var newClassType = document.getElementsByName("classtype")[0].value;
+        var newVenueID = document.getElementsByName("venueID")[0].value;
+
+        // Compare with old data
+        if (
+            newStartTime === "<?php echo $startTime; ?>" &&
+            newEndTime === "<?php echo $endTime; ?>" &&
+            newDay === "<?php echo $day; ?>" &&
+            newClassType === "<?php echo $classtype; ?>" &&
+            newVenueID === "<?php echo $venueID; ?>"
+        ) {
+            alert("Please change at least one detail.");
+            return false; // Prevent form submission
+        }
+
+        return true; // Allow form submission
+    }
+</script>
     
 </body>
 </html>
