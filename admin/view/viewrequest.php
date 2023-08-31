@@ -124,6 +124,7 @@
                 <td>' . $lecname . '</td>
                 <td>-</td>
             </tr>';
+            
 
               
 

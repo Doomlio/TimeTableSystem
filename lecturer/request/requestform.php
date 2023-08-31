@@ -60,14 +60,13 @@ $lec_id = $_SESSION["lec_id"];
 </head>
 <body>
     <?php //selecting all timeslot related to lecturer
-    $result = $mysqli->query("
-        SELECT t.*, s.subname, l.lecname 
-        FROM timetable t
-        JOIN lecturer l ON t.lec_id = l.lec_id
-        JOIN subject s ON t.subID = s.subID
-        WHERE t.lec_id = '$lec_id'
-        ORDER BY FIELD(t.day, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
-    ");
+   $result = $mysqli->query("
+   SELECT t.*, s.subname, l.lecname 
+   FROM timetable t
+   JOIN lecturer l ON t.lec_id = l.lec_id
+   JOIN subject s ON t.subID = s.subID
+   WHERE t.lec_id = '$lec_id' AND t.cstatus != 'replacement' ORDER BY FIELD(t.day, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
+");
 
     if ($result->num_rows > 0) { //output data
         echo "<table class ='custom-table'>
@@ -103,9 +102,8 @@ $lec_id = $_SESSION["lec_id"];
                 <td>$classtype</td>
                 <td>$venueID</td>
                 <td>
-                    <button type='button' class='link-button'onclick='redirectToRequestForm(\"$timetableID\", \"$subID\",
-                     \"$subName\", \"$startTime\", \"$endTime\", 
-                    \"$day\", \"$classtype\", \"$venueID\")'>Request changes</button>
+     <button type='button' class='link-button'onclick='redirectToRequestForm(\"$timetableID\", \"$subID\",\"$subName\", \"$startTime\", \"$endTime\", 
+     \"$day\", \"$classtype\", \"$venueID\")'>Request changes</button>
                 </td>
             </tr>";
         }

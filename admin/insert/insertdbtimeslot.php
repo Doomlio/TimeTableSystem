@@ -12,18 +12,19 @@ if (empty($subcode) || empty($starttime) || empty($endtime) || empty($day) || em
     echo "<script>alert('Error: All fields are required.'); window.location.href = '/admin/insert/insertsubject.php';</script>";
 } else {
     $sql = "INSERT INTO `timetable` (`subID`, `lec_id`, `start_time`, `end_time`, `day`) 
-            VALUES ('$subcode', '$lecID', '$starttime', '$endtime', '$day')";
+            VALUES (?, ?, ?, ?, ?)";
         
-    if ($mysqli->query($sql) === TRUE) {
-        echo "New record created successfully";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("sssss", $subcode, $lecID, $starttime, $endtime, $day);
+
+    if ($stmt->execute()) {
+        echo "<script>alert('Timeslot added successfully.'); window.location.href = '/admin/view/timetable.php';</script>";
     } else {
-        echo "Error: " . $sql . "<br>" . $mysqli->error;
+        echo "Error: " . $sql . "<br>" . $stmt->error;
     }
+
+    $stmt->close();
 }
 
-echo "
-<form action='/admin/view/timetable.php'>
-    <button>Go back</button>
-</form>";
 $mysqli->close();
 ?>

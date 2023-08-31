@@ -8,19 +8,19 @@
 </head>
 <body>
 
-<h1>Insert Timetableslot</h1>
-<div class="formboxsub">
-<form method="post" action="insertdbtimeslot.php">
-<label class="subID">Subject ID:</label>
- <select name="subID" class="subidsel">
-        <?php
+    <h1>Insert Timetableslot</h1>
+    <div class="formboxsub">
+    <form method="post" action="insertdbtimeslot.php">
+    <label class="subID">Subject ID:</label>
+    <select name="subID" class="subidsel">
+            <?php
             $query = "SELECT `subID`, `subname` FROM `subject`";
             $result = $mysqli->query($query);
 
             while ($row = $result->fetch_assoc()) {
-                echo "<option value='" . $row["subID"] . "'>" . $row["subname"] . "</option>";
+                echo "<option value='" . $row["subID"] . "'>" . $row["subname"] . " (" . $row["subID"] . ")</option>";
             }
-        ?>
+    ?>
     </select><br>
     <label class="lecID">Lecturer id:  </label>
     <select class="lecIDsel" name="lecID">

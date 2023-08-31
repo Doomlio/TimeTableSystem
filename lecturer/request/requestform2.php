@@ -36,8 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check for clashes in pending requests (time and venue)
     $requestClashesExist = false;
     $sqlCheckRequestClashes = "SELECT * FROM request WHERE lecid = ? AND new_day = ? AND new_venue_id = ? AND 
-    ((new_start_time >= ? AND new_start_time < ?) OR (new_end_time > ? AND new_end_time <= ?) OR (new_start_time <= ? AND new_end_time >= ?)) A
-    ND status = 'pending'";
+    ((new_start_time >= ? AND new_start_time < ?) OR (new_end_time > ? AND new_end_time <= ?) OR (new_start_time <= ? AND new_end_time >= ?)) AND status = 'pending'";
     $stmtCheckRequestClashes = $mysqli->prepare($sqlCheckRequestClashes);
     $stmtCheckRequestClashes->bind_param('sssssssss', $lec_id, $newDay, $newVenueID, $newStartTime, 
     $newEndTime, $newStartTime, $newEndTime, $newStartTime, $newEndTime);
