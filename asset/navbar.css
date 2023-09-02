@@ -1,0 +1,105 @@
+header
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    transition: 0.6s;
+    padding: 10px 3rem;
+    z-index: 100000;
+    background-color: #0f1923;
+}
+
+header .paddinghead
+{
+  padding: 15px 0;
+}
+
+header .logo
+{
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.6s;
+}
+
+header .logo .ED
+{
+  width: 90px;
+  height: 40px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(94deg) brightness(105%) contrast(103%);
+}
+header .logo i
+{
+  color: #fff;
+  font-size: 16px;
+  margin: 0 5px;
+}
+header .logo:hover .ED
+{
+  filter: none;
+  cursor: pointer;
+}
+header ul
+{
+    margin: 0 20px;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-self: right;
+    list-style-type: none;
+    margin-right: 0;
+}
+header ul li
+{
+    list-style: none;
+    margin: 0 5px;
+    border-bottom: 4px solid #0f1923;
+    padding: 15px 0;
+    transition: 0.6s;
+    cursor: pointer;
+}
+header.sticky ul li
+{
+  border-bottom: 4px solid #fff;
+}
+header ul li:hover
+{
+    border-bottom: 4px #FF4747 solid;
+}
+header ul li a
+{
+    position: relative;
+    margin: 0 15px;
+    color: #fff;
+    padding: 20px 3px;
+    letter-spacing: 2px;
+    font-weight: 500px;
+    transition: 0.6s;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-decoration: none;
+}
+header ul li a span
+{
+    color: #fff;
+    transition: 0.6s;
+    padding: 3px;
+    letter-spacing: 2px;
+    font-weight: 500px;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    border-radius: 6px;
+}
+header ul li:hover a span
+{
+    background-color: rgb(79, 78, 79);
+}
+.padding-top{
+    padding-top: 5rem;
+}
