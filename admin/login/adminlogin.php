@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="/asset/adminlogin.css">
     <link rel="stylesheet" href="/asset/valo-button.css">
     <title>Login</title>
-    <a href="/lecturer/login/login.php"> lecturer login</a>
 </head>
 
 <body>
@@ -15,6 +14,7 @@
             <h1 class="AGT">WELCOME</h1>
             <h1 class="AGT">TO</h1>
             <h1 class="AGT">AGT (ADMIN)</h1>
+            <p>If you want to go user login <a href="/lecturer/login/login.php">click here</a></p>
             <form method="post" action="/admin/login/adminloginprocessing.php">
                 <div class="label-container">
                     <input type="email" name="email" placeholder="Email">
