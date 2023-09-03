@@ -1,17 +1,10 @@
-    <?php
+<?php
     session_start();
     require_once("../../config.php");
-if (!isset($_SESSION["lec_id"])) {
-    header("Location: /lecturer/login/login.php");
-    exit;
-}
-
-
-
-
-
-
-
+    if (!isset($_SESSION["lec_id"])) {
+        header("Location: /lecturer/login/login.php");
+        exit;
+    }
     $lec_id = $_SESSION["lec_id"];
     $lecname = $_SESSION["name"];
 
@@ -24,49 +17,35 @@ if (!isset($_SESSION["lec_id"])) {
         ORDER BY FIELD(t.day, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
     ");
 
-    ?>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-<link rel="stylesheet" href="/asset/timetable.css">   
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
     <link rel="stylesheet" href="/asset/timetable.css">
-
-    <div class="header">
-    
-<a class="link-button"
-
- href="viewreplacementclass.php">Manage Replacement Class</a>
-    
-<a class="link-button"
-
- href="viewlectimeslot.php">Manage Timeslots</a>
-    
-<a class="link-button"
-
- href="viewlecsubject.php">View Subject</a>
-    
-<a class="link-button"
-
- href="viewlecvenue.php">View  Venue</a>
-    
-<a class="link-button"
-
- href="/lecturer/request/requestform.php">Manage Requests</a>
-    
- <a class="link-button"
-
-href="/lecturer/login/logout.php">Logout</a>
-    </div>
-    
-    </head>
-    <body>
-    <div class="header">
+    <link rel="stylesheet" href="/asset/navbar.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGT Systems</title>
+</head>
 
-
-        <?php
+<body>
+    <header>
+        <div class="paddinghead"></div>
+        <a href="#" class="logo" id="logo1">
+            <img src="/img/agt.png" alt="" class="ED"><i class="fa-solid fa-caret-down"></i>
+        </a>
+        <ul>
+            <li><a href="viewreplacementclass.php"><span>MANAGE REPLACEMENT</span></a></li>
+            <li><a href="viewlectimeslot.php"><span>MANAGE TIMESLOTS</span></a></li>
+            <li><a href="viewlecsubject.php"><span>VIEW LECTURERS</span></a></li>
+            <li><a href="viewlecvenue.php"><span>VIEW VENUE</span></a></li>
+            <li><a href="/lecturer/request/requestform.php"><span>MANAGE REQUESTS</span></a></li>
+            <li><a href="/admin/login/adminlogout.php"><span>LOGOUT</span></a></li>
+        </ul>
+    </header>
+    <div class="padding-top"></div>
+    <?php
         // Check if the query was successful
         if ($result->num_rows > 0) {
             echo "<div class='timetable-section'>";
@@ -215,5 +194,6 @@ href="/lecturer/login/logout.php">Logout</a>
     ?>
     <footer>
     </footer>
-    </body>
-    </html>
+</body>
+
+</html>
