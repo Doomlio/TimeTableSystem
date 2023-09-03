@@ -30,7 +30,7 @@ while ($row = $LECQUERY->fetch_assoc()) {
     <header>
         <div class="paddinghead"></div>
         <a href="#" class="logo" id="logo1">
-            <img src="/img/Logo.png" alt="" class="ED"><i class="fa-solid fa-caret-down"></i>
+            <img src="/img/agt.png" alt="" class="ED"><i class="fa-solid fa-caret-down"></i>
         </a>
         <ul>
             <li><a href="viewsubject.php"><span>MANAGE SUBJECT</span></a></li>
@@ -67,7 +67,7 @@ while ($row = $LECQUERY->fetch_assoc()) {
                 // Fetch the lecturer's name from the first row
                 $firstRow = $result->fetch_assoc();
                 $lecname = $firstRow['lecname'];
-                echo "<h2>Lecturer name: $lecname</h2>";
+                echo "<h2> $lecname</h2>";
 
                 // Initialize daysOfWeek array for the current lecturer
                 $daysOfWeek = array(
