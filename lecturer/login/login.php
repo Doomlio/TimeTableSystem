@@ -11,18 +11,15 @@
 <body>
     <div class="container-admin-login">
         <div class="loginbox">
-            <h1 class="AGT">Welcome to AGT </h1>
+            <h1 class="AGT">Welcome to AGT</h1>
             <form method="post" action="loginprocessing.php">
                 <div class="label-container">
-                    <p class="username">
-                        Email:
-                    </p>
-                    <input type="email" class="write-box" name="email"><br>
+                    <input type="email" name="email" placeholder="Email">
+                    <br>
                 </div>
                 <div class="label-container">
-                    <p class="password">Password:</p>
-
-                    <input type="password" class="write-box" name="password"><br>
+                    <input type="password" name="password" placeholder="Password">
+                    <br>
                 </div>
                 <div class="btncontainer">
                     <button type="submit" name="login">
