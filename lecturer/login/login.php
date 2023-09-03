@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/asset/adminlogin.css">
     <link rel="stylesheet" href="/asset/valo-button.css">
     <title>Login</title>
+    <a href="/admin/login/adminlogin.php"> admin login</a>
 </head>
 
 <body>

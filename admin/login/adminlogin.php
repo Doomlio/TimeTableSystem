@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/asset/adminlogin.css">
     <link rel="stylesheet" href="/asset/valo-button.css">
     <title>Login</title>
+    <a href="/lecturer/login/login.php"> lecturer login</a>
 </head>
 
 <body>
@@ -30,10 +31,12 @@
                             <a>Login</a>
                         </div>
                     </button>
-                </div>
+                    
+                </div>  
             </form>
         </div>
     </div>
+  
 </body>
 
 </html>
