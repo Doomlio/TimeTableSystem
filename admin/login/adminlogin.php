@@ -24,6 +24,7 @@
                     <input type="password" name="password" placeholder="Password">
                     <br>
                 </div>
+
                 <div class="btncontainer">
                     <button type="submit" name="login">
                         <div>
@@ -31,12 +32,12 @@
                             <a>Login</a>
                         </div>
                     </button>
-                    
-                </div>  
+
+                </div>
             </form>
         </div>
     </div>
-  
+
 </body>
 
 </html>
