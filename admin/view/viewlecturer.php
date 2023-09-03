@@ -11,7 +11,7 @@ if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
     echo "<tr><td>".$row["lec_id"]."</td>
               <td>".$row["lecname"]."</td>
-              <td>".$row["lecemail"]."</td>
+              <td>".$row["email"]."</td>
               <td>".$row["maxhours"]."</td>
           </tr>";
   }
@@ -23,15 +23,18 @@ $mysqli->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AGT System</title>
-  <link rel="stylesheet" href="/asset/timetable.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGT System</title>
+    <link rel="stylesheet" href="/asset/timetable.css">
 </head>
+
 <body>
-  
+
 </body>
+
 </html>
 <button class="link-button2" onclick="window.location.href='/admin/view/timetable.php';">Back to timetable</button>
 <button class="link-button2" onclick="window.location.href='/admin/insert/insertlecturer.php';">Insert Lecturer</button>
