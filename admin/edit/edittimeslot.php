@@ -21,7 +21,11 @@
 
 
     if (isset($_POST["submitSave"])) {
+        $hasClashes = false; // Initialize the clashes flag to false
+        $changesDetected = false; // Initialize the changes detected flag to false
+    
         foreach ($_POST['timetable_id'] as $key => $timetable_id) {
+            // Get data from the form
             $start_time = $_POST['start_time'][$key];
             $end_time = $_POST['end_time'][$key];
             $day = $_POST['day'][$key];
@@ -30,18 +34,10 @@
             $venueID = $_POST['venueID'][$key];
             $cstatus = $_POST['cstatus'][$key];
             $hours = $_POST['hours'][$key];
-            $lecID = $row["lec_id"];
-            
-
-
-
+            $lecID = $_POST['lecID'][$key];
 
             // Calculate total hours of the class if cstatus is "active"
-            $totalHoursOfClass = 0;
-            if ($cstatus === "active") {
-                // Calculate the total hours based on the class duration
-                $totalHoursOfClass = $hours;
-            }
+            $totalHoursOfClass = ($cstatus === "active") ? $hours : 0;
     
             // Check if the total hours exceed the maximum hours (16 hours)
             if ($totalHoursOfClass > 16) {
@@ -55,29 +51,62 @@
     
                 echo "<script>alert('Lecturer $lecturerName has exceeded the weekly hours limit.');</script>";
             } else {
-                // Check for clashes with existing timeslots
-                $sqlCheckClashes = "SELECT * FROM timetable WHERE lec_id = ? AND day = ? AND ((start_time >= ? AND start_time < ?) OR (end_time > ? AND end_time <= ?) OR (start_time <= ? AND end_time >= ?))";
+                // Check for clashes with existing records
+                $sqlCheckClashes = "SELECT * FROM timetable WHERE lec_id = ? AND day = ? 
+                    AND (
+                        (start_time >= ? AND start_time < ?) 
+                        OR (end_time > ? AND end_time <= ?) 
+                        OR (start_time <= ? AND end_time >= ?) 
+                        OR (start_time = ? AND end_time = ?)
+                    )";
                 $stmtCheckClashes = $mysqli->prepare($sqlCheckClashes);
-                $stmtCheckClashes->bind_param('ssssssss', $lecID, $day, $start_time, $end_time, $start_time, $end_time, $start_time, $end_time);
+              $stmtCheckClashes->bind_param('ssssssssss', $lecID, $day, $start_time, $start_time, 
+              $end_time, $end_time, $start_time, $end_time, $start_time, $end_time);
+
                 $stmtCheckClashes->execute();
+    
                 $resultClashes = $stmtCheckClashes->get_result();
                 $clashesExist = ($resultClashes->num_rows > 0);
                 $stmtCheckClashes->close();
     
                 if (!$clashesExist) {
-                    // Update record
-                    $sqlUpdateRecord = $mysqli->prepare("UPDATE timetable SET start_time=?, end_time=?, day=?, classtype=?, subID=?, venueID=?, cstatus=?, hours=? WHERE timetable_id=?");
-                    $sqlUpdateRecord->bind_param('ssssssssi', $start_time, $end_time, $day, $classtype, $subID, $venueID, $cstatus, $hours, $timetable_id);
-                    $sqlUpdateRecord->execute();
-                    $sqlUpdateRecord->close();
+                    // Check if any changes were made to the data
+                    $sqlCheckChanges = "SELECT * FROM timetable WHERE timetable_id = ? AND (start_time != ? OR end_time != ? OR day != ? OR classtype != ? OR subID != ? OR venueID != ? OR cstatus != ? OR hours != ?)";
+                    $stmtCheckChanges = $mysqli->prepare($sqlCheckChanges);
+                    $stmtCheckChanges->bind_param('issssssss', $timetable_id, $start_time, $end_time, $day, $classtype, $subID, $venueID, $cstatus, $hours);
+                    $stmtCheckChanges->execute();
+                    $resultChanges = $stmtCheckChanges->get_result();
+                    $changesDetected = ($resultChanges->num_rows > 0);
+                    $stmtCheckChanges->close();
+    
+                    if ($changesDetected) {
+                        // Update record
+                        $sqlUpdateRecord = $mysqli->prepare("UPDATE timetable SET start_time=?, end_time=?, day=?, classtype=?, subID=?, venueID=?, cstatus=?, hours=? WHERE timetable_id=?");
+                        $sqlUpdateRecord->bind_param('ssssssssi', $start_time, $end_time, $day, $classtype, $subID, $venueID, $cstatus, $hours, $timetable_id);
+                        $sqlUpdateRecord->execute();
+                        $sqlUpdateRecord->close();
+    
+                        // JavaScript alert for successful data insertion
+                    }
                 }
             }
         }
-
-	header("refresh:1;url=edittimeslot.php");
-	echo "<script>alert('Data is successfully saved.')</script>";	
-}
-
+    
+        if ($changesDetected && !$hasClashes) {
+            // JavaScript alert for successful data insertion
+            echo "<script>alert('Data inserted successfully.');</script>";
+        } elseif ($hasClashes) {
+            // JavaScript alert for clash detected
+            echo "<script>alert('Clash detected. Changes not saved.');</script>";
+        } elseif (!$changesDetected) {
+            // Display a message if no changes were detected
+            echo "<script>alert('No changes detected.');</script>";
+        }
+    
+       // header("refresh:1;url=edittimeslot.php");
+    }
+    
+    
 
 if (isset($_POST["reassign"])) {
     // Get distinct lecturer IDs
@@ -269,7 +298,7 @@ if (isset($_POST["reassign"])) {
                 <td><?php echo $no ?></td>
                 <td><?php echo $timetable_id ?></td>
                 <input type="hidden" name="timetable_id[]" value="<?php echo $timetable_id ?>">
-                <td><?php echo $lecID ?></td>
+                <input type="hidden" name="lecID[]" value="<?php echo $lecID; ?>">
                 <td><?php echo $lecName ?></td>
                 <td><input type="time" name="start_time[]" value="<?php echo $start_time ?>"></td>
                 <td><input type="time" name="end_time[]" value="<?php echo $end_time ?>"></td>
