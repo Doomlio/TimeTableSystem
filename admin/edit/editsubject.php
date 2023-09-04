@@ -45,6 +45,12 @@ if (isset($_POST["savedata"])) {
             $stmtUpdateSubject->bind_param('sssssss', $newSubID, $subname, $qualification, $sem, $lecid, $course, $subID);
             $stmtUpdateSubject->execute();
             $stmtUpdateSubject->close();
+            // Prepare and execute the SQL query to update the lec_id in the timetable table
+            $sqlUpdateTimetable = "UPDATE timetable SET lec_id=? WHERE subID=?";
+            $stmtUpdateTimetable = $mysqli->prepare($sqlUpdateTimetable);
+            $stmtUpdateTimetable->bind_param('ss', $lecid, $newSubID); // Assuming you want to update based on the newSubID
+            $stmtUpdateTimetable->execute();
+            $stmtUpdateTimetable->close();
         } else {
             // Output JavaScript alert for clash
             echo "<script>alert('Clash detected for subject code $newSubID. Changes not saved.');</script>";
