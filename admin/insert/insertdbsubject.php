@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 VALUES ('$subID', '$subname', '$qual', '$sem', '$course')";
 
         if ($mysqli->query($sql) === TRUE) {
-            echo "New record created successfully";
+            echo "<script>alert('New record created successfully');</script>";
         } else {
             echo "Error: " . $sql . "<br>" . $mysqli->error;
         }
