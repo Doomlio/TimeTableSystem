@@ -30,6 +30,7 @@
             $venueID = $_POST['venueID'][$key];
             $cstatus = $_POST['cstatus'][$key];
             $hours = $_POST['hours'][$key];
+            $lecID = $row["lec_id"];
             
 
 

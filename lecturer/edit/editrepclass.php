@@ -13,7 +13,6 @@
 
     
     $lec_id = $_SESSION["lec_id"];
-    $clashDetected = false;
     $showAlert = false; // Initialize showAlert to false
 
     // Delete code
@@ -33,6 +32,7 @@
 
 
     if (isset($_POST["submitSave"])) {
+        $clashesExist = false;
         foreach ($_POST['timetable_id'] as $key => $timetable_id) {
             $start_time = $_POST['start_time'][$key];
             $end_time = $_POST['end_time'][$key];
@@ -55,17 +55,18 @@
                 // Fetch the lecturer's name
                 $sqlGetLecturerName = "SELECT lecname FROM lecturer WHERE lec_id = ?";
                 $stmtGetLecturerName = $mysqli->prepare($sqlGetLecturerName);
-                $stmtGetLecturerName->bind_param('s', $lecID);
+                $stmtGetLecturerName->bind_param('s', $lec_id);
                 $stmtGetLecturerName->execute();
                 $resultLecturerName = $stmtGetLecturerName->get_result();
                 $lecturerName = ($resultLecturerName->num_rows > 0) ? $resultLecturerName->fetch_assoc()['lecname'] : '';
     
                 echo "<script>alert('Lecturer $lecturerName has exceeded the weekly hours limit.');</script>";
             } else {
+                echo "Lecturer: $lec_id, Day: $day, Start Time: $start_time, End Time: $end_time<br>";
                 // Check for clashes with existing timeslots
                 $sqlCheckClashes = "SELECT * FROM timetable WHERE lec_id = ? AND day = ? AND ((start_time >= ? AND start_time < ?) OR (end_time > ? AND end_time <= ?) OR (start_time <= ? AND end_time >= ?))";
                 $stmtCheckClashes = $mysqli->prepare($sqlCheckClashes);
-                $stmtCheckClashes->bind_param('ssssssss', $lecID, $day, $start_time, $end_time, $start_time, $end_time, $start_time, $end_time);
+                $stmtCheckClashes->bind_param('ssssssss', $lec_id, $day, $start_time, $end_time, $start_time, $end_time, $start_time, $end_time);
                 $stmtCheckClashes->execute();
                 $resultClashes = $stmtCheckClashes->get_result();
                 $clashesExist = ($resultClashes->num_rows > 0);
@@ -77,12 +78,16 @@
                     $sqlUpdateRecord->bind_param('ssssssssi', $start_time, $end_time, $day, $classtype, $subID, $venueID, $cstatus, $hours, $timetable_id);
                     $sqlUpdateRecord->execute();
                     $sqlUpdateRecord->close();
+                    echo "Clashes Exist: " . ($clashesExist ? 'Yes' : 'No') . "<br>";
+                    echo "<script>alert('Data is successfully saved.')</script>";	
+                } else {
+                    // Output JavaScript alert for clash
+                    echo "<script>alert('Clash detected. Changes not saved.');</script>";
                 }
             }
         }
-
 	header("refresh:1;url=/lecturer/edit/editrepclass.php");
-	echo "<script>alert('Data is successfully saved.')</script>";	
+
 }
 
 
