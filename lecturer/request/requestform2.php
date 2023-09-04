@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check if there's already a pending or approved request for the same timetable entry
     $existingRequestExist = false;
-    $sqlCheckExistingRequest = "SELECT * FROM request WHERE lecid = ? AND timetable_id = ? AND status IN ('pending', 'approved')";
+    $sqlCheckExistingRequest = "SELECT * FROM request WHERE lecid = ? AND timetable_id = ? AND status IN ('pending')";
     $stmtCheckExistingRequest = $mysqli->prepare($sqlCheckExistingRequest);
     $stmtCheckExistingRequest->bind_param('ii', $lec_id, $TimetableID);
     $stmtCheckExistingRequest->execute();

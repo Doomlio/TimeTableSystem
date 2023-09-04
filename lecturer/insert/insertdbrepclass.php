@@ -94,7 +94,7 @@ $mysqli->close();
             <input type="submit" value="Confirm">
         </form>
 
-        <form action="/lecturer/view/lectimetable.php">
+        <form action="/lecturer/view/lectimetable.php" class="link-button">
             <button>Cancel</button>
         </form>
     </body>
