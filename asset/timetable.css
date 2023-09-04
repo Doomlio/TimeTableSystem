@@ -386,7 +386,7 @@ body {
   
   position: absolute;
   width: 541px;
-  height: 650px;
+  height: 750px;
   left: 300.67px;
   top: 87px;
   
@@ -833,3 +833,22 @@ color: #000000;
   left: 10px;
   top: 540px;
   }
+  .vtype{
+    position: absolute;
+width: 326px;
+height: 66px;
+left: 10px;
+top: 560px;
+
+font-family: 'Laila';
+font-style: normal;
+font-weight: 400;
+font-size: 36px;
+line-height: 66px;
+color: #000000;
+}
+.vsell{
+position: absolute;
+left: 10px;
+top: 630px;
+}
