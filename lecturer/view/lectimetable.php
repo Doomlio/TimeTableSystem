@@ -38,7 +38,7 @@
         <ul>
             <li><a href="viewreplacementclass.php"><span>MANAGE REPLACEMENT</span></a></li>
             <li><a href="viewlectimeslot.php"><span>MANAGE TIMESLOTS</span></a></li>
-            <li><a href="viewlecsubject.php"><span>VIEW LECTURERS</span></a></li>
+            <li><a href="viewlecsubject.php"><span>VIEW SUBJECT</span></a></li>
             <li><a href="viewlecvenue.php"><span>VIEW VENUE</span></a></li>
             <li><a href="/lecturer/request/requestform.php"><span>MANAGE REQUESTS</span></a></li>
             <li><a href="/admin/login/adminlogout.php"><span>LOGOUT</span></a></li>
