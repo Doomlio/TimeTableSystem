@@ -1,58 +1,35 @@
 <?php
 require_once('../../config.php');
 
+// Retrieve POST data
 $subcode = $_POST["subID"];
 $starttime = $_POST["starttime"];
 $endtime = $_POST["endtime"];
 $day = $_POST["day"];
 $lecID = $_POST["lecID"];
+$classType = $_POST["type"];
+$venue = $_POST["venue"];
 
-// Check for empty fields
-if (empty($subcode) || empty($starttime) || empty($endtime) || empty($day) || empty($lecID)) {
+if (empty($subcode) || empty($lecID) || empty($starttime) || empty($endtime) || empty($day) || empty($classType) || empty($venue)) {
     echo "<script>alert('Error: All fields are required.'); window.location.href = '/admin/insert/insertsubject.php';</script>";
 } else {
-    // Prepare SQL query to retrieve lecturer's current total hours
-    $currentHoursQuery = "SELECT SUM(TIMEDIFF(end_time, start_time)) AS current_hours FROM timetable WHERE lec_id = ?";
-    $stmtHours = $mysqli->prepare($currentHoursQuery);
-    $stmtHours->bind_param("s", $lecID);
-    $stmtHours->execute();
-    $result = $stmtHours->get_result();
-    $row = $result->fetch_assoc();
-    $currentHours = $row['current_hours'];
+     // Calculate hours (difference between endtime and starttime)
+     $hours = (strtotime($endtime) - strtotime($starttime)) / 3600;
+     
+   // Prepare SQL query to insert data into the timetable table
+   $sql = "INSERT INTO `timetable` (`subID`, `lec_id`, `start_time`, `end_time`, `day`, `classtype`, `venueID`, `hours`) 
+   VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-    // Prepare SQL query to retrieve lecturer's maxhours
-    $maxHoursQuery = "SELECT maxhours FROM lecturer WHERE lec_id = ?";
-    $stmtMaxHours = $mysqli->prepare($maxHoursQuery);
-    $stmtMaxHours->bind_param("s", $lecID);
-    $stmtMaxHours->execute();
-    $resultMaxHours = $stmtMaxHours->get_result();
-    $rowMaxHours = $resultMaxHours->fetch_assoc();
-    $maxHours = $rowMaxHours['maxhours'];
+$stmt = $mysqli->prepare($sql);
+$stmt->bind_param("sssssssi", $subcode, $lecID, $starttime, $endtime, $day, $classType, $venue, $hours);
 
-    // Calculate the new total hours after adding the new timeslot
-    $newHours = strtotime($endtime) - strtotime($starttime) + $currentHours;
-
-    // Check if new total hours exceed maxhours
-    if ($newHours <= $maxHours) {
-        $sql = "INSERT INTO `timetable` (`subID`, `lec_id`, `start_time`, `end_time`, `day`) 
-                VALUES (?, ?, ?, ?, ?)";
-
-        $stmt = $mysqli->prepare($sql);
-        $stmt->bind_param("sssss", $subcode, $lecID, $starttime, $endtime, $day);
-
-        if ($stmt->execute()) {
-            echo "<script>alert('Timeslot added successfully.'); window.location.href = '/admin/view/timetable.php';</script>";
-        } else {
-            echo "Error: " . $sql . "<br>" . $stmt->error;
-        }
-
-        $stmt->close();
+    if ($stmt->execute()) {
+        echo "<script>alert('Timeslot added successfully.'); window.location.href = '/admin/view/timetable.php';</script>";
     } else {
-        echo "<script>alert('Error: The lecturer's total hours would exceed the maximum allowed hours.'); window.location.href = '/admin/insert/insertsubject.php';</script>";
+        echo "Error: " . $sql . "<br>" . $stmt->error;
     }
 
-    $stmtHours->close();
-    $stmtMaxHours->close();
+    $stmt->close();
 }
 
 $mysqli->close();
