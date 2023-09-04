@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $lecname = $_POST["lecname"];
         $email = $_POST["email"];
 
-        $sql = "INSERT INTO `lecturer`(`lecname`, `email`, `password`, `maxhours`)
+        $sql = "INSERT INTO `lecturer`(`lecname`, `lecemail`, `lecpassword`, `maxhours`)
                 VALUES ('$lecname','$email','123456','16')";
 
         if ($mysqli->query($sql) === TRUE) {
@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Error: " . $sql . "<br>" . $mysqli->error;
         }
 
-        header("refresh:1;url=/admin/edit/edittimeslot.php");
+        header("refresh:1;url=/admin/view/viewlecturer.php");
         echo "<script>alert('Lecturer added  successfully.')</script>";
     } else {
         echo "Lecturer name and email are required.";

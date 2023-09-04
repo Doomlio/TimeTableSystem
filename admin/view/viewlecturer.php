@@ -11,7 +11,7 @@ if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
     echo "<tr><td>".$row["lec_id"]."</td>
               <td>".$row["lecname"]."</td>
-              <td>".$row["email"]."</td>
+              <td>".$row["lecemail"]."</td>
               <td>".$row["maxhours"]."</td>
           </tr>";
   }

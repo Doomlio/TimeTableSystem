@@ -8,7 +8,7 @@ if (isset($_POST["login"])) { //if login is pressed
     $email = $_POST['email']; 
     $userpassword = $_POST['password'];
 
-    $sql = "SELECT * FROM lecturer WHERE email=? AND password=?";  //check db for details
+    $sql = "SELECT * FROM lecturer WHERE lecemail=? AND lecpassword=?";  //check db for details
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("ss", $email, $userpassword);
     $stmt->execute();

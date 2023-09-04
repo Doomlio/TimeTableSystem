@@ -27,7 +27,7 @@ if (isset($_POST["savedata"])) {
         $maxhours = $_POST['maxhours'][$key];
 
         // Prepare and execute the SQL query to update the lecturer data
-        $sqlUpdateLecturer = "UPDATE lecturer SET lec_id=?, lecname=?, email=?, password=?, maxhours=? WHERE lec_id=?";
+        $sqlUpdateLecturer = "UPDATE lecturer SET lec_id=?, lecname=?, lecemail=?, lecpassword=?, maxhours=? WHERE lec_id=?";
         $stmtUpdateLecturer = $mysqli->prepare($sqlUpdateLecturer);
         $stmtUpdateLecturer->bind_param('ssssss', $newLecID, $lecname, $email, $password, $maxhours, $lec_id);
         $stmtUpdateLecturer->execute();
@@ -76,8 +76,8 @@ if (isset($_POST["savedata"])) {
             <input type="hidden" name="lec_id[]" value="<?php echo $lec_id ?>">
             <td class=""><input type="text" name="newLecID[]" value="<?php echo $lec_id ?>"></td>
             <td class=""><input type="text" name="lecname[]" value="<?php echo $lecname ?>"></td>
-            <td class=""><input type="text" name="email[]" value="<?php echo $email ?>"></td>
-            <td class=""><input type="text" name="password[]" value="<?php echo $password ?>"></td>
+            <td class=""><input type="text" name="lecemail[]" value="<?php echo $email ?>"></td>
+            <td class=""><input type="text" name="lecpassword[]" value="<?php echo $password ?>"></td>
             <td class=""><input type="text" name="maxhours[]" value="<?php echo $maxhours ?>"></td>
             <td class="">
                 <button type="submit" class="back" name="delete" value="<?php echo $lec_id ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
