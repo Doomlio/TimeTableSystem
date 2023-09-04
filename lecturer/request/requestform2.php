@@ -143,10 +143,10 @@ $venueID = $_GET["venueID"];
             </tr>
             <tr>
             <td>Old Start Time:</td> <!-- show data -->
-<td><?php echo $startTime; ?></td>
-<td>New Start Time:</td>
-<td><input type="time" name="start_time" value="<?php echo substr($startTime, 0, 5); ?>"></td>
-<?php echo "Received start time: $startTime"; ?> <!-- user input  data -->
+            <td><?php echo $startTime; ?></td>
+            <td>New Start Time:</td>
+            <td><input type="time" name="start_time" value="<?php echo substr($startTime, 0, 5); ?>"></td>
+            <?php echo "Received start time: $startTime"; ?> <!-- user input  data -->
             </tr>
             <tr>
                 <td>Old End Time:</td>
@@ -177,13 +177,21 @@ $venueID = $_GET["venueID"];
                 <td>
                 
         <select name="classtype"> <!-- User input for new class type -->
-            <?php
-            $classTypes = ['Lab', 'Lecture'];
-            foreach ($classTypes as $classTypeOption) {
-                $selected = ($classTypeOption === $classtype) ? 'selected' : '';
-                echo "<option value=\"$classTypeOption\" $selected>$classTypeOption</option>";
+        <?php
+        $classTypes = ['Lab', 'Lecture'];
+        $currentClassType = $classtype; // Assuming $classtype contains the current selected value
+
+        // Display the current selected option first
+        echo "<option value=\"$currentClassType\" selected>$currentClassType</option>";
+
+        // Loop through other options
+        foreach ($classTypes as $classTypeOption) {
+            if ($classTypeOption !== $currentClassType) {
+                echo "<option value=\"$classTypeOption\">$classTypeOption</option>";
             }
-            ?>
+        }
+        ?>
+
         </select>
     </td>
                 </td>
