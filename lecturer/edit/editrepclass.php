@@ -13,7 +13,7 @@
 
     
     $lec_id = $_SESSION["lec_id"];
-    
+    $clashDetected = false;
     $showAlert = false; // Initialize showAlert to false
 
     // Delete code
@@ -40,7 +40,7 @@
             $classtype = $_POST['classtype'][$key];
             $subID = $_POST['subID'][$key];
             $venueID = $_POST['venueID'][$key];
-            $cstatus = $_POST['cstatus'][$key];
+            $cstatus = "replacement";
             $hours = $_POST['hours'][$key];
     
             // Calculate total hours of the class if cstatus is "active"
@@ -81,80 +81,11 @@
             }
         }
 
-	header("refresh:1;url=edittimeslot.php");
+	header("refresh:1;url=/lecturer/edit/editrepclass.php");
 	echo "<script>alert('Data is successfully saved.')</script>";	
 }
 
 
-if (isset($_POST["reassign"])) {
-    // Get distinct lecturer IDs
-    $sqlDistinctLecturers = "SELECT DISTINCT lec_id FROM timetable";
-    $resultDistinctLecturers = $mysqli->query($sqlDistinctLecturers);
-    $lecturerIDs = [];
-
-    while ($row = $resultDistinctLecturers->fetch_assoc()) {
-        $lecturerIDs[] = $row['lec_id'];
-    }
-
-    // Function to reassign timeslots for a specific lecturer
-    function reassignTimeslots($lecID) {
-        global $mysqli;
-
-        $sqlExistingTimeslots = "SELECT * FROM timetable WHERE lec_id = ?";
-        $stmtExistingTimeslots = $mysqli->prepare($sqlExistingTimeslots);
-        $stmtExistingTimeslots->bind_param('s', $lecID);
-        $stmtExistingTimeslots->execute();
-        $resultExistingTimeslots = $stmtExistingTimeslots->get_result();
-
-        $newTimeslots = [];
-
-        while ($row = $resultExistingTimeslots->fetch_assoc()) {
-            // Get the class duration (hours) from the database
-            $classDuration = $row['hours'];
-
-            // Generate a random hour between 8 and 15 for the start time
-            $randomHour = rand(8, 15);
-
-            // Calculate end time based on class duration
-            $newStartTime = sprintf("%02d:%02d:%02d", $randomHour, 0, 0);
-            $newEndTime = date("H:i:s", strtotime($newStartTime) + ($classDuration * 60 * 60));
-
-            // Check for clashes with existing timeslots
-            $clashExists = false;
-
-            foreach ($newTimeslots as $existingTimeslot) {
-                if (($newStartTime >= $existingTimeslot['start_time'] && $newStartTime < $existingTimeslot['end_time']) ||
-                    ($newEndTime > $existingTimeslot['start_time'] && $newEndTime <= $existingTimeslot['end_time'])) {
-                    $clashExists = true;
-                    break;
-                }
-            }
-
-            if (!$clashExists) {
-                $newTimeslots[] = [
-                    'start_time' => $newStartTime,
-                    'end_time' => $newEndTime
-                ];
-
-                // Update timeslot in the database
-                $sqlUpdateTimeslot = "UPDATE timetable SET start_time = ?, end_time = ? WHERE timetable_id = ?";
-                $stmtUpdateTimeslot = $mysqli->prepare($sqlUpdateTimeslot);
-                $stmtUpdateTimeslot->bind_param('sss', $newStartTime, $newEndTime, $row['timetable_id']);
-                $stmtUpdateTimeslot->execute();
-                $stmtUpdateTimeslot->close();
-            }
-        }
-    }
-
-    // Loop through lecturers and reassign timeslots
-    foreach ($lecturerIDs as $lecturerID) {
-        reassignTimeslots($lecturerID);
-    }
-
-    // Refresh the page after reassignment
-    header("refresh:1;url=edittimeslot.php");
-    echo "<script>alert('Timeslots reassigned successfully.')</script>";
-}
 
 ?>
 
