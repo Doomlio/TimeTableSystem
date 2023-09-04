@@ -299,6 +299,7 @@ if (isset($_POST["reassign"])) {
                 <td><?php echo $timetable_id ?></td>
                 <input type="hidden" name="timetable_id[]" value="<?php echo $timetable_id ?>">
                 <input type="hidden" name="lecID[]" value="<?php echo $lecID; ?>">
+                <td><?php echo $lecID ?></td>
                 <td><?php echo $lecName ?></td>
                 <td><input type="time" name="start_time[]" value="<?php echo $start_time ?>"></td>
                 <td><input type="time" name="end_time[]" value="<?php echo $end_time ?>"></td>
