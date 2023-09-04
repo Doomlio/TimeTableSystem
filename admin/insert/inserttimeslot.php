@@ -57,6 +57,25 @@
             }
         ?>
     </select>
+    <label class="vtype">Venue:</label>  
+    <select name="venue" class="vsell">
+    <?php
+// Fetch all venues
+$sqlMatchingVenues = "SELECT venueid, venuetype FROM venue";
+$resultMatchingVenues = $mysqli->query($sqlMatchingVenues);
+
+while ($rowVenue = $resultMatchingVenues->fetch_assoc()) {
+    $venueIDOption = $rowVenue['venueid'];
+    $venuetypeOption = $rowVenue['venuetype'];
+
+    echo "<option value=\"$venueIDOption\">$venueIDOption - $venuetypeOption</option>";
+}
+$resultMatchingVenues->close();
+?>
+
+
+
+                    </select><br>
     <input type="submit"class ="submit"name="submit" value="Submit">
         
 
