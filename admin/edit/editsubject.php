@@ -17,9 +17,10 @@ if (isset($_POST["delete"])) {
     echo "<script>alert('Record deleted successfully.')</script>";
     header("refresh:1;url=/admin/edit/editsubject.php");
 }
-
 // Save the data and reassign constraint violation
 if (isset($_POST["savedata"])) {
+    $showAlert = false; // Initialize showAlert flag
+    
     foreach ($_POST['subID'] as $key => $subID) {
         $newSubID = $_POST['newSubID'][$key];
         $subname = $_POST['subname'][$key];
@@ -28,15 +29,46 @@ if (isset($_POST["savedata"])) {
         $lecid = $_POST['lecid'][$key];
         $course = $_POST['course'][$key];
         
-        // Prepare and execute the SQL query to update the subject data
-        $sqlUpdateSubject = "UPDATE subject SET subID=?, subname=?, qualification=?, sem=?, lecid=?, course=? WHERE subID=?";
-        $stmtUpdateSubject = $mysqli->prepare($sqlUpdateSubject);
-        $stmtUpdateSubject->bind_param('sssssss', $newSubID, $subname, $qualification, $sem, $lecid, $course, $subID);
-        $stmtUpdateSubject->execute();
-        $stmtUpdateSubject->close();
+        // Check for clashes with existing subject codes
+        $sqlCheckClashes = "SELECT subID FROM subject WHERE subID = ? AND subID != ?";
+        $stmtCheckClashes = $mysqli->prepare($sqlCheckClashes);
+        $stmtCheckClashes->bind_param('ss', $newSubID, $subID);
+        $stmtCheckClashes->execute();
+        $resultClashes = $stmtCheckClashes->get_result();
+        $clashesExist = ($resultClashes->num_rows > 0);
+        $stmtCheckClashes->close();
         
+        if (!$clashesExist) {
+            // Prepare and execute the SQL query to update the subject data
+            $sqlUpdateSubject = "UPDATE subject SET subID=?, subname=?, qualification=?, sem=?, lecid=?, course=? WHERE subID=?";
+            $stmtUpdateSubject = $mysqli->prepare($sqlUpdateSubject);
+            $stmtUpdateSubject->bind_param('sssssss', $newSubID, $subname, $qualification, $sem, $lecid, $course, $subID);
+            $stmtUpdateSubject->execute();
+            $stmtUpdateSubject->close();
+        } else {
+            // Output JavaScript alert for clash
+            echo "<script>alert('Clash detected for subject code $newSubID. Changes not saved.');</script>";
+        }
         
-        // Identify lecturers with more than 3 subjects
+        // Set showAlert if any lecturer exceeds the subject count
+        $sqlLecturerSubjects = "SELECT lecid, COUNT(subID) AS subjectCount FROM subject GROUP BY lecid";
+        $resultLecturerSubjects = $mysqli->query($sqlLecturerSubjects);
+        $lecturerSubjects = array();
+
+        while ($row = $resultLecturerSubjects->fetch_assoc()) {
+            $lecturerSubjects[$row['lecid']] = $row['subjectCount'];
+        }
+        
+        foreach ($lecturerSubjects as $lecturerID => $subjectCount) {
+            if ($subjectCount > 3) {
+                $showAlert = true;
+                break;
+            }
+        }
+    }
+    
+    // Reassign subjects from lecturers with more than 3 subjects
+    if ($showAlert) {
         $sqlExceedingSubjects = "SELECT lecid FROM subject GROUP BY lecid HAVING COUNT(subID) > 3";
         $resultExceedingSubjects = $mysqli->query($sqlExceedingSubjects);
         $lecturerExceedingSubjects = [];
@@ -46,7 +78,6 @@ if (isset($_POST["savedata"])) {
         }
 
         if (!empty($lecturerExceedingSubjects)) {
-            // Reassign subjects from lecturers with more than 3 subjects
             foreach ($lecturerExceedingSubjects as $exceedingLecturer) {
                 $sqlReassignSubject = "
                     UPDATE subject
@@ -67,23 +98,10 @@ if (isset($_POST["savedata"])) {
         }
     }
     
-    // Check lecturer's subjects count
-    $sqlLecturerSubjects = "SELECT lecid, COUNT(subID) AS subjectCount FROM subject GROUP BY lecid";
-    $resultLecturerSubjects = $mysqli->query($sqlLecturerSubjects);
-    $lecturerSubjects = array();
-
-    while ($row = $resultLecturerSubjects->fetch_assoc()) {
-        $lecturerSubjects[$row['lecid']] = $row['subjectCount'];
-    }
-    
-    // Set showAlert if any lecturer exceeds the subject count
-    foreach ($lecturerSubjects as $lecturerID => $subjectCount) {
-        if ($subjectCount > 3) {
-            $showAlert = true;
-            break;
-        }
-    }
+    header("refresh:1;url=/admin/edit/editsubject.php");
+    echo "<script>alert('Data is successfully saved.')</script>";
 }
+
 
 
 //reassign lec
@@ -125,9 +143,7 @@ if (isset($_POST["reassign"])) {
          $stmtUpdateTimetable->close();
 
          
-        // Add debugging output
-        echo "Subject ID: $subjectID - Rows affected: " . $stmtReassignToLecturer->affected_rows . "<br>";
-
+        
         if ($stmtReassignToLecturer->affected_rows > 0) {
             echo "Lecturer reassigned for subject $subjectID.<br>";
         } else {
