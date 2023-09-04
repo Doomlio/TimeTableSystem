@@ -41,7 +41,7 @@
             <li><a href="viewlecsubject.php"><span>VIEW SUBJECT</span></a></li>
             <li><a href="viewlecvenue.php"><span>VIEW VENUE</span></a></li>
             <li><a href="/lecturer/request/requestform.php"><span>MANAGE REQUESTS</span></a></li>
-            <li><a href="/admin/login/adminlogout.php"><span>LOGOUT</span></a></li>
+            <li><a href="/lecturer/login/logout.php"><span>LOGOUT</span></a></li>
         </ul>
     </header>
     <div class="padding-top"></div>
