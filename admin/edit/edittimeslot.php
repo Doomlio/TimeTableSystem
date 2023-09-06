@@ -163,7 +163,7 @@ if (isset($_POST["reassign"])) {
                 ];
 
                 // Update timeslot in the database
-                $sqlUpdateTimeslot = "UPDATE timetable SET start_time = ?, end_time = ? WHERE timetable_id = ?";
+                $sqlUpdateTimeslot = "UPDATE timetable SET start_time = ?, end_time = ? WHERE timetable_id = ? AND cstatus != 'replacement' ";
                 $stmtUpdateTimeslot = $mysqli->prepare($sqlUpdateTimeslot);
                 $stmtUpdateTimeslot->bind_param('sss', $newStartTime, $newEndTime, $row['timetable_id']);
                 $stmtUpdateTimeslot->execute();
