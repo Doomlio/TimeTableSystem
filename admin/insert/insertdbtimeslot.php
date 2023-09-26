@@ -20,7 +20,7 @@ if (empty($subcode) || empty($lecID) || empty($starttime) || empty($endtime) || 
 $hours = (strtotime($endtime) - strtotime($starttime)) / 3600;
 
 // Prepare SQL query to check for time slot clashes
-$sqlCheckClashes = "SELECT * FROM timetable WHERE lec_id = ? AND day = ? 
+$sqlCheckClashes = "SELECT * FROM timetable WHERE  day = ? 
                     AND (
                         (start_time >= ? AND start_time < ?) 
                         OR (end_time > ? AND end_time <= ?) 
