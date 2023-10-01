@@ -39,12 +39,12 @@ if (!$semesterResult) {
         <br><br>
         
         <label>Choose Lecturer(s):</label><br>
-        <?php
-        while ($row = mysqli_fetch_assoc($result)) {
-            $lecname = $row['lecname'];
-            echo '<input type="checkbox" name="lecturers[]" value="' . $lecname . '"> ' . $lecname . '<br>';
-        }
-        ?>
+            <?php
+            while ($row = mysqli_fetch_assoc($result)) {
+                $lecname = $row['lecname'];
+                echo '<input type="checkbox" name="lecturers[]" value="' . $lecname . '" checked> ' . $lecname . '<br>';
+            }
+            ?>
         
         <label>Choose Subject(s):</label><br>
         <div id="subjectCheckboxes">
@@ -53,43 +53,55 @@ if (!$semesterResult) {
         <br>
 
         <input type="submit" value="Submit">
+        <input type="button" value="Check All Subjects" id="checkAllSubjects">
+
     </form>
 
-        <script>
-         // Wait for the DOM to be fully loaded
-document.addEventListener("DOMContentLoaded", function () {
-    // Get references to the select and subject checkboxes container
-    var semesterSelect = document.getElementById('semesterSelect');
-    var subjectCheckboxes = document.getElementById('subjectCheckboxes');
+    <script>
+        // Wait for the DOM to be fully loaded
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get references to the select and subject checkboxes container
+            var semesterSelect = document.getElementById('semesterSelect');
+            var subjectCheckboxes = document.getElementById('subjectCheckboxes');
+            var checkAllButton = document.getElementById('checkAllSubjects');
 
-    // Add an event listener to the semester dropdown
-    semesterSelect.addEventListener('change', function () {
-        var selectedSemester = semesterSelect.value;
+            // Add an event listener to the semester dropdown
+            semesterSelect.addEventListener('change', function () {
+                var selectedSemester = semesterSelect.value;
 
-        // Create an AJAX request
-        var xhr = new XMLHttpRequest();
+                // Create an AJAX request
+                var xhr = new XMLHttpRequest();
 
-        // Define the request method, URL, and make it asynchronous
-        xhr.open('GET', 'get_subjects.php?semester=' + selectedSemester, true);
+                // Define the request method, URL, and make it asynchronous
+                xhr.open('GET', 'get_subjects.php?semester=' + selectedSemester, true);
 
-        // Define the callback function to handle the response
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    // Update the subject checkboxes container with the response HTML
-                    subjectCheckboxes.innerHTML = xhr.responseText;
-                } else {
-                    // Handle HTTP errors here
-                    console.error('Error:', xhr.status, xhr.statusText);
-                }
-            }
-        };
+                // Define the callback function to handle the response
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            // Update the subject checkboxes container with the response HTML
+                            subjectCheckboxes.innerHTML = xhr.responseText;
+                        } else {
+                            // Handle HTTP errors here
+                            console.error('Error:', xhr.status, xhr.statusText);
+                        }
+                    }
+                };
 
-        // Send the AJAX request
-        xhr.send();
-    });
-});
+                // Send the AJAX request
+                xhr.send();
+            });
 
-        </script>
+            // Add a click event listener to the "Check All Subjects" button
+            checkAllButton.addEventListener('click', function () {
+                var subjectCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+                
+                // Loop through all subject checkboxes and check them
+                subjectCheckboxes.forEach(function (checkbox) {
+                    checkbox.checked = true;
+                });
+            });
+        });
+    </script>
 </body>
 </html>
