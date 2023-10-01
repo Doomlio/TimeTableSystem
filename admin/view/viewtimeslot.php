@@ -73,6 +73,7 @@ $mysqli->close();
 <button class="link-button" onclick="window.location.href='/admin/view/timetable.php'">Back to Timetable</button>
     <button class="link-button" onclick="window.location.href='/admin/insert/inserttimeslot.php';">Add Timeslot</button>
     <button  class="link-button"onclick="window.location.href='/admin/edit/edittimeslot.php';">Edit Timeslot</button>
+    <button  class="link-button"onclick="window.location.href='/admin/insert/regentime.php';">Recreate Timetable</button>
 </div>
 </body>
 </html> 
