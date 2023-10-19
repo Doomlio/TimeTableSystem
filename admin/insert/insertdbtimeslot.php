@@ -24,8 +24,7 @@ $sqlCheckClashes = "SELECT * FROM timetable WHERE  day = ?
                     AND (
                         (start_time >= ? AND start_time < ?) 
                         OR (end_time > ? AND end_time <= ?) 
-                        OR (start_time <= ? AND end_time >= ?) 
-                        OR (start_time = ? AND end_time = ?)
+                        OR (start_time <= ? AND end_time >= ?) ``
                     )";
 $stmtCheckClashes = $mysqli->prepare($sqlCheckClashes);
 $stmtCheckClashes->bind_param("ssssssssss", $lecID, $day, $starttime, $endtime, $starttime, $endtime, $starttime, $endtime, $starttime, $endtime);
